@@ -1,0 +1,655 @@
+%\documentclass[a4paper]{article}
+\documentclass[12pt,a4paper,oneside]{book} % tamaño 12
+%\usepackage[spanish]{babel}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[usenames]{color}
+\usepackage[table]{xcolor} % para poner color en las tablas
+\usepackage{tikz} % grafos
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+\usepackage{amsmath} % códigos
+\usepackage{setspace} %interlineado algoritmo
+\usepackage{algorithm}
+%\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{longtable}
+\algdef{SE}[DOWHILE]{Do}{doWhile}{\algorithmicdo}[1]{\algorithmicwhile\ #1}%
+\usepackage[hidelinks]{hyperref}
+\usepackage{subfig} % Para poner imágenes
+\usepackage{graphicx} % para poner dos imágenes juntas
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{anysize}
+\marginsize{4cm}{2.5cm}{2.5cm}{2.5cm}
+% Márgenes {izquierda}{derecha}{arriba}{abajo}.
+\usepackage{mathptmx}% http://ctan.org/pkg/mathptmx Times new roman
+\usepackage{amsfonts}% Para expresiones matemáticas
+%\usepackage{setspace} % interlineado
+\renewcommand{\baselinestretch}{1.5} % Interlineado
+\usepackage{enumerate}% para los enumerate
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage[none]{hyphenat} %saltos y justificación texto
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{changepage}
+\usepackage{ragged2e}
+\usepackage{tabularx} % Para meter tablas que no excedan los márgenes del papel
+\usepackage{fancyhdr}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% XML %%%%%%%%%%
+\usepackage{listings}
+
+\usepackage{appendix}
+% cambiar apéndices por anexos
+\renewcommand{\appendixname}{Anexos}
+\renewcommand{\appendixtocname}{Anexos}
+\renewcommand{\appendixpagename}{Anexos}
+
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\usepackage[export]{adjustbox} % -- imagenes y cosas
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={id,tx,ty,tz,rx,ry,rz,scale,file,type}% list your attributes here
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% COLOR %%%%%%%%
+\definecolor{palegreen}{rgb}{0.6, 0.98, 0.6}
+\definecolor{palegoldenrod}{rgb}{0.93, 0.91, 0.67}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+%%%% Carpeta de las figuras
+
+
+% Logo de la uex en el header de todas las páginas
+%\rhead{\begin{picture}(0,0) \put(0,0){\includegraphics[width=1cm,natwidth=124,natheight=163]{pictures/logouex_transp.png}}
+%\end{picture}}
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\rhead{\includegraphics[width=1cm,natwidth=124,natheight=163]{pictures/logouex_transp.png}}
+	\fancyhead[L]{\leftmark}
+	\headsep = -1cm
+}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\includegraphics[width=1cm,natwidth=124,natheight=163]{pictures/logouex_transp.png}}
+\fancyhead[L]{\leftmark}
+\headsep = 2cm
+	
+\begin{document}
+\sloppy
+\pagebreak
+%http://tex.stackexchange.com/questions/129º088/create-a-frame-for-a-title-page
+\makeatletter
+
+\begin{titlepage}
+	\begin{adjustwidth}{-1.5cm}{0cm}
+		\begin{tikzpicture}[remember picture, overlay]
+		\usetikzlibrary{calc}
+		\draw[line width = 1.5pt] ($(current page.north west) + (1in,-1in)$) rectangle ($(current page.south east) + (-1in,1in)$);
+		\end{tikzpicture}
+
+		\vspace{-3em}
+		\hspace{-0.5em}
+		\begin{minipage}{0.45\textwidth}
+			\begin{flushleft}
+				\includegraphics[width=1.75cm,natwidth=124,natheight=163]{pictures/logouex_transp.png}
+			\end{flushleft}
+		\end{minipage}
+
+		\vspace{-5.5em}
+		\hspace{20em}
+		\begin{minipage}{0.45\textwidth}
+			\begin{flushright} % width=0.8\textwidth,height=0.8\textheight,keepaspectratio
+				\includegraphics[width=4cm, natwidth=233,natheight=135]{pictures/logoEpcc.png}
+			\end{flushright}
+		\end{minipage}\\[1.5cm]
+
+		\begin{center}
+			% Upper part of the page
+			\textsc{\LARGE UNIVERSIDAD DE EXTREMADURA}\\[4cm]
+
+			\textsc{\Large Escuela Politécnica}\\[0.5cm]
+			\textsc{\Large Grado en Ingeniería Informática en Ingeniería de Software}\\[3cm]
+			\textsc{\Large Trabajo Fin de Grado}\\[0.5cm]
+%			{ \large \bfseries }\\[4.0cm]
+			\vfill
+			% Bottom of the page
+			{\large}
+		\end{center}
+	\end{adjustwidth}
+\end{titlepage}
+
+
+\thispagestyle{empty}
+
+\begin{titlepage}
+	\begin{adjustwidth}{-1.5cm}{0cm}
+		\begin{tikzpicture}[remember picture, overlay]
+		\usetikzlibrary{calc}
+		\draw[line width = 1.5pt] ($(current page.north west) + (1in,-1in)$) rectangle ($(current page.south east) + (-1in,1in)$);
+		\end{tikzpicture}
+
+		\vspace{-3em}
+		\hspace{-0.5em}
+		\begin{minipage}{0.55\textwidth}
+			\begin{flushleft}F1
+				\includegraphics[width=1.75cm,natwidth=124,natheight=163]{pictures/logouex_transp.png}
+			\end{flushleft}
+		\end{minipage}
+
+		\vspace{-5.5em}
+		\hspace{20em}
+		\begin{minipage}{0.45\textwidth}
+			\begin{flushright}
+				\includegraphics[width=4cm,natwidth=233,natheight=135]{pictures/logoEpcc.png}
+			\end{flushright}
+		\end{minipage}\\[1.5cm]
+
+		\begin{center}
+
+
+			% Upper part of the page
+			\textsc{\LARGE UNIVERSIDAD DE EXTREMADURA}\\[3cm]
+
+			\textsc{\Large Escuela Politécnica}\\[0.5cm]
+			\textsc{\Large Grado en Ingeniería Informática en Ingeniería de Software}\\[2.5cm]
+			\textsc{\Large Trabajo Fin de Grado}\\[0.5cm]
+			{ \large \bfseries Extracción del contexto de ejecución del usuario}\\[4.0cm]
+			{ \large \bfseries Autor: Alberto de la Fuente Cruz}\\[0.5cm]
+			{ \large \bfseries Tutor: Juan Manuel Murillo}\\[0.5cm]
+			\vfill
+			% Bottom of the page
+			{\large}
+		\end{center}
+	\end{adjustwidth}
+\end{titlepage}
+
+%\makeatother
+\thispagestyle{empty}
+%\newpage
+%\thispagestyle{empty}
+
+
+\chapter*{Resumen}
+\thispagestyle{empty}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+\thispagestyle{empty}
+%\chapter*{Abstract}
+%\thispagestyle{empty}
+%EL RESUMEN EN INGLÉS
+\pagenumbering{roman}
+\setcounter{page}{1}
+\tableofcontents
+%\pagebreak
+%\newpage
+\listoftables
+%\newpage
+\listoffigures
+%\newpage
+
+
+%%%%%%% ESTRUCTURA DEL TFG %%%%%%%%%%%%%%
+% A.PORTADA (según la estructura indicada a continuación)
+% B.CONTRAPORTADA (según la estructura indicada a continuación)
+% C.ÍNDICE GENERAL DE CONTENIDOS
+% D.ÍNDICE DE TABLAS
+% E.ÍNDICE DE FIGURAS
+% F.RESUMEN (Podrá incluirse también en inglés, si así lo indica el Tutor1)
+% G.CUERPO DEL TRABAJO (según la estr
+% uctura indicada a continuación)
+% H.REFERENCIAS BIBLIOGRÁFICAS
+% (Según norma ISO690)
+% I.ANEXOS, si los hubiera
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Cuerpo del trabajo
+% 1.INTRODUCCIÓN
+% 2.OBJETIVOS
+% 3.ANTECEDENTES / ESTADO DEL ARTE
+% 4.MÉTODOLOGÍA
+% 5.IMPLEMENTACIÓN Y DESARROLLO (Cuando proceda)
+% 6.RESULTADOS Y DISCUSIÓN
+% 7.CONCLUSIONES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tamaño: Normalizado UNE A-4, salvo planos.
+% Tipo y tamaño de letra del texto: Times New Roman 12 pt, Arial 12 pt o similar.
+% Interlineado del texto: 1,5 líneas.
+% Márgenes del texto: Superior, Inferior y Derecha, 2,5 cm; Izquierda, 4 cm.
+% Numeración de páginas en margen inferior derecha y tamaño 8 pt.
+% Las  figuras  serán  numeradas  y  tituladas  debajo  de  las  mismas  (indicando  su  fuente  si  no  son  de  elaboración
+% propia).
+% Las  tablas  serán  numeradas  y  tituladas  encima  de  las  mismas  (indicando  su  fuente  si  no  son  de  elaboración
+% propia).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\setcounter{page}{1}
+
+\chapter{Introducción}
+El ejercicio propuesto se plantea del siguiente modo. Es objetivo del proyecto ser capaces de desarrollar una aplicación android capaz de escuchar lo que el usuario \textit{dice} al teléfono, con esto nos referimos a toda la información que surge del usuario al interactuar con su dispositivo y que por el momento pasa desapercibida. Esta información, sea del tipo que sea nos aportan un grado más de información acerca de nuestros usuarios, siendo el fin último ser capaces de registrar sus rutinas de comportamiento, uso y costumbres interactuando con la tecnología con el fin de inferir patrones sobre el usuario. 
+
+Es tarea del proyecto la parte relacionada con la recogida de información del sistema, actividad que nos ocupará en su estudio y desarrollo todo el recorrido del trabajo. 
+\chapter{Estado del Arte}
+-- aquí hablaremos sobre las distintas aproximaciones al problema en términos de implementación. 
+
+\chapter{Análisis}
+En esta capítulo se describe el análisis del problema mediante su especificación de requisitos. Nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
+\newpage
+\section{Requisitos}
+\subsection{Requisitos funcionales}
+El sistema deberá: 
+\begin{itemize}
+  \item Registrar cada aplicación que lanza el usuario, con información suficiente que permita identificarla. 
+  \item Aportar un contexto temporal de cuando las aplicaciones son ejecutadas, esto es, fecha y hora exactas. 
+  \item Incluyendo lo anterior, registrar el uso dado a aplicaciones relacionadas con, comunicación, mensajería instantánea, búsqueda web,redes sociales y por último sensores. 
+  \item Dentro de comunicación se incluye la aplicación de Gmail, Mensajes (sms) y el Teléfono. 
+  \item Dentro mensajería instantánea prestaremos atención a Telegram, Whatsapp Messenger y Facebook Messenger. 
+  \item Como aplicaciones relacionadas con la búsqueda en la web estarán la Chrome Browser y Google Search. 
+  \item En las aplicaciones de redes sociales; Twitter, Facebook e Instagram.
+  \item Los sensores que escucharemos serán el emisor de GPS, acelerómetro, presión, giroscopio y temperatura.
+\subsubsection{Aplicaciones de comunicación}
+  \item En  \textbf{Gmail} capturar, la dirección de correo del emisor. 
+  \item La dirección de correo del receptor(es). 
+  \item El asunto del correo electrónico. 
+  \item El contenido, cuerpo de dicho correo. 
+  \item En \textbf{Mensajes} se deberá capturar, el destinatario. 
+  \item El cuerpo del mensaje. 
+  \item En \textbf{Teléfono} se deberá capturar, el destinatario de la llamada. 
+  \item Tiempo total invertido en ella. 
+\subsubsection{Aplicaciones de mensajería instantánea}
+  \item En \textbf{Telegram} capturar, el nombre del contacto o grupo interlocutor. 
+  \item Los mensajes enviados en la conversación por parte del usuario. 
+  \item En \textbf{Whatsapp} capturar, el nombre del contacto o grupo interlocutor. 
+  \item Los mensajes enviados en la conversación por parte del usuario. 
+  \item En \textbf{Facebook Messenger} capturar, el nombre del contacto o grupo interlocutor. 
+  \item Los mensajes enviados en la conversación por parte del usuario. 
+\subsubsection{Aplicaciones de redes sociales}
+  \item En \textbf{Twitter} capturar, el nombre de los perfiles visitados. 
+  \item Los los \textit{retuits} realizados. 
+  \item Los \textit{me gusta} dados. 
+  \item El contenido de los mensajes directos. 
+  \item Interlocutor de esos mensajes directos. 
+  \item En \textbf{Facebook} capturar, el nombre de los perfiles visitados. 
+  \item Los comentarios hechos en dichos perfiles. 
+  \item Los estados compartidos dentro de la red social. 
+  \item Las subidas de fotos y su título. 
+  \item Los \textit{me gusta} dados. 
+  \item En \textbf{Instagram} capturar, el nombre de los perfiles visitados. 
+  \item Los comentarios hechos en dichos perfiles. 
+  \item Las subidas de fotos y su descripción. 
+  \item Los \textit{me gusta} dados.
+  \item Los mensajes directos. 
+  \item El interlocutor de esos mensajes directos. 
+\end{itemize}
+\subsubsection{Sensores}
+\begin{itemize}
+  \item Del sensor relacionado con la ubicación \textbf{GPS} deberemos registrar cada cambio de coordenadas que registre el teléfono. 
+  \item Mediante el \textbf{acelerómetro} registraremos los cambios en la aceleración del teléfono. 
+  \item Con el sensor de \textbf{presión} registraremos los cambios de altitud del teléfono. 
+  \item Con el \textbf{giroscopio} para detectar y registrar  los movimientos que realiza el teléfonpo. 
+  \item El sensor de \textbf{temperatura} nos permitirá registrar, como no, la temperatura ambiente del dispositivo. 
+\end{itemize}
+\newpage
+\subsection{Requisitos no funcionales}
+\begin{itemize}
+	\item Versión. El sistema deberá soportar una versión limpia de Android 8.0. 
+	\item Eficiencia. Dado que el sistema debe registrar en tiempo real toda la información generada en el teléfono por parte del usuario, deberá ser capaz de procesar cada transacción para procesarla y registrar en tiempo real. 
+	\item Privacidad. El usuario deberá autorizar explícitamente al software desarrollado permisos de accesibilidad de modo que sea consciente de que existe una aplicación monitorizando parte de su actividad, a parte del propio sistema. 
+	\item Robustez. Debido a que el sistema debe estar constantemente escuchando el software debe ser tolerante a fallos y mantener el servicio de escucha siempre disponible.  
+	\item Seguridad. La base de datos local deberá estar protegida ante el acceso indebido a los datos. 
+\end{itemize}
+\break
+\chapter{Diseño}
+En este capítulo se detalla el resultado de las sucesivas iteraciones sobre la etapa de diseño. A partir de los requisitos se ha estudiado el problema y planteado una arquitectura que nos permitirá guiar la implementación de los casos de uso. Se pretende obtener una arquitectura limpia y organizada de manera que permita la mantenibilidad del proyecto y una modificación mínima y eficaz. 
+\newpage
+\section{Arquitectura}
+A la hora de plantear nuestra arquitectura el primer paso es conocer la propia arquitectura de Android.
+\newline
+\newline
+Si nos fijamos en la siguiente figura vemos como Android se asienta en una modificación del Kernel de Linux sobre el que se van abstrayendo capas en las que cada una emplea los servicios que provee la capa inmediatamente inferior. 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.15]{pictures/architecture/android_stack.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+	\end{center}
+	\caption[Android stack]{Arquitectura por capas de Android.}
+\end{figure}
+%%% ------
+Así, como base de la arquitectura tenemos una modificación del Kernel de Linux sobre la cual se implementa una segunda capa, de abstracción del hardware, que será la encargada de manejar y comunicarse con los periféricos del teléfono. Entendemos por periféricos lo habitual en estos entornos; sensores, antenas, emisores radio...). Sobre estas dos capas, que permiten una interfaz de acceso al dispositivo Hardware, tenemos las librerías de bajo nivel y el entorno de ejecución de android. 
+\newline \newline
+Si avanzamos un poco más vemos que en las dos últimas capas están relacionadas con una API Java que permite al programador implementar aplicaciones, usando a través de la api, todo la anteriormente expuesto. 
+\\
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.2]{pictures/architecture/android_stack_used.png} 
+	\end{center}
+	\caption[Detalle del Android Stack]{Márgenes del sistema}
+\end{figure}
+%%% ------
+Estas dos últimas capas serán en las que se situará nuestra arquitectura. Además será conceptualmente parecida puesto que como hemos visto, Android dispone de un sistema organizado por capas, algo bastante lógica y habitual en los sistemas software, y nuestro objetivo por tanto debe ser separar funcionalidades y agruparlas bajo este patrón.
+\newpage
+\break
+Teniendo este concepto claro, nos fijaremos en la publicación de Robert C. Martin, Clean Architecture, en la que se plantea el concepto de Arquitectura Limpia, sin ser más que una serie de condiciones que debe cumplir una arquitectura para que se la considere ”clean". Nos encontramos entonces con una serie de reglas, cuyo cumplimiento ayuda a diferenciar y dividir el software en capas, obteniendo además un software independiente de elementos externos (como la ui, frameworks y bases de datos), testeable y mantenible. 
+\newline
+\newline
+En esta publicación nos encontramos con que una arquitectura debe partir de las entidades (entities). Estas entidades no son mas que las implementaciones sencillas de clases Java. 
+\newline
+\newline
+Estas clases permitirán instanciar objetos que reprensentarán a los actores principales de la lógica de negocio. Por tanto POJOS (Plain Old Java Object) y Dtos (Data Transfer Objects) se verán incluidos en esta capa. 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.3]{pictures/architecture/android_architecture.png} 
+	\end{center}
+	\caption[Clean Architecture]{Arquitectura clean}
+\end{figure}
+%%% ------ 
+Los casos de uso (use cases) están muy relacionados con las entidades, puesto que implementarán la lógica de negocio del sistema, puesto que deben orquestar y orientar todo el flujo de datos del sistema. 
+\newline
+\newline
+La capa de los Interface Adapters realiza la conversión de los datos de manera que se puedan comunicar los niveles superiores con los casos de uso y entidades (en MVC corresponde a los Controladores, MVVP al presenter... etc). 
+\newline
+\newline
+En la última capa y más externa, Frameworks and Drivers, residen las plataformas y herramientas externas, donde se incluye la interfaz de usuario, web... 
+\newline
+\newline
+Si nos planteamos esto en los términos del proyecto, es decir, una aplicación que sea capaz de meterse en los servicios de accesibilidad que provee para capturar, procesar y extraer la  información de los eventos que se generan, deberemos abstraernos del problema y ser capaces de, a partir de una vista general del sistema inferir las capas que finalmente nos guiarán la implementación. 
+\newline
+\newline
+Así pues, en primer lugar situar nuestro sistema dentro del stack tecnológico de Android citado al principio de esta sección. 
+\newline
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.6]{pictures/architecture/arquitecturaGeneral01.png} 
+	\end{center}
+	\caption[Arquitectura dentro del android stack]{Arquitectura del sistema dentro del stack de Android.}
+\end{figure}
+Es natural esta clasificación puesto que el proyecto se basa en la implementación de los Servicios de Accesibilidad que Android dispone en de su API, gracias a mecanismos como la herencia y la implementación de interfaces. 
+\newline \newline
+Estos servicios de accesibilidad son la solución de Google para asistir y dar soportes a usuarios con diversidad funcional. Su naturaleza y comportamiento es lo que nos permite aprovechar estos servicios para obtener información de lo que hace el usuario. 
+\newline \newline
+Se comporta además como cualquier otro servicio de Android, (es decir, procesos ideados para correr en segundo plano con un ciclo de vida prolongado en el tiempo). Los Servicios de Accesibilidad se comportan al final como listeners de Eventos de Accesibilidad, que lanzados por el sistema. Estos Eventos de Accesibilidad son la entidad que manejan los servicios de accesibilidad. 
+\newline \newline
+Los eventos llevan consigo información sobre la interfaz de usuario, por ejemplo los eventos se lanza cuando entra en foco un elemento (con la descripción del elemento, botones, entradas de texto, nombres de ventanas...). Nuestra solución pasa por extraer la información de esos eventos y procesarla. 
+\newline \newline
+Dado que estos eventos pueden ser capturados por Eventos de Accesibilidad, nuestro sistema contará con un servicio que lo implemente y que realiza esta captura, este será un elemento fundamental en la arquitectura puesto que será la base sobre la que se asentarán el resto de elementos. 
+\\
+Así, en un primer vistazo, podemos ver la arquitectura usando un grano gordo del siguiente modo. 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.3]{pictures/architecture/arquitecturaGeneral02.png} 
+	\end{center}
+	\caption[Arquitectura general del sistema]{Arquitectura general del sistema}
+\end{figure}
+%%% ------ 
+Donde la interfaz de usuario (UI) genera eventos de accesibilidad. Estos eventos, como ya se ha comentado, están asociados a cada acción que el usuario realiza con el teléfono sobre la interfaz. Será la implementación del evento de accesibilidad (Accesibility Service) el que nos permita capturarlos. 
+\newline
+\newline
+Este servicio se encargará de capturar los eventos y mandarlos hacia el Manejador de Eventos (Event Handler), este manejador será el encargado de clasificar y procesar los eventos en función de la información que traigan consigo. 
+\newline
+\newline
+Una vez que estos eventos pasen por el manejador, obtendremos como resultado una entidad lista para ser guardada en la base de datos. 
+\newline
+\newline
+Profundicemos un poco más en como sería este manejador y como son los componentes que lo forman. 
+\newline
+\newline
+Como estamos viendo, el servicio de accesibilidad (lo llamaremos simplemente servicio) recibe eventos de la interfaz y los envía al manejador, pero dado que los eventos se generan en gran cantidad y en momentos puntuales tendremos que manejar un caudal de información importante, la comunicación entre el servicio y el manejador se realizará a través de un bus que permitirá al servicio desatender los datos lo antes posible y desentenderse así de lo que ocurre con esos datos y como son tratados.
+\newline
+\newline
+Este bus lo estará escuchando el manejador, que capturará los elementos para realizar un primer chequeo, y es que en función del nombre de la aplicación (más concretamente su package name), invocará a un \textit{Scraper} encargado de extraer la información relevante del evento que estamos manejando. 
+\newline
+\newline
+Estos Scrapers son un concepto sacado del llamado \textit{Web Scraping}, técnica mediante la cual se transforman los datos sin estructura de la web en datos estructurados que pueden ser almacenados y analizados en una base de datos. 
+\newline
+\newline
+Así pues, en nuestro sistema tendremos de tantos Scrapers como aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por los Managers. Encargados de persistir en una base de datos local los datos generados por el sistema. 
+\newline
+\newline
+Al final nuestra arquitectura a bajo nivel resulta en el siguiente diagrama. 
+%%% ------ 
+\begin{figure}[H]
+		\includegraphics[width=1.3\textwidth,center]{pictures/architecture/arquitecturaGeneral03.png} 
+%	\end{large}
+	\caption[Arquitectura detallada]{Arquitectura detallada}
+\end{figure}
+%%% ------  
+En primer lugar nos encontramos la ui que alimenta al servicio de accesibilidad con eventos. Este servicio se encarga de meterlos en un bus de forma que el manejador pueda recogerlos y computarlos. 
+\newline \newline
+Este tratamiento que realiza el manejador no es otro que, en función de la app que lo lanzó llamar a las clases implicadas en su tratamiento.
+\newline \newline
+Expliquemos más despacio en que consite esto. El manejador, como se ha dicho en alguna ocasión, analiza el package name del evento, este package name nos permite identificar el elemento del sistema android que lanzó el evento, ya sean relacionados con la aplicación en foco en ese momento como los relacionados con el uso de sensores del teléfono. 
+\newline \newline
+Los eventos de las aplicaciones serán tratados por los scrapers. Estos extraerán la información pertinente y la encapsularán en dtos. 
+\newline \newline
+Con los sensores la historia es diferente, puesto que la escucha de los mismos está ligada a la implementación de sendos listeners que recogen la información que van generando. En un apartado diferente entra la escucha del micrófono, puesto que para respetar la privacidad del usuario sólo se lanzará la captura de audio cuando un evento relacionado con la misma sea lanzado. Nos referimos a casos concretos del uso del móvil como comandos de voz, notas de audio, etc. 
+\newline \newline
+En la parte del Data Manager nos encontramos a las entidades y a los responsables de mover esas entidades a lo largo de la arquitectura. 
+\newline \newline
+Así nos encontramos con el paquete repository, encargado de la persistencia en base de datos de las entidades. Entidades como dtos (para la comunicación de información desde el manejador al data manager) y mappers, que realizarán la conversión de dtos a modelos, entidad aceptada por el repository para la persistencia en la base de datos. 
+\newline \newline
+De esta manera nos encontramos con 4 capas separadas por funcionalidad y con independencia lógica entre ellas, puesto que cada una está consagrada a una tarea particular (recibir eventos, computarlos, persistirlos). 
+\newline \newline
+La lógica de negocio del sistema se encuentra, sin duda, en la capa correspondiente al manejador, donde deberemos de echar un esfuerzo de implementación considerable para manejar todo el flujo de información. 
+%%% ------
+%%% ------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              CASOS DE USO                                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\newpage 
+\section{Casos de Uso}
+-- descripción y tablas con los casos de uso 
+%Caso de uso 01 ~\ref{tab:Caso de uso 01}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+
+\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar nombre de aplicación.} \\ \hline \hline
+
+\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Cuando el usuario lanza una aplicación dentro del grupo de interés se debe capturar el nombre de la misma para saber de que aplicación se trata} \\ \hline
+
+\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
+
+\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline 
+
+\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
+	Lanza una aplicación & & \\ \hline
+	& Genera un evento de accesibilidad & \\ \hline
+	& & Captura el evento y extrae su texto \\ \hline
+\end{tabular}
+\caption[Caso de uso 01]{Caso de uso 01.}
+\label{tab:Caso de uso 01}
+\end{table}
+
+%Caso de uso 02 ~\ref{tab:Caso de uso 02}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+
+\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar el package name de aplicación.} \\ \hline \hline
+
+\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Cuando el usuario lanza una aplicación dentro del grupo de interés debemos capturar el package name de la misma para situar el contexto de las siguientes capturas. } \\ \hline
+
+\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
+
+\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline
+
+\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
+	Lanza una aplicación & & \\ \hline
+	& Genera un evento de accesibilidad & \\ \hline
+	& & Captura el evento y extrae el package name \\ \hline
+\end{tabular}
+\caption[Caso de uso 02]{Caso de uso 02.}
+\label{tab:Caso de uso 02}
+\end{table}
+
+%Caso de uso 03 ~\ref{tab:Caso de uso 03}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+
+\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar la fecha y hora exactas en la que la aplicación se lanza.} \\ \hline \hline
+
+\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Cuando el usuario lanza una aplicación dentro del grupo de interés debemos capturar el timestamp con la fecha
+y hora del sistema.} \\ \hline
+
+\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
+
+\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline
+
+\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
+	Lanza una aplicación & & \\ \hline
+	%&  & \\ \hline
+	& & Pide la fecha y hora del sistema y la almacena dentro del objeto correspondiente como timestamp de inicio. \\ \hline
+\end{tabular}
+\caption[Caso de uso 03]{Caso de uso 03.}
+\label{tab:Caso de uso 03}
+\end{table}
+
+%Caso de uso 04 ~\ref{tab:Caso de uso 04}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+
+\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar la fecha y hora exactas en la que se dejó de usar la aplicación.} \\ \hline \hline
+
+\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Cuando el usuario cierra o cambia de aplicación debemos capturar el timestamp con la fecha y hora del sistema.} \\ \hline
+
+\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
+
+\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline
+
+\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
+	Cuando el usuario cierra o cambia de aplicación debemos capturar el timestamp con la fecha y hora del sistema. & & \\ \hline
+	%&  & \\ \hline
+	& & Pide la fecha y hora del sistema y la almacena dentro del objeto correspondiente como timestamp de fin. \\ \hline
+\end{tabular}
+\caption[Caso de uso 04]{Caso de uso 04.}
+\label{tab:Caso de uso 04}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%% COMENZAMOS CON LOS UC PARTICULARES %%%%%%%%%%%%%%%%%%
+\subsection{Casos de uso con Whatsapp Messenger}
+%Caso de uso 05 ~\ref{tab:Caso de uso 05}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+
+\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar el nombre de la conversación de WhatsApp Messenger.} \\ \hline \hline
+
+\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Se debe capturar el nombre de la conversación de WhatsApp Messenger a fin de saber cual es el interlocutor al cual el usuario dedica su atención.} \\ \hline
+
+\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
+
+\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline
+
+\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
+	Desde la home de whatsapp abre una conversación pulsando sobre la misma. & & \\ \hline
+	& Genera un evento de accesibilidad. & \\ \hline
+	& & Extrae del evento el texto del mismo, el cual lleva asociado el título de la conversación. \\ \hline
+\end{tabular}
+\caption[Caso de uso 05]{Caso de uso 05.}
+\label{tab:Caso de uso 05}
+\end{table}
+
+
+
+
+\chapter{Implementación y desarrollo}
+
+%~\ref{fig:Calculo IDLE-PC} este valor es calculado automáticamente por el programa, algo que no pasa en versiones anteriores de este, donde se calculan varios valores que se muestran al usuario para que este seleccione uno de ellos.
+%\begin{figure}[h]
+%\centering
+%\caption[Calculo IDLE-PC]{Calculo IDLE-PC}
+%\label{fig:Calculo IDLE-PC}
+%\end{figure}
+
+
+\chapter{Conclusiones y trabajos futuros}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% ANEXOS %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\appendix
+%%%\clearpage
+%%\appendixpage
+%%%\addappheadtotoc
+
+%%%%%\chapter{Ejemplo de anexo}
+%%%%%%Si no se desea incluir anexos, sólo hay que borrar este capítulo.
+%%%%%\par
+
+
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% AL FINAL %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\pagestyle{empty}
+%%%% https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+\addcontentsline{toc}{chapter}{Bibliografía}
+\bibliographystyle{unsrt}
+\bibliography{LocalBibliography.bib}
+\end{document}
+%%%%%\section{Secciones}
+%%%%%Las secciones se crean con \textit{section}. Las subsecciones y %%%%subsubsecciones con \textit{subsection} y \textit{subsubsection}, %%%%respectivamente. Si se desea que alguna subsección en concreto no salga %%%%en el índice se pueden usar los mismos comandos añadiéndoles un %%asterisco al final (\textit{subsection*} y \textit{subsubsection*}).
+%%\par
+
+%%%%%\subsection{una subsección}
+
+%%%%%%\subsection{otra subsección}
+%%%%%%Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui %%%%%%officia deserunt mollit anim id est laborum.
+%%%%%%\subsubsection{subsubsecciones}
+%%%%%%¡Por defecto las subsubsecciones no aparecen en el índice! Este %%%%%%comportamiento se puede cambiar.
+
+%%%%%%\section{Citas y referencias}
+%%%%%Para citar un texto hay que incluirlo en el fichero %%%%\textit{LocalBibliography.bib} de esta plantilla. Una vez hecho se %%%%%puede referenciar usando el comando \textit{cite}~\cite{LaTeX_tutorials}.
+%%%%Para referenciar imágenes, secciones o tablas se usa el %%%%comando~\textit{ref}. Por ejemplo~\ref{fig:logoEpcc}. Es importante %%%%haber añadido una etiqueta con el nombre correspondiente al emenento a %referenciar.
+%%%%%\par
+%%%%%%Para facilitar la lectura, cuando se insertan citas y referencias %%%%%%es conveniente insertar un caracter de espacio sin salto de línea %%%%%%%%\textit{\~} antes del comando de cita o referencia.
+
+
+%%%%%%\section{Imágenes}
+%%%%%%Las imágenes se insertan así:
+
+%%%%\begin{figure}[H]
+%%%%%\centering
+%%%%%\includegraphics[width=0.6\textwidth]{pictures/logoEpcc.png}
+%%%%%%\caption[Logo Epcc]{Logo Epcc.\\Fuente:http://www.unex.es/conoce-la-uex/centros/epcc/}
+%%%%%%\label{fig:logoEpcc}
+%%%%%%\end{figure}
