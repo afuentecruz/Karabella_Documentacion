@@ -1,7 +1,7 @@
 \select@language {spanish}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{2}{chapter.1}
 \contentsline {chapter}{\numberline {2}Estado del Arte}{3}{chapter.2}
-\contentsline {chapter}{\numberline {3}An\IeC {\'a}lisis}{4}{chapter.3}
+\contentsline {chapter}{\numberline {3}Requisitos del proyecto}{4}{chapter.3}
 \contentsline {section}{\numberline {3.1}Requisitos}{5}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Requisitos funcionales}{5}{subsection.3.1.1}
 \contentsline {subsubsection}{Aplicaciones de comunicaci\IeC {\'o}n}{5}{section*.5}
@@ -9,9 +9,12 @@
 \contentsline {subsubsection}{Aplicaciones de redes sociales}{6}{section*.7}
 \contentsline {subsubsection}{Sensores}{7}{section*.8}
 \contentsline {subsection}{\numberline {3.1.2}Requisitos no funcionales}{8}{subsection.3.1.2}
-\contentsline {chapter}{\numberline {4}Dise\IeC {\~n}o}{9}{chapter.4}
-\contentsline {section}{\numberline {4.1}Arquitectura}{10}{section.4.1}
-\contentsline {section}{\numberline {4.2}Casos de Uso}{20}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Casos de uso con Whatsapp Messenger}{23}{subsection.4.2.1}
-\contentsline {chapter}{\numberline {5}Implementaci\IeC {\'o}n y desarrollo}{24}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusiones y trabajos futuros}{25}{chapter.6}
+\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis}{9}{chapter.4}
+\contentsline {section}{\numberline {4.1}Diagrama de Casos de Uso}{9}{section.4.1}
+\contentsline {section}{\numberline {4.2}Arquitectura de alto nivel}{9}{section.4.2}
+\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{12}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura}{13}{section.5.1}
+\contentsline {section}{\numberline {5.2}Casos de Uso}{23}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Casos de uso con Whatsapp Messenger}{26}{subsection.5.2.1}
+\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{27}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{28}{chapter.7}

@@ -262,8 +262,8 @@ Es tarea del proyecto la parte relacionada con la recogida de información del s
 \chapter{Estado del Arte}
 -- aquí hablaremos sobre las distintas aproximaciones al problema en términos de implementación. 
 
-\chapter{Análisis}
-En esta capítulo se describe el análisis del problema mediante su especificación de requisitos. Nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
+\chapter{Requisitos del proyecto}
+En esta capítulo se analiza el problema planteado por el proyecto y se detalla su descomposición como requisitos de un sistema software. No hay que perder de vista que nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
 \newpage
 \section{Requisitos}
 \subsection{Requisitos funcionales}
@@ -329,6 +329,42 @@ El sistema deberá:
 	\item Seguridad. La base de datos local deberá estar protegida ante el acceso indebido a los datos. 
 \end{itemize}
 \break
+\chapter{Análisis}
+Wikipedia.getSearch("Analisis").getHtml().getBody().toString(); 
+\section{Diagrama de Casos de Uso}
+
+\section{Arquitectura de alto nivel}
+Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cuales serán los elementos que, interactuando entre ellos, resuelvan el problema final. 
+\newline 
+\newline
+Debemos, entonces, asimilar los requisitos y darnos cuenta de que el objetivo final no es otro más que, recoger información relevante del usuario y su entorno, y escoger y almacenar aquella que entra dentro del círculo de aplicaciones de interés, descrito antes en los requisitos. 
+\newline 
+\newline 
+En primer lugar por tanto, a la hora de diseñar un sistema que nos resuelva todo esto, lo primero que se nos viene a la cabeza es que esa información la genera el usuario dentro de la interfaz de usuario del teléfono. Entonces nuestra fuente principal de información no es otra que dicha interfaz. 
+\newline 
+\newline
+En esta interfaz el usuario vuelca toda su interacción con el teléfono y el sistema deberá entonces capturar esta información para que pueda ser tratada y analizada. 
+\newline
+\newline
+Este tratamiento y análisis consiste en, a partir de la información \textit{en bruto} que vierte el usuario sobre su teléfono, seamos capaces de categorizarla y extraer su significado para encapsularlo en unidades de datos relevantes. 
+\newline 
+\newline 
+Esta información por tanto deberá pasar por una serie de filtros hasta que consigamos extraer algún significado de ella. Esto nos plantea entonces el siguiente problema a abordar. Cómo diantres tratar la información capturada para que sea relevante. 
+\newline 
+\newline
+Pues bien, imaginemos la información generada por el usuario como un carro de datos sin sentido alguno. Deberemos capturar ese carro y rescatar de entre el tumulto los datos relevantes para nuestro sistema, para, posteriormente, analizarlo y darle de significado. 
+\newline 
+\newline
+Por lo tanto, nuestra arquitectura del sistema tendrá, a groso modo, el siguiente aspecto. 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.45]{pictures/architecture/ArquitecturaBasica01.jpg} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+	\end{center}
+	\caption[Arquitectura general]{Arquitectura general del sistema.}
+\end{figure}
+%%% ------
+--- Hablar de mi libro! Lo que hace el analizador sintáctico (organizar a la peña y mandarla pa un lao o pa otro) y el semántico (una máquina de estados gigantesca donde en función de como venga la información se almacena de una forma u otra). 
 \chapter{Diseño}
 En este capítulo se detalla el resultado de las sucesivas iteraciones sobre la etapa de diseño. A partir de los requisitos se ha estudiado el problema y planteado una arquitectura que nos permitirá guiar la implementación de los casos de uso. Se pretende obtener una arquitectura limpia y organizada de manera que permita la mantenibilidad del proyecto y una modificación mínima y eficaz. 
 \newpage
