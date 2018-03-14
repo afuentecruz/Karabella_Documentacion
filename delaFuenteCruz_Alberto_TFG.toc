@@ -12,9 +12,9 @@
 \contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis}{9}{chapter.4}
 \contentsline {section}{\numberline {4.1}Diagrama de Casos de Uso}{9}{section.4.1}
 \contentsline {section}{\numberline {4.2}Arquitectura de alto nivel}{9}{section.4.2}
-\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{12}{chapter.5}
-\contentsline {section}{\numberline {5.1}Arquitectura}{13}{section.5.1}
-\contentsline {section}{\numberline {5.2}Casos de Uso}{23}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Casos de uso con Whatsapp Messenger}{26}{subsection.5.2.1}
-\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{27}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{28}{chapter.7}
+\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{13}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura}{14}{section.5.1}
+\contentsline {section}{\numberline {5.2}Casos de Uso}{24}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Casos de uso con Whatsapp Messenger}{27}{subsection.5.2.1}
+\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{28}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{29}{chapter.7}
