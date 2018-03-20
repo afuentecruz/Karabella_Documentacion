@@ -6,15 +6,16 @@
 \contentsline {subsection}{\numberline {3.1.1}Requisitos funcionales}{5}{subsection.3.1.1}
 \contentsline {subsubsection}{Aplicaciones de comunicaci\IeC {\'o}n}{5}{section*.5}
 \contentsline {subsubsection}{Aplicaciones de mensajer\IeC {\'\i }a instant\IeC {\'a}nea}{6}{section*.6}
-\contentsline {subsubsection}{Aplicaciones de redes sociales}{6}{section*.7}
-\contentsline {subsubsection}{Sensores}{7}{section*.8}
-\contentsline {subsection}{\numberline {3.1.2}Requisitos no funcionales}{8}{subsection.3.1.2}
-\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis}{9}{chapter.4}
-\contentsline {section}{\numberline {4.1}Diagrama de Casos de Uso}{9}{section.4.1}
-\contentsline {section}{\numberline {4.2}Arquitectura de alto nivel}{9}{section.4.2}
-\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{13}{chapter.5}
-\contentsline {section}{\numberline {5.1}Arquitectura}{14}{section.5.1}
-\contentsline {section}{\numberline {5.2}Casos de Uso}{24}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Casos de uso con Whatsapp Messenger}{27}{subsection.5.2.1}
-\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{28}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{29}{chapter.7}
+\contentsline {subsubsection}{Aplicaciones de b\IeC {\'u}squeda en la web}{6}{section*.7}
+\contentsline {subsubsection}{Aplicaciones de redes sociales}{7}{section*.8}
+\contentsline {subsubsection}{Sensores}{7}{section*.9}
+\contentsline {subsection}{\numberline {3.1.2}Requisitos no funcionales}{9}{subsection.3.1.2}
+\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis}{10}{chapter.4}
+\contentsline {section}{\numberline {4.1}Diagrama de Casos de Uso}{10}{section.4.1}
+\contentsline {section}{\numberline {4.2}Arquitectura de alto nivel}{12}{section.4.2}
+\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{16}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura}{17}{section.5.1}
+\contentsline {section}{\numberline {5.2}Casos de Uso}{27}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Casos de uso con Whatsapp Messenger}{30}{subsection.5.2.1}
+\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{31}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{32}{chapter.7}
