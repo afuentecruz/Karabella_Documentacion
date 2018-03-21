@@ -330,8 +330,9 @@ El sistema deberá:
 \end{itemize}
 \break
 \chapter{Análisis}
-Wikipedia.getSearch("Analisis").getHtml().getBody().toString(); 
-\section{Diagrama de Casos de Uso}
+Para centrar el problema y enfocar los requisitos a un proceso que nos lleve a obtener un proyecto de ingeniería, haremos uso de distintos diagramas que nos ayudaran a resolver el problema y plantear una solución. Así en el capítulo nos encontramos con los diagramas de casos de uso, indicando las tareas que debe resolver el sistema, y un diagrama de arquitectura a alto nivel que plantea una solución inicial. 
+\pagebreak
+\section{Diagramas de Casos de Uso}
 Si nos fijamos en como está planteado el proyecto, no tendremos un usuario como tal, si no que nos aprovecharemos de los movimientos de este para registrar de forma pasiva lo que hace. 
 \newline
 \newline
@@ -350,10 +351,8 @@ Aquí tenemos los casos de uso del usuario entonces;
 	\caption[Casos de uso 01]{Casos de uso próximos al usuario.}
 \end{figure}
 %%% ------
-Siendo los casos de uso desde el punto de vista de la captura de información los siguientes.
-\newline
-\newline
-Aplicaciones de comunicación.
+\pagebreak
+Siendo los casos de uso desde el punto de vista de la captura de información los siguientes. Si nos centramos en el apartado de aplicaciones de comunicación; 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
@@ -362,7 +361,7 @@ Aplicaciones de comunicación.
 	\caption[Casos de uso 02]{CU Apps de comunicación.}
 \end{figure}
 %%% ------
-Aplicaciones de mensajería instantánea.
+En el grupo de mensajería instantánea.
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
@@ -371,7 +370,34 @@ Aplicaciones de mensajería instantánea.
 	\caption[Casos de uso 03]{CU Apps de mensajería.}
 \end{figure}
 %%% ------
-CULO
+Aplicaciones de navegación y consulta de la web. 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.30]{pictures/usecases/usecases04.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+	\end{center}
+	\caption[Casos de uso 04]{CU Apps de navegación web.}
+\end{figure}
+%%% ------
+Si nos fijamos ahora en las aplicaciones de redes sociales, tenemos los siguientes casos de uso; 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.30]{pictures/usecases/usecases05.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+	\end{center}
+	\caption[Casos de uso 05]{CU Apps RRSS.}
+\end{figure}
+%%% ------
+Por último, en el apartado de los sensores, donde el actor será el capturador de la información de los sensores; 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.30]{pictures/usecases/usecases06.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+	\end{center}
+	\caption[Casos de uso 06]{CU Sensores.}
+\end{figure}
+%%% ------
+\pagebreak
 \section{Arquitectura de alto nivel}
 Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cuales serán los elementos que, interactuando entre ellos, resuelvan el problema final. 
 \newline 
