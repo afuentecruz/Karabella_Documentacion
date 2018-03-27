@@ -398,46 +398,20 @@ Por último, en el apartado de los sensores, donde el actor será el capturador 
 \end{figure}
 %%% ------
 \pagebreak
-\section{Arquitectura de alto nivel}
+\section{Arquitectura de bajo nivel}
 Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cuales serán los elementos que, interactuando entre ellos, resuelvan el problema final. 
 \newline 
 \newline
-Debemos, entonces, asimilar los requisitos y darnos cuenta de que el objetivo final no es otro más que, recoger información relevante del usuario y su entorno, y escoger y almacenar aquella que entra dentro del círculo de aplicaciones de interés, descrito antes en los requisitos. 
-\newline 
-\newline 
-En primer lugar por tanto, a la hora de diseñar un sistema que nos resuelva todo esto, lo primero que se nos viene a la cabeza es que esa información la genera el usuario dentro de la interfaz de usuario del teléfono. Entonces nuestra fuente principal de información no es otra que dicha interfaz. 
-\newline 
-\newline
-En esta interfaz el usuario vuelca toda su interacción con el teléfono y el sistema deberá entonces capturar esta información para que pueda ser tratada y analizada. 
-\newline
-\newline
-Este tratamiento y análisis consiste en, a partir de la información \textit{en bruto} que vierte el usuario sobre su teléfono, seamos capaces de categorizarla y extraer su significado para encapsularlo en unidades de datos relevantes. 
-\newline 
-\newline 
-Esta información por tanto deberá pasar por una serie de filtros hasta que consigamos extraer algún significado de ella. Esto nos plantea entonces el siguiente problema a abordar. Cómo diantres tratar la información capturada para que sea relevante. 
-\newline 
-\newline
-Pues bien, imaginemos la información generada por el usuario como un carro de datos sin sentido alguno. Deberemos capturar ese carro y rescatar de entre el tumulto los datos relevantes para nuestro sistema, para, posteriormente, analizarlo y darle de significado. 
-\newline 
-\newline
-Por lo tanto, si prestamos atención a las necesidades del sistema entendemos que será necesaria la siguiente arquitectura. 
-%%% ------ 
+ %%% ------ 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.45]{pictures/architecture/ArquitecturaBasica01.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+		\includegraphics[scale=0.15]{pictures/architecture/highLevelArch01.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Arquitectura general]{Arquitectura general del sistema.}
+	\caption[Arquitectura de alto nivel]{Arquitectura de alto nivel.}
 \end{figure}
+\newpage
+contar desde el usuario hasta la nube y tol meollo
 %%% ------
-Donde tenemos tres capas intermedias entre la interfaz de usuario y el almacenamiento. Estas tres capas se encargarán de la lógica de negocio del sistema. Veamos estas cinco capas. 
-\begin{itemize}
-  \item UI. La interfaz del usuario de nuestra aplicación. En ella desarrollará el uso del teléfono interactuando con el. Esta es por tanto la principal fuente de datos de nuestro proyecto. 
-  \item Capturador de información. Primera capa de nuestra lógica de negocio. Será la encargada de capturar la información directamente de la UI y suministrarla en bruto a las capas inferiores, encargadas ellas de procesarlas. Por lo tanto su función es, sencillamente, capturar la información y pasarla hacia abajo. Esto es así con el fin de desarrollar una lógica lo más mínima posible, de modo que se libere de carga computacional innecesaria al proceso, dado la posibilidad de recibir cargas descomunales de información en momentos puntuales.  
-  \item Analizador sintáctico. Es la capa encargada de realizar un primer análisis a los datos para ordenarlos de acuerdo a unas reglas. Esta ordenación no tiene más propósito que analizar de acuerdo a unas reglas los datos, para o bien encapsularlos en unidades de las que se conoce su forma, o descartarla en caso de que no satisfaga estas reglas. 
-  \item Analizador semántico. Se encargará de interpretar los datos suministrados por la capa sintáctica. Dotará por tanto de un sentido a los datos bien formados y estructurados de la capa superior. Esto se realizará desarrollando sendas máquinas de estado que permitan situar los datos en su contexto y extraer así su significado. 
-  \item La capa de persistencia. Nos permitirá almacenar los datos en local, disponibles para su consulta. 
-\end{itemize}
-De esta forma obtenemos una arquitectura inicial que nos plantea una separación de funcionalidades en capas lo suficientemente atómicas como para poder realizar una arquitectura sencilla y eficaz basada en este planteamiento inicial. 
 \chapter{Diseño}
 En este capítulo se detalla el resultado de las sucesivas iteraciones sobre la etapa de diseño. A partir de los requisitos se ha estudiado el problema y planteado una arquitectura que nos permitirá guiar la implementación de los casos de uso. Se pretende obtener una arquitectura limpia y organizada de manera que permita la mantenibilidad del proyecto y una modificación mínima y eficaz. 
 \newpage
