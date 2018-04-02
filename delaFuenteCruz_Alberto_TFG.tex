@@ -403,15 +403,78 @@ Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cua
 \newline 
 \newline
  %%% ------ 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.15]{pictures/architecture/highLevelArch01.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
-	\end{center}
-	\caption[Arquitectura de alto nivel]{Arquitectura de alto nivel.}
+\begin{figure}[hbt]
+  \begin{center} \setlength{\unitlength}{0.0105in}
+     \includegraphics[width=1\textwidth]{pictures/architecture/highLevelArch01.png}
+  \end{center}
+  \caption[Arquitectura de alto nivel]{Arquitectura de alto nivel.}
 \end{figure}
-\newpage
-contar desde el usuario hasta la nube y tol meollo
 %%% ------
+\newpage
+Vemos que el sistema se compone gracias a tres componentes fundamentales, por un lado el usuario, fuente de nuestros datos, el propio teléfono, en donde capturaremos la información, y un servidor en la nube que recibirá de forma periódica los datos recogidos por el teléfono y que permitirá además consultarlos. 
+\newline
+\newline
+\subsection{Smartphone}
+Vayamos por partes pues y analicemos cada grupo de componentes. Por un lado el \textbf{smarthphone} y el \textbf{usuario}. Dado que el smartphone es la interfaz de acceso del usuario a las funciones del teléfono y sus aplicaciones, será entonces aquí donde centremos nuestro sistema y donde estarán la mayor parte de sus componentes, al menos todos los relacionados con la captura de información. 
+\newline
+\newline
+Este proceso de captura se detalla en el siguiente fragmento de la arquitectura. 
+ %%% ------ 
+\begin{figure}[hbt]
+  \begin{center} \setlength{\unitlength}{0.0105in}
+     \includegraphics[width=0.5\textwidth]{pictures/architecture/highLevelArch02.png}
+  \end{center}
+  \caption[Arquitectura de alto nivel. Smartphone]{Arquitectura de alto nivel. Detalle de la parte móvil.}
+\end{figure}
+%%% ------
+Toda la arquitectura parte del usuario, el cual interactúa con su teléfono mediante pulsaciones en la pantalla, que son recogidas por aplicaciones que le devuelven información al usuario mediante esa misma pantalla. Será entonces esta interfaz de usuario lo que nuestro sistema deberá escuchar y capturar. Por lo tanto tendremos una aplicación que recibirá las pulsaciones en los elementos de la interfaz del usuario (UI). 
+\newline
+\newline
+Realizaremos esta captura recogiendo los \textbf{eventos} que lanzan las pulsaciones del usuario. Estos \textbf{eventos} son fuentes de datos crudos, es decir, la información interna que genera el sistema para informar a las capas inferiores de las acciones del mismo. Nosotros realizaremos la captura de estos eventos y extraeremos su información, situándola, siempre que sea posible dentro de un contexto que le aporte significado. 
+\newline
+\newline
+Tendremos entonces, como elementos de nuestra aplicación un \textbf{capturador} como punto de entrada, \textbf{manejador} para encapsular la información de forma que pueda ser tratada por las capas inferiores, el \textbf{analizador} encargado de extraer su significado, y un \textbf{Database manager} encargado de la persistencia de la información. Veamos cada elemento por separado.  
+\subsubsection{Capturador}
+Encargado de capturar los \textbf{eventos} que produce la interfaz de usuario, estos eventos, como ya se ha comentado, son datos en crudo, información básica del sistema. Este capturador debe recoger estos eventos y pasárselos al manejador junto al instante temporal (timestamp) en el que se produjo su captura. 
+\subsubsection{Manejador}
+Recibe el evento y timestamp del capturador y los encapsula en un Sto (Simple Transfer Object). Estos Stos son la mínima expresión de lo que posteriormente serán nuestros Dtos completos. Los Stos estarán compuestos de la información básica que nos permite analizar un evento, incluyendo así, el nombre del paquete de la aplcación, el nombre de la aplicación, su timestamp y la cadena de información extraída del evento. 
+Esta cadena puede ser desde el título de la pantalla que se le muestra al usuario hasta lo que escribe dentro de un cuadro de texto. Necesitaremos por tanto un componente que ponga orden a ese flujo de datos. 
+\subsubsection{Analizador}
+Recibe los objetos sencillos del manejador para categorizarlos y analizarlos. Dado que el Sto permite identificar la aplicación que generó la información esto deja lugar a tratar de manera individual a cada objeto si procede. 
+Este tratamiento consisitirá en analizar, en base a un modelo, el patrón de llegada de los datos y en base a su contenido situarla en un contexto determinado. Gracias a este modelo construiremos Dtos completos que representarán una unidad de información completa acerca del uso de la app. Estas unidades de información o Dtos pueden ser desde una conversación mantenida por whatsapp como un correo enviado por el usuario. 
+\subsubsection{DB Manager}
+Capa encargada de la persistencia de los datos que le pasa el analizador, este Manager los convertirá en modelos para su almacenamiento en una base de datos local. Deberá además realizar un volcado periódico del contenido de esa base de datos local a un servidor en la nube para su seguridad. 
+\newpage
+\subsection{Cloud}
+En este apartado analizaremos la arquitectura del entorno cloud planteado por la arquitectura. Consiste en un servicio en la nube que acepta el volcado que realiza la base de datos del teléfono cada poco tiempo y permite además visualizar los datos allí vertidos. 
+ %%% ------ 
+\begin{figure}[hbt]
+  \begin{center} \setlength{\unitlength}{0.0105in}
+     \includegraphics[width=0.5\textwidth]{pictures/architecture/highLevelArch03.png}
+  \end{center}
+  \caption[Arquitectura de alto nivel. Cloud]{Arquitectura de alto nivel. Detalle del entorno cloud}
+\end{figure}
+%%% ------
+Estamos, por lo tanto, ante una típica arquitectura de servicios web, donde tenemos un controlador, encargado de atender los puntos de entrada de la API, un Manager que realiza las tareas de conversión de objetos y la lógica de negocio, el Repositorio, encargado trabajar contra la base de datos, una base de datos NoSQL y una Vista, 	que nos permite visualizar los datos almacenados. 
+\subsubsection{Controller}
+Proporciona la interfaz de entrada de la API a través de solicitudes HTTP, así, contaremos con un único método de entrada que aceptará datos en formato JSON, con el contenido en bloques de la base de datos del teléfono, así como los endpoints necesarios para la vista. 
+\newline
+\newline
+Este controller extraerá los datos del json y los convertirá a Dtos, pasándoselos a su vez al manager para que realice la comunicación con las capas inferiores. 
+\subsubsection{Manager}
+Se encarga de transformar los dtos aportados por el controller en modelos que acepte la base de datos, así como realizar la operación inversa y convertir los datos de la base de datos en Dtos de forma que puedan ser invocados por el controlador y ser devueltos a la vista. 
+\newline
+\newline
+Será por tanto el elemento del entorno cloud donde se depositará toda la lógica de negocio, transformaciones de objetos, mezclados, etc. 
+\subsubsection{Repository}
+Capa más próxima a la base de datos, nos ofrecerá un sistema de comunicación del resto de la plataforma con la base de datos, siendo este su único punto de entrada, donde manejaremos modelos acordes al esquema de los documentos almacenados en la DB NoSQL. 
+\subsubsection{DB NoSQL}
+Se trata de nuestra base de datos en la nube, se opta por un sistema NoSQL debido al gran volumen de datos que vamos a manejar. Con el crecimiento de estos datos, surge la necesidad de proporcionar información procesada a partir de grandes volúmenes de datos que tienen unas estructuras horizontales más o menos similares, y este es justo el escenario donde el uso de NoSQL nos brinda la mejor solución. 
+\subsubsection{Vista}
+Punto de salida de nuestra plataforma cloud, proporcionando así una interfaz de consulta de los datos almacenados, generados por la aplicación. 
+% -------------- %
+% --- DISEÑO --- %
+% -------------- % 
 \chapter{Diseño}
 En este capítulo se detalla el resultado de las sucesivas iteraciones sobre la etapa de diseño. A partir de los requisitos se ha estudiado el problema y planteado una arquitectura que nos permitirá guiar la implementación de los casos de uso. Se pretende obtener una arquitectura limpia y organizada de manera que permita la mantenibilidad del proyecto y una modificación mínima y eficaz. 
 \newpage

@@ -13,9 +13,20 @@
 \contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis}{10}{chapter.4}
 \contentsline {section}{\numberline {4.1}Diagramas de Casos de Uso}{11}{section.4.1}
 \contentsline {section}{\numberline {4.2}Arquitectura de bajo nivel}{15}{section.4.2}
-\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{16}{chapter.5}
-\contentsline {section}{\numberline {5.1}Arquitectura}{17}{section.5.1}
-\contentsline {section}{\numberline {5.2}Casos de Uso}{27}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Casos de uso con Whatsapp Messenger}{30}{subsection.5.2.1}
-\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{31}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{32}{chapter.7}
+\contentsline {subsection}{\numberline {4.2.1}Smartphone}{16}{subsection.4.2.1}
+\contentsline {subsubsection}{Capturador}{17}{section*.18}
+\contentsline {subsubsection}{Manejador}{17}{section*.19}
+\contentsline {subsubsection}{Analizador}{18}{section*.20}
+\contentsline {subsubsection}{DB Manager}{18}{section*.21}
+\contentsline {subsection}{\numberline {4.2.2}Cloud}{19}{subsection.4.2.2}
+\contentsline {subsubsection}{Controller}{19}{section*.23}
+\contentsline {subsubsection}{Manager}{20}{section*.24}
+\contentsline {subsubsection}{Repository}{20}{section*.25}
+\contentsline {subsubsection}{DB NoSQL}{20}{section*.26}
+\contentsline {subsubsection}{Vista}{20}{section*.27}
+\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{21}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura}{22}{section.5.1}
+\contentsline {section}{\numberline {5.2}Casos de Uso}{32}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Casos de uso con Whatsapp Messenger}{35}{subsection.5.2.1}
+\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{36}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{37}{chapter.7}
