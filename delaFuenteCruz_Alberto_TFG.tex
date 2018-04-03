@@ -5,7 +5,7 @@
 \usepackage[spanish, es-tabla]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[usenames]{color}
-\usepackage[table]{xcolor} % para poner color en las tablas
+\usepackage[table,xcdraw]{xcolor}
 \usepackage{tikz} % grafos
 \usetikzlibrary{arrows,shapes,positioning,shadows,trees}
 \usepackage{amsmath} % códigos
@@ -47,13 +47,18 @@
 \renewcommand{\appendixname}{Anexos}
 \renewcommand{\appendixtocname}{Anexos}
 \renewcommand{\appendixpagename}{Anexos}
-
+%\newcommand{\specialcell}[1]{\begin{tabular}{@{}c@{}}#1\end{tabular}}
+ \everycr={\noalign{\global\advance\stepno by 1}}%
+ 
 \usepackage{color}
 \definecolor{gray}{rgb}{0.4,0.4,0.4}
 \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
 \definecolor{cyan}{rgb}{0.0,0.6,0.6}
 
 \usepackage[export]{adjustbox} % -- imagenes y cosas
+\usepackage{enumitem}
+\newlist{tabitemize}{itemize}{1}
+\setlist[tabitemize]{label=\textbullet,nosep,after=\strut,align=parleft,leftmargin=*,}
 
 \lstset{
   basicstyle=\ttfamily,
@@ -398,7 +403,7 @@ Por último, en el apartado de los sensores, donde el actor será el capturador 
 \end{figure}
 %%% ------
 \pagebreak
-\section{Arquitectura de bajo nivel}
+\section{Arquitectura de alto nivel}
 Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cuales serán los elementos que, interactuando entre ellos, resuelvan el problema final. 
 \newline 
 \newline
@@ -618,120 +623,26 @@ La lógica de negocio del sistema se encuentra, sin duda, en la capa correspondi
 \newpage
 \newpage 
 \section{Casos de Uso}
--- descripción y tablas con los casos de uso 
 %Caso de uso 01 ~\ref{tab:Caso de uso 01}
 \begin{table}[H]
 \centering
 \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+\multicolumn{3}{|c|}{\textbf{Registro de fecha y hora}} \\ \hline \hline
+\multicolumn{3}{|p{13cm}|}{\raggedright Cuando el usuario pulsa lanza una aplicación el sistema registrará la marca horaria de su puesta en marcha} \\ \hline
+Actores & \multicolumn{2}{|l|}{Usuario y sistema} \\ \hline \hline
 
-\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar nombre de aplicación.} \\ \hline \hline
+\multicolumn{3}{|c|}{\textbf{Flujo principal}} \\ \hline 
 
-\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Cuando el usuario lanza una aplicación dentro del grupo de interés se debe capturar el nombre de la misma para saber de que aplicación se trata} \\ \hline
+\multicolumn{3}{|p{13cm}|}{\raggedright 1. El usuario lanza una app.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 2. El evento de accesibilidad es recogido por el servicio en segundo plano.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 3. Este servicio lo encapsula en un objeto junto a su marca horaria.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 4. El servicio manda el objeto al bus de eventos.} 
 
-\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
-
-\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline 
-
-\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
-	Lanza una aplicación & & \\ \hline
-	& Genera un evento de accesibilidad & \\ \hline
-	& & Captura el evento y extrae su texto \\ \hline
+\\ \hline 
 \end{tabular}
-\caption[Caso de uso 01]{Caso de uso 01.}
-\label{tab:Caso de uso 01}
+\caption[CU Registro de fecha y hora.]{CU Registro de fecha y hora.}
+\label{tab:CU Registro de fecha y hora.}
 \end{table}
-
-%Caso de uso 02 ~\ref{tab:Caso de uso 02}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
-
-\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar el package name de aplicación.} \\ \hline \hline
-
-\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Cuando el usuario lanza una aplicación dentro del grupo de interés debemos capturar el package name de la misma para situar el contexto de las siguientes capturas. } \\ \hline
-
-\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
-
-\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline
-
-\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
-	Lanza una aplicación & & \\ \hline
-	& Genera un evento de accesibilidad & \\ \hline
-	& & Captura el evento y extrae el package name \\ \hline
-\end{tabular}
-\caption[Caso de uso 02]{Caso de uso 02.}
-\label{tab:Caso de uso 02}
-\end{table}
-
-%Caso de uso 03 ~\ref{tab:Caso de uso 03}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
-
-\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar la fecha y hora exactas en la que la aplicación se lanza.} \\ \hline \hline
-
-\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Cuando el usuario lanza una aplicación dentro del grupo de interés debemos capturar el timestamp con la fecha
-y hora del sistema.} \\ \hline
-
-\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
-
-\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline
-
-\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
-	Lanza una aplicación & & \\ \hline
-	%&  & \\ \hline
-	& & Pide la fecha y hora del sistema y la almacena dentro del objeto correspondiente como timestamp de inicio. \\ \hline
-\end{tabular}
-\caption[Caso de uso 03]{Caso de uso 03.}
-\label{tab:Caso de uso 03}
-\end{table}
-
-%Caso de uso 04 ~\ref{tab:Caso de uso 04}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
-
-\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar la fecha y hora exactas en la que se dejó de usar la aplicación.} \\ \hline \hline
-
-\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Cuando el usuario cierra o cambia de aplicación debemos capturar el timestamp con la fecha y hora del sistema.} \\ \hline
-
-\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
-
-\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline
-
-\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
-	Cuando el usuario cierra o cambia de aplicación debemos capturar el timestamp con la fecha y hora del sistema. & & \\ \hline
-	%&  & \\ \hline
-	& & Pide la fecha y hora del sistema y la almacena dentro del objeto correspondiente como timestamp de fin. \\ \hline
-\end{tabular}
-\caption[Caso de uso 04]{Caso de uso 04.}
-\label{tab:Caso de uso 04}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%% COMENZAMOS CON LOS UC PARTICULARES %%%%%%%%%%%%%%%%%%
-\subsection{Casos de uso con Whatsapp Messenger}
-%Caso de uso 05 ~\ref{tab:Caso de uso 05}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
-
-\multicolumn{3}{|l|}{\textbf{Nombre:} Capturar el nombre de la conversación de WhatsApp Messenger.} \\ \hline \hline
-
-\multicolumn{3}{|p{13cm}|}{\raggedright \textbf{Descripción:} Se debe capturar el nombre de la conversación de WhatsApp Messenger a fin de saber cual es el interlocutor al cual el usuario dedica su atención.} \\ \hline
-
-\multicolumn{3}{|l|}{\textbf{Actor:} Usuario} \\ \hline \hline
-
-\multicolumn{3}{|l|}{\textbf{Flujo principal}} \\ \hline
-
-\textbf{Usuario} & \textbf{Sistema} & \textbf{Karabella} \\ \hline
-	Desde la home de whatsapp abre una conversación pulsando sobre la misma. & & \\ \hline
-	& Genera un evento de accesibilidad. & \\ \hline
-	& & Extrae del evento el texto del mismo, el cual lleva asociado el título de la conversación. \\ \hline
-\end{tabular}
-\caption[Caso de uso 05]{Caso de uso 05.}
-\label{tab:Caso de uso 05}
-\end{table}
-
-
 
 
 \chapter{Implementación y desarrollo}
