@@ -432,26 +432,64 @@ Este proceso de captura se detalla en el siguiente fragmento de la arquitectura.
   \caption[Arquitectura de alto nivel. Smartphone]{Arquitectura de alto nivel. Detalle de la parte móvil.}
 \end{figure}
 %%% ------
-Toda la arquitectura parte del usuario, el cual interactúa con su teléfono mediante pulsaciones en la pantalla, que son recogidas por aplicaciones que le devuelven información al usuario mediante esa misma pantalla. Será entonces esta interfaz de usuario lo que nuestro sistema deberá escuchar y capturar. Por lo tanto tendremos una aplicación que recibirá las pulsaciones en los elementos de la interfaz del usuario (UI). 
+Toda la arquitectura parte del usuario, el cual interactúa con su teléfono mediante pulsaciones en la pantalla, que son recogidas por aplicaciones que le devuelven información al usuario mediante esa misma pantalla. Será entonces esta interfaz de usuario lo que nuestro sistema deberá escuchar y capturar. Por lo tanto tendremos una aplicación que recibirá las pulsaciones en los elementos de la interfaz del usuario (UI) bajo la forma de eventos. 
 \newline
 \newline
-Realizaremos esta captura recogiendo los \textbf{eventos} que lanzan las pulsaciones del usuario. Estos \textbf{eventos} son fuentes de datos crudos, es decir, la información interna que genera el sistema para informar a las capas inferiores de las acciones del mismo. Nosotros realizaremos la captura de estos eventos y extraeremos su información, situándola, siempre que sea posible dentro de un contexto que le aporte significado. 
+Vamos a desglosarla por cada elemento, viendo antes de cada componente la unidad de datos que va a manejar.
 \newline
 \newline
-Tendremos entonces, como elementos de nuestra aplicación un \textbf{capturador} como punto de entrada, \textbf{manejador} para encapsular la información de forma que pueda ser tratada por las capas inferiores, el \textbf{analizador} encargado de extraer su significado, y un \textbf{Database manager} encargado de la persistencia de la información. Veamos cada elemento por separado.  
+\subsubsection{Evento}
+Estamos ante la información de entrada única y por tanto fundamental del sistema. Se trata de una unidad de datos compleja y sin estructurar. 
+\newline
+\newline
+Los genera el sistema cada vez que ocurre un cambio notable en la pantalla, y su propósito es dar el mayor feedback posible del usuario. 
+\newline
+\newline
+Muchas veces esta información no surge en el instante en el que se produce el evento, que no deja de ser una instantánea de la pantalla en ese momento, si no que se necesita un contexto, que lo aporta la relación que existe entre los eventos al estar asociados a través de un árbol, representando la vista que está viendo el usuario. 
+\newline
+\newline
+Es por tanto, una unidad de datos muy cruda y desestructurada a la que hay que extraer el significado en su procesamiento en las capas inferiores. Por tanto este evento será producido por el sistema y la fuente de entrada del nuestro, a través del \textbf{capturador}.
 \subsubsection{Capturador}
-Encargado de capturar los \textbf{eventos} que produce la interfaz de usuario, estos eventos, como ya se ha comentado, son datos en crudo, información básica del sistema. Este capturador debe recoger estos eventos y pasárselos al manejador junto al instante temporal (timestamp) en el que se produjo su captura. 
+Se trata de un proceso que está siempre escuchando la aparición de nuevos eventos, con el objetivo de capturarlos y pasárselos al siguiente nivel de la arquitectura, el \textbf{manejador}. Su carga de trabajo realmente será poca, y consistirá en informar al manejador pasándole el evento junto al instante temporal en el que fué generado. 
+\newline
+\newline
+Por lo tanto el capturador recibe eventos y genera eventos junto a su marca temporal para que los consuma el siguiente nivel, manejador. 
+\subsubsection{Evento + timestamp}
+No consiste en una unidad de datos como tal, puesto que sólo consiste en una fecha y hora y el propio evento asociado a ellos. 
 \subsubsection{Manejador}
-Recibe el evento y timestamp del capturador y los encapsula en un Sto (Simple Transfer Object). Estos Stos son la mínima expresión de lo que posteriormente serán nuestros Dtos completos. Los Stos estarán compuestos de la información básica que nos permite analizar un evento, incluyendo así, el nombre del paquete de la aplcación, el nombre de la aplicación, su timestamp y la cadena de información extraída del evento. 
-Esta cadena puede ser desde el título de la pantalla que se le muestra al usuario hasta lo que escribe dentro de un cuadro de texto. Necesitaremos por tanto un componente que ponga orden a ese flujo de datos. 
+Recibe un evento y su marca horaria y debe encapsularlo para que el nivel inferior lo analice, es por tanto el nexo de unión entre los datos en bruto y los datos refinados. 
+\newline
+\newline
+Para ello, cuando reciba el evento, en primer lugar lo encapsula junto a su marca horaria en un objeto que hemos llamado Sto. Simple Transfer Object. 
+\newline
+\newline
+Una vez encapsulado, consulta la aplicación fuente del evento, es decír, la aplicación que lo generó, que nos permite establecer nuestro primer filtro y discernir si se trata de gmail, telegram, facebook... etc. 
+\newline
+\newline
+En función de esto, se llamará a una implementación del analizador u otra, puesto que cada aplicación sigue su propio flujo lógico. Por ello se le comunica un Sto con la información fundamental que necesita. 
+\subsubsection{Sto}
+Es la unidad de datos empleado para comunicar el \textbf{manejador} con el \textbf{analizador}, se trata de una unidad de datos cuyo objetivo es encapsular la información en unidades contenidas y controladas. Será consumido por en analizador a través de la consulta de su evento y su marca horaria, siendo esta última fundamental para aportar el contexto necesario por el analizador. 
 \subsubsection{Analizador}
-Recibe los objetos sencillos del manejador para categorizarlos y analizarlos. Dado que el Sto permite identificar la aplicación que generó la información esto deja lugar a tratar de manera individual a cada objeto si procede. 
-Este tratamiento consisitirá en analizar, en base a un modelo, el patrón de llegada de los datos y en base a su contenido situarla en un contexto determinado. Gracias a este modelo construiremos Dtos completos que representarán una unidad de información completa acerca del uso de la app. Estas unidades de información o Dtos pueden ser desde una conversación mantenida por whatsapp como un correo enviado por el usuario. 
+Recibe los citados Stos, objetos sencillos, del manejador, para tratarlos, procesarlos y extraer su significao. 
+\newline
+\newline
+Este procesamiento consisitirá en analizar, en base al modelo correspondiente, el patrón de llegada de los datos y en base a su contenido y el de eventos antecesores y sucesores, aportarle un contexto. Gracias a este modelo construiremos Dtos completos que representarán una unidad de información completa acerca del uso de la app.
+\subsubsection{Dto}
+Dtos, Data Transfer Objects, será la unidad última de información que genere nuestro sistema, representado así la información completa del usuario, es decir, uno de estos dtos contiene en su interior la interacción completa del usuario con cualquier servicio que le ofrezca el teléfono. 
+\newline
+\newline
+Será por tanto contenido semántico de esta interacción, siendo por ejemplo, un dto una conversación mantenida por whatsapp con un contacto durante el intervalo de tiempo en el que estuvo activa, una búsqueda en el navegador... en resumen cualquier interacción, contextuada, del usuario con cualquiera de las apps que vamos a monitorizar. 
+\newline
+\newline 
+Una vez estos Dtos están listos se les pasa al DB Manager. 
 \subsubsection{DB Manager}
-Capa encargada de la persistencia de los datos que le pasa el analizador, este Manager los convertirá en modelos para su almacenamiento en una base de datos local. Deberá además realizar un volcado periódico del contenido de esa base de datos local a un servidor en la nube para su seguridad. 
+Capa encargada de la persistencia de los datos que le pasa el analizador. El manager los convierte en modelos para su almacenamiento en una base de datos local. 
+\newline 
+\newline 
+En este manager recae una tarea también fundamental para el sistema, puesto que debe realizar un volcado periódico la base de datos a un servidor remoto para su seguridad y almacenamiento para posibles usos. 
 \newpage
-\subsection{Cloud}
-En este apartado analizaremos la arquitectura del entorno cloud planteado por la arquitectura. Consiste en un servicio en la nube que acepta el volcado que realiza la base de datos del teléfono cada poco tiempo y permite además visualizar los datos allí vertidos. 
+\subsection{Servidor Remoto}
+En este apartado analizaremos la arquitectura del entorno remoto planteado por la arquitectura. Consiste en un servicio en la nube que acepta el volcado que realiza la base de datos del teléfono cada poco tiempo y permite además visualizar los datos allí vertidos. 
  %%% ------ 
 \begin{figure}[hbt]
   \begin{center} \setlength{\unitlength}{0.0105in}
