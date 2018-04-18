@@ -514,152 +514,12 @@ Capa más próxima a la base de datos, nos ofrecerá un sistema de comunicación
 \subsubsection{DB NoSQL}
 Se trata de nuestra base de datos en la nube, se opta por un sistema NoSQL debido al gran volumen de datos que vamos a manejar. Con el crecimiento de estos datos, surge la necesidad de proporcionar información procesada a partir de grandes volúmenes de datos que tienen unas estructuras horizontales más o menos similares, y este es justo el escenario donde el uso de NoSQL nos brinda la mejor solución. 
 \subsubsection{Vista}
-Punto de salida de nuestra plataforma cloud, proporcionando así una interfaz de consulta de los datos almacenados, generados por la aplicación. 
-% -------------- %
-% --- DISEÑO --- %
-% -------------- % 
-\chapter{Diseño}
-En este capítulo se detalla el resultado de las sucesivas iteraciones sobre la etapa de diseño. A partir de los requisitos se ha estudiado el problema y planteado una arquitectura que nos permitirá guiar la implementación de los casos de uso. Se pretende obtener una arquitectura limpia y organizada de manera que permita la mantenibilidad del proyecto y una modificación mínima y eficaz. 
-\newpage
-\section{Arquitectura}
-A la hora de plantear nuestra arquitectura el primer paso es conocer la propia arquitectura de Android.
-\newline
-\newline
-Si nos fijamos en la siguiente figura vemos como Android se asienta en una modificación del Kernel de Linux sobre el que se van abstrayendo capas en las que cada una emplea los servicios que provee la capa inmediatamente inferior. 
-%%% ------ 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.15]{pictures/architecture/android_stack.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
-	\end{center}
-	\caption[Android stack]{Arquitectura por capas de Android.}
-\end{figure}
-%%% ------
-Así, como base de la arquitectura tenemos una modificación del Kernel de Linux sobre la cual se implementa una segunda capa, de abstracción del hardware, que será la encargada de manejar y comunicarse con los periféricos del teléfono. Entendemos por periféricos lo habitual en estos entornos; sensores, antenas, emisores radio...). Sobre estas dos capas, que permiten una interfaz de acceso al dispositivo Hardware, tenemos las librerías de bajo nivel y el entorno de ejecución de android. 
-\newline \newline
-Si avanzamos un poco más vemos que en las dos últimas capas están relacionadas con una API Java que permite al programador implementar aplicaciones, usando a través de la api, todo la anteriormente expuesto. 
-\\
-%%% ------ 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.2]{pictures/architecture/android_stack_used.png} 
-	\end{center}
-	\caption[Detalle del Android Stack]{Márgenes del sistema}
-\end{figure}
-%%% ------
-Estas dos últimas capas serán en las que se situará nuestra arquitectura. Además será conceptualmente parecida puesto que como hemos visto, Android dispone de un sistema organizado por capas, algo bastante lógica y habitual en los sistemas software, y nuestro objetivo por tanto debe ser separar funcionalidades y agruparlas bajo este patrón.
-\newpage
-\break
-Teniendo este concepto claro, nos fijaremos en la publicación de Robert C. Martin, Clean Architecture, en la que se plantea el concepto de Arquitectura Limpia, sin ser más que una serie de condiciones que debe cumplir una arquitectura para que se la considere ”clean". Nos encontramos entonces con una serie de reglas, cuyo cumplimiento ayuda a diferenciar y dividir el software en capas, obteniendo además un software independiente de elementos externos (como la ui, frameworks y bases de datos), testeable y mantenible. 
-\newline
-\newline
-En esta publicación nos encontramos con que una arquitectura debe partir de las entidades (entities). Estas entidades no son mas que las implementaciones sencillas de clases Java. 
-\newline
-\newline
-Estas clases permitirán instanciar objetos que reprensentarán a los actores principales de la lógica de negocio. Por tanto POJOS (Plain Old Java Object) y Dtos (Data Transfer Objects) se verán incluidos en esta capa. 
-%%% ------ 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.3]{pictures/architecture/android_architecture.png} 
-	\end{center}
-	\caption[Clean Architecture]{Arquitectura clean}
-\end{figure}
-%%% ------ 
-Los casos de uso (use cases) están muy relacionados con las entidades, puesto que implementarán la lógica de negocio del sistema, puesto que deben orquestar y orientar todo el flujo de datos del sistema. 
-\newline
-\newline
-La capa de los Interface Adapters realiza la conversión de los datos de manera que se puedan comunicar los niveles superiores con los casos de uso y entidades (en MVC corresponde a los Controladores, MVVP al presenter... etc). 
-\newline
-\newline
-En la última capa y más externa, Frameworks and Drivers, residen las plataformas y herramientas externas, donde se incluye la interfaz de usuario, web... 
-\newline
-\newline
-Si nos planteamos esto en los términos del proyecto, es decir, una aplicación que sea capaz de meterse en los servicios de accesibilidad que provee para capturar, procesar y extraer la  información de los eventos que se generan, deberemos abstraernos del problema y ser capaces de, a partir de una vista general del sistema inferir las capas que finalmente nos guiarán la implementación. 
-\newline
-\newline
-Así pues, en primer lugar situar nuestro sistema dentro del stack tecnológico de Android citado al principio de esta sección. 
-\newline
-%%% ------ 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.6]{pictures/architecture/arquitecturaGeneral01.png} 
-	\end{center}
-	\caption[Arquitectura dentro del android stack]{Arquitectura del sistema dentro del stack de Android.}
-\end{figure}
-Es natural esta clasificación puesto que el proyecto se basa en la implementación de los Servicios de Accesibilidad que Android dispone en de su API, gracias a mecanismos como la herencia y la implementación de interfaces. 
-\newline \newline
-Estos servicios de accesibilidad son la solución de Google para asistir y dar soportes a usuarios con diversidad funcional. Su naturaleza y comportamiento es lo que nos permite aprovechar estos servicios para obtener información de lo que hace el usuario. 
-\newline \newline
-Se comporta además como cualquier otro servicio de Android, (es decir, procesos ideados para correr en segundo plano con un ciclo de vida prolongado en el tiempo). Los Servicios de Accesibilidad se comportan al final como listeners de Eventos de Accesibilidad, que lanzados por el sistema. Estos Eventos de Accesibilidad son la entidad que manejan los servicios de accesibilidad. 
-\newline \newline
-Los eventos llevan consigo información sobre la interfaz de usuario, por ejemplo los eventos se lanza cuando entra en foco un elemento (con la descripción del elemento, botones, entradas de texto, nombres de ventanas...). Nuestra solución pasa por extraer la información de esos eventos y procesarla. 
-\newline \newline
-Dado que estos eventos pueden ser capturados por Eventos de Accesibilidad, nuestro sistema contará con un servicio que lo implemente y que realiza esta captura, este será un elemento fundamental en la arquitectura puesto que será la base sobre la que se asentarán el resto de elementos. 
-\\
-Así, en un primer vistazo, podemos ver la arquitectura usando un grano gordo del siguiente modo. 
-%%% ------ 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.3]{pictures/architecture/arquitecturaGeneral02.png} 
-	\end{center}
-	\caption[Arquitectura general del sistema]{Arquitectura general del sistema}
-\end{figure}
-%%% ------ 
-Donde la interfaz de usuario (UI) genera eventos de accesibilidad. Estos eventos, como ya se ha comentado, están asociados a cada acción que el usuario realiza con el teléfono sobre la interfaz. Será la implementación del evento de accesibilidad (Accesibility Service) el que nos permita capturarlos. 
-\newline
-\newline
-Este servicio se encargará de capturar los eventos y mandarlos hacia el Manejador de Eventos (Event Handler), este manejador será el encargado de clasificar y procesar los eventos en función de la información que traigan consigo. 
-\newline
-\newline
-Una vez que estos eventos pasen por el manejador, obtendremos como resultado una entidad lista para ser guardada en la base de datos. 
-\newline
-\newline
-Profundicemos un poco más en como sería este manejador y como son los componentes que lo forman. 
-\newline
-\newline
-Como estamos viendo, el servicio de accesibilidad (lo llamaremos simplemente servicio) recibe eventos de la interfaz y los envía al manejador, pero dado que los eventos se generan en gran cantidad y en momentos puntuales tendremos que manejar un caudal de información importante, la comunicación entre el servicio y el manejador se realizará a través de un bus que permitirá al servicio desatender los datos lo antes posible y desentenderse así de lo que ocurre con esos datos y como son tratados.
-\newline
-\newline
-Este bus lo estará escuchando el manejador, que capturará los elementos para realizar un primer chequeo, y es que en función del nombre de la aplicación (más concretamente su package name), invocará a un \textit{Scraper} encargado de extraer la información relevante del evento que estamos manejando. 
-\newline
-\newline
-Estos Scrapers son un concepto sacado del llamado \textit{Web Scraping}, técnica mediante la cual se transforman los datos sin estructura de la web en datos estructurados que pueden ser almacenados y analizados en una base de datos. 
-\newline
-\newline
-Así pues, en nuestro sistema tendremos de tantos Scrapers como aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por los Managers. Encargados de persistir en una base de datos local los datos generados por el sistema. 
-\newline
-\newline
-Al final nuestra arquitectura a bajo nivel resulta en el siguiente diagrama. 
-%%% ------ 
-\begin{figure}[H]
-		\includegraphics[width=1.3\textwidth,center]{pictures/architecture/arquitecturaGeneral03.png} 
-%	\end{large}
-	\caption[Arquitectura detallada]{Arquitectura detallada}
-\end{figure}
-%%% ------  
-En primer lugar nos encontramos la ui que alimenta al servicio de accesibilidad con eventos. Este servicio se encarga de meterlos en un bus de forma que el manejador pueda recogerlos y computarlos. 
-\newline \newline
-Este tratamiento que realiza el manejador no es otro que, en función de la app que lo lanzó llamar a las clases implicadas en su tratamiento.
-\newline \newline
-Expliquemos más despacio en que consite esto. El manejador, como se ha dicho en alguna ocasión, analiza el package name del evento, este package name nos permite identificar el elemento del sistema android que lanzó el evento, ya sean relacionados con la aplicación en foco en ese momento como los relacionados con el uso de sensores del teléfono. 
-\newline \newline
-Los eventos de las aplicaciones serán tratados por los scrapers. Estos extraerán la información pertinente y la encapsularán en dtos. 
-\newline \newline
-Con los sensores la historia es diferente, puesto que la escucha de los mismos está ligada a la implementación de sendos listeners que recogen la información que van generando. En un apartado diferente entra la escucha del micrófono, puesto que para respetar la privacidad del usuario sólo se lanzará la captura de audio cuando un evento relacionado con la misma sea lanzado. Nos referimos a casos concretos del uso del móvil como comandos de voz, notas de audio, etc. 
-\newline \newline
-En la parte del Data Manager nos encontramos a las entidades y a los responsables de mover esas entidades a lo largo de la arquitectura. 
-\newline \newline
-Así nos encontramos con el paquete repository, encargado de la persistencia en base de datos de las entidades. Entidades como dtos (para la comunicación de información desde el manejador al data manager) y mappers, que realizarán la conversión de dtos a modelos, entidad aceptada por el repository para la persistencia en la base de datos. 
-\newline \newline
-De esta manera nos encontramos con 4 capas separadas por funcionalidad y con independencia lógica entre ellas, puesto que cada una está consagrada a una tarea particular (recibir eventos, computarlos, persistirlos). 
-\newline \newline
-La lógica de negocio del sistema se encuentra, sin duda, en la capa correspondiente al manejador, donde deberemos de echar un esfuerzo de implementación considerable para manejar todo el flujo de información. 
-%%% ------
-%%% ------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                              CASOS DE USO                                   %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+Punto de salida de nuestra plataforma cloud, proporcionando así una interfaz de consulta de los datos almacenados, generados por la aplicación. \\
 \newpage 
+%%% ------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                        ##    CASOS DE USO    ##                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Casos de Uso}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -809,6 +669,146 @@ La lógica de negocio del sistema se encuentra, sin duda, en la capa correspondi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                              <- ASUNTO GMAIL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% -------------- %
+% --- DISEÑO --- %
+% -------------- % 
+\chapter{Diseño}
+En este capítulo se detalla el resultado de las sucesivas iteraciones sobre la etapa de diseño. A partir de los requisitos se ha estudiado el problema y planteado una arquitectura que nos permitirá guiar la implementación de los casos de uso. Se pretende obtener una arquitectura limpia y organizada de manera que permita la mantenibilidad del proyecto y una modificación mínima y eficaz. 
+\newpage
+\section{Arquitectura}
+A la hora de plantear nuestra arquitectura el primer paso es conocer la propia arquitectura de Android.
+\newline
+\newline
+Si nos fijamos en la siguiente figura vemos como Android se asienta en una modificación del Kernel de Linux sobre el que se van abstrayendo capas en las que cada una emplea los servicios que provee la capa inmediatamente inferior. 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.15]{pictures/architecture/android_stack.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+	\end{center}
+	\caption[Android stack]{Arquitectura por capas de Android.}
+\end{figure}
+%%% ------
+Así, como base de la arquitectura tenemos una modificación del Kernel de Linux sobre la cual se implementa una segunda capa, de abstracción del hardware, que será la encargada de manejar y comunicarse con los periféricos del teléfono. Entendemos por periféricos lo habitual en estos entornos; sensores, antenas, emisores radio...). Sobre estas dos capas, que permiten una interfaz de acceso al dispositivo Hardware, tenemos las librerías de bajo nivel y el entorno de ejecución de android. 
+\newline \newline
+Si avanzamos un poco más vemos que en las dos últimas capas están relacionadas con una API Java que permite al programador implementar aplicaciones, usando a través de la api, todo la anteriormente expuesto. 
+\\
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.2]{pictures/architecture/android_stack_used.png} 
+	\end{center}
+	\caption[Detalle del Android Stack]{Márgenes del sistema}
+\end{figure}
+%%% ------
+Estas dos últimas capas serán en las que se situará nuestra arquitectura. Además será conceptualmente parecida puesto que como hemos visto, Android dispone de un sistema organizado por capas, algo bastante lógica y habitual en los sistemas software, y nuestro objetivo por tanto debe ser separar funcionalidades y agruparlas bajo este patrón.
+\newpage
+\break
+Teniendo este concepto claro, nos fijaremos en la publicación de Robert C. Martin, Clean Architecture, en la que se plantea el concepto de Arquitectura Limpia, sin ser más que una serie de condiciones que debe cumplir una arquitectura para que se la considere ”clean". Nos encontramos entonces con una serie de reglas, cuyo cumplimiento ayuda a diferenciar y dividir el software en capas, obteniendo además un software independiente de elementos externos (como la ui, frameworks y bases de datos), testeable y mantenible. 
+\newline
+\newline
+En esta publicación nos encontramos con que una arquitectura debe partir de las entidades (entities). Estas entidades no son mas que las implementaciones sencillas de clases Java. 
+\newline
+\newline
+Estas clases permitirán instanciar objetos que reprensentarán a los actores principales de la lógica de negocio. Por tanto POJOS (Plain Old Java Object) y Dtos (Data Transfer Objects) se verán incluidos en esta capa. 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.3]{pictures/architecture/android_architecture.png} 
+	\end{center}
+	\caption[Clean Architecture]{Arquitectura clean}
+\end{figure}
+%%% ------ 
+Los casos de uso (use cases) están muy relacionados con las entidades, puesto que implementarán la lógica de negocio del sistema, puesto que deben orquestar y orientar todo el flujo de datos del sistema. 
+\newline
+\newline
+La capa de los Interface Adapters realiza la conversión de los datos de manera que se puedan comunicar los niveles superiores con los casos de uso y entidades (en MVC corresponde a los Controladores, MVVP al presenter... etc). 
+\newline
+\newline
+En la última capa y más externa, Frameworks and Drivers, residen las plataformas y herramientas externas, donde se incluye la interfaz de usuario, web... 
+\newline
+\newline
+Si nos planteamos esto en los términos del proyecto, es decir, una aplicación que sea capaz de meterse en los servicios de accesibilidad que provee para capturar, procesar y extraer la  información de los eventos que se generan, deberemos abstraernos del problema y ser capaces de, a partir de una vista general del sistema inferir las capas que finalmente nos guiarán la implementación. 
+\newline
+\newline
+Así pues, en primer lugar situar nuestro sistema dentro del stack tecnológico de Android citado al principio de esta sección. 
+\newline
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.6]{pictures/architecture/arquitecturaGeneral01.png} 
+	\end{center}
+	\caption[Arquitectura dentro del android stack]{Arquitectura del sistema dentro del stack de Android.}
+\end{figure}
+Es natural esta clasificación puesto que el proyecto se basa en la implementación de los Servicios de Accesibilidad que Android dispone en de su API, gracias a mecanismos como la herencia y la implementación de interfaces. 
+\newline \newline
+Estos servicios de accesibilidad son la solución de Google para asistir y dar soportes a usuarios con diversidad funcional. Su naturaleza y comportamiento es lo que nos permite aprovechar estos servicios para obtener información de lo que hace el usuario. 
+\newline \newline
+Se comporta además como cualquier otro servicio de Android, (es decir, procesos ideados para correr en segundo plano con un ciclo de vida prolongado en el tiempo). Los Servicios de Accesibilidad se comportan al final como listeners de Eventos de Accesibilidad, que lanzados por el sistema. Estos Eventos de Accesibilidad son la entidad que manejan los servicios de accesibilidad. 
+\newline \newline
+Los eventos llevan consigo información sobre la interfaz de usuario, por ejemplo los eventos se lanza cuando entra en foco un elemento (con la descripción del elemento, botones, entradas de texto, nombres de ventanas...). Nuestra solución pasa por extraer la información de esos eventos y procesarla. 
+\newline \newline
+Dado que estos eventos pueden ser capturados por Eventos de Accesibilidad, nuestro sistema contará con un servicio que lo implemente y que realiza esta captura, este será un elemento fundamental en la arquitectura puesto que será la base sobre la que se asentarán el resto de elementos. 
+\\
+Así, en un primer vistazo, podemos ver la arquitectura usando un grano gordo del siguiente modo. 
+%%% ------ 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.3]{pictures/architecture/arquitecturaGeneral02.png} 
+	\end{center}
+	\caption[Arquitectura general del sistema]{Arquitectura general del sistema}
+\end{figure}
+%%% ------ 
+Donde la interfaz de usuario (UI) genera eventos de accesibilidad. Estos eventos, como ya se ha comentado, están asociados a cada acción que el usuario realiza con el teléfono sobre la interfaz. Será la implementación del evento de accesibilidad (Accesibility Service) el que nos permita capturarlos. 
+\newline
+\newline
+Este servicio se encargará de capturar los eventos y mandarlos hacia el Manejador de Eventos (Event Handler), este manejador será el encargado de clasificar y procesar los eventos en función de la información que traigan consigo. 
+\newline
+\newline
+Una vez que estos eventos pasen por el manejador, obtendremos como resultado una entidad lista para ser guardada en la base de datos. 
+\newline
+\newline
+Profundicemos un poco más en como sería este manejador y como son los componentes que lo forman. 
+\newline
+\newline
+Como estamos viendo, el servicio de accesibilidad (lo llamaremos simplemente servicio) recibe eventos de la interfaz y los envía al manejador, pero dado que los eventos se generan en gran cantidad y en momentos puntuales tendremos que manejar un caudal de información importante, la comunicación entre el servicio y el manejador se realizará a través de un bus que permitirá al servicio desatender los datos lo antes posible y desentenderse así de lo que ocurre con esos datos y como son tratados.
+\newline
+\newline
+Este bus lo estará escuchando el manejador, que capturará los elementos para realizar un primer chequeo, y es que en función del nombre de la aplicación (más concretamente su package name), invocará a un \textit{Scraper} encargado de extraer la información relevante del evento que estamos manejando. 
+\newline
+\newline
+Estos Scrapers son un concepto sacado del llamado \textit{Web Scraping}, técnica mediante la cual se transforman los datos sin estructura de la web en datos estructurados que pueden ser almacenados y analizados en una base de datos. 
+\newline
+\newline
+Así pues, en nuestro sistema tendremos de tantos Scrapers como aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por los Managers. Encargados de persistir en una base de datos local los datos generados por el sistema. 
+\newline
+\newline
+Al final nuestra arquitectura a bajo nivel resulta en el siguiente diagrama. 
+%%% ------ 
+\begin{figure}[H]
+		\includegraphics[width=1.3\textwidth,center]{pictures/architecture/arquitecturaGeneral03.png} 
+%	\end{large}
+	\caption[Arquitectura detallada]{Arquitectura detallada}
+\end{figure}
+%%% ------  
+En primer lugar nos encontramos la ui que alimenta al servicio de accesibilidad con eventos. Este servicio se encarga de meterlos en un bus de forma que el manejador pueda recogerlos y computarlos. 
+\newline \newline
+Este tratamiento que realiza el manejador no es otro que, en función de la app que lo lanzó llamar a las clases implicadas en su tratamiento.
+\newline \newline
+Expliquemos más despacio en que consite esto. El manejador, como se ha dicho en alguna ocasión, analiza el package name del evento, este package name nos permite identificar el elemento del sistema android que lanzó el evento, ya sean relacionados con la aplicación en foco en ese momento como los relacionados con el uso de sensores del teléfono. 
+\newline \newline
+Los eventos de las aplicaciones serán tratados por los scrapers. Estos extraerán la información pertinente y la encapsularán en dtos. 
+\newline \newline
+Con los sensores la historia es diferente, puesto que la escucha de los mismos está ligada a la implementación de sendos listeners que recogen la información que van generando. En un apartado diferente entra la escucha del micrófono, puesto que para respetar la privacidad del usuario sólo se lanzará la captura de audio cuando un evento relacionado con la misma sea lanzado. Nos referimos a casos concretos del uso del móvil como comandos de voz, notas de audio, etc. 
+\newline \newline
+En la parte del Data Manager nos encontramos a las entidades y a los responsables de mover esas entidades a lo largo de la arquitectura. 
+\newline \newline
+Así nos encontramos con el paquete repository, encargado de la persistencia en base de datos de las entidades. Entidades como dtos (para la comunicación de información desde el manejador al data manager) y mappers, que realizarán la conversión de dtos a modelos, entidad aceptada por el repository para la persistencia en la base de datos. 
+\newline \newline
+De esta manera nos encontramos con 4 capas separadas por funcionalidad y con independencia lógica entre ellas, puesto que cada una está consagrada a una tarea particular (recibir eventos, computarlos, persistirlos). 
+\newline \newline
+La lógica de negocio del sistema se encuentra, sin duda, en la capa correspondiente al manejador, donde deberemos de echar un esfuerzo de implementación considerable para manejar todo el flujo de información. 
+%%% ------
 
 
 \chapter{Implementación y desarrollo}

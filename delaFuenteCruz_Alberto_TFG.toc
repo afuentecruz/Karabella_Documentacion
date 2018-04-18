@@ -28,8 +28,8 @@
 \contentsline {subsubsection}{Repository}{22}{section*.29}
 \contentsline {subsubsection}{DB NoSQL}{22}{section*.30}
 \contentsline {subsubsection}{Vista}{22}{section*.31}
-\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{23}{chapter.5}
-\contentsline {section}{\numberline {5.1}Arquitectura}{24}{section.5.1}
-\contentsline {section}{\numberline {5.2}Casos de Uso}{34}{section.5.2}
-\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{37}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{38}{chapter.7}
+\contentsline {section}{\numberline {4.3}Casos de Uso}{24}{section.4.3}
+\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{27}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura}{28}{section.5.1}
+\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{38}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{39}{chapter.7}
