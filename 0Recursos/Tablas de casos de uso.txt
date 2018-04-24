@@ -1,0 +1,153 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                        ##    CASOS DE USO    ##                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Casos de Uso}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              FECHA Y HORA ->                                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+\multicolumn{3}{|c|}{\textbf{Registro de fecha y hora}} \\ \hline \hline
+\multicolumn{3}{|p{13cm}|}{\raggedright Cuando el usuario pulsa lanza una aplicación el sistema registrará la marca horaria de su puesta en marcha} \\ \hline
+\textbf{Precondiciones:} & \multicolumn{2}{|l|}{El usuario interactúa con el teléfono} \\ \hline 
+
+\textbf{Actores:} & \multicolumn{2}{|l|}{Usuario y sistema} \\ \hline \hline
+
+\multicolumn{3}{|c|}{\textbf{Flujo principal}} \\ \hline 
+
+\multicolumn{3}{|p{13cm}|}{\raggedright 1. El usuario lanza una app y se genera un evento que describe el cambio en el estado del sistema.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 2. El evento es recogido por el capturador.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 3. El capturador asocia al evento un timestamp del momento en el que se recibe.} 
+\\ \hline 
+\end{tabular}
+\caption[CU Registro de fecha y hora.]{CU Registro de fecha y hora.}
+\label{tab:CU Registro de fecha y hora.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              <- FECHA Y HORA                                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              CAPTURA DE UN EVENTO -> 						%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+\multicolumn{3}{|c|}{\textbf{Captura de información}} \\ \hline \hline
+\multicolumn{3}{|p{13cm}|}{\raggedright Una vez recogido el timestamp del momento de la ejecución, esta información se pasa, junto al evento, al manejador para que comience el proceso de extracción de la información.} \\ \hline
+\textbf{Precondiciones:} & \multicolumn{2}{|l|}{El capturador ha recogido el evento y lleva el timestamp} \\ \hline 
+
+\textbf{Actores:} & \multicolumn{2}{|l|}{Capturador} \\ \hline \hline
+
+\multicolumn{3}{|c|}{\textbf{Flujo principal}} \\ \hline 
+
+\multicolumn{3}{|p{13cm}|}{\raggedright 1. El capturador invoca al manejador pasándole el evento y timestamp.} 
+\\ \hline 
+\end{tabular}
+\caption[CU Captura de información.]{CU Captura de información.}
+\label{tab:CU Registro de fecha y hora.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                            <-  CAPTURA DE UN EVENTO 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              CAPTURA DE GMAIL ->
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+\multicolumn{3}{|c|}{\textbf{Captura de GMail}} \\ \hline \hline
+\multicolumn{3}{|p{13cm}|}{\raggedright Se recibe un evento asociado a la aplicación de gmail, el manejador debe recogerlo, encapsularlo y pasarlo al analizador para su cómputo.} \\ \hline
+\textbf{Precondiciones:} & \multicolumn{2}{|l|}{El capturador comunica al manejador el evento y su timestamp.} \\ \hline 
+
+\textbf{Actores:} & \multicolumn{2}{|l|}{Manejador} \\ \hline \hline
+
+\multicolumn{3}{|c|}{\textbf{Flujo principal}} \\ \hline 
+
+\multicolumn{3}{|p{13cm}|}{\raggedright 1. Se recibe un evento junto a su timestamp.} \\
+
+\multicolumn{3}{|p{13cm}|}{\raggedright 2. Si el nombre del paquete coincide con el asociado a GMail, se encapsula la marca horaria junto al nombre del paquete, nombre de la aplicación y el contenido del evento.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 3. Se invoca, junto a la información encapsulada, al analizador de GMail para su procesamiento.} 
+\\ \hline 
+\end{tabular}
+\caption[CU Captura de GMail.]{CU Captura de GMail.}
+\label{tab:CU Captura de Gmail.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              <- CAPTURA DE GMAIL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               EMISOR GMAIL ->
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+\multicolumn{3}{|c|}{\textbf{Registro del emisor en GMail}} \\ \hline \hline
+\multicolumn{3}{|p{13cm}|}{\raggedright Se analiza el evento buscando el elemento de la interfaz asociado al campo del emisor, si existe se recoge su información y se encapsula en un objeto.} \\ \hline
+\textbf{Precondiciones:} & \multicolumn{2}{|l|}{El manejador invoca al analizador con la información encapsulada.} \\ \hline 
+
+\textbf{Actores:} & \multicolumn{2}{|l|}{Analizador GMail} \\ \hline \hline
+
+\multicolumn{3}{|c|}{\textbf{Flujo principal}} \\ \hline 
+
+\multicolumn{3}{|p{13cm}|}{\raggedright 1. Se recibe un objeto encapsulado asociado a la app de GMail.} \\
+
+\multicolumn{3}{|p{13cm}|}{\raggedright 2. Se busca entre los distintos campos del evento el identificador del elemento de la interfaz de usuario asociado al campo de texto donde aparece el emisor.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 3. Se extrae del atributo la información correspondiente a su contenido, en este caso el emisor del correo y en encapsula en un objeto.} \\ \hline
+\end{tabular}
+\caption[CU Registro del emisor en GMail.]{CU Registro del emisor en GMail.}
+\label{tab:CU Registro del emisor en GMail.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              <- EMISOR GMAIL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               ASUNTO GMAIL ->
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+\multicolumn{3}{|c|}{\textbf{Registro del asunto en GMail}} \\ \hline \hline
+\multicolumn{3}{|p{13cm}|}{\raggedright Se analiza el evento buscando el elemento de la interfaz asociado al campo del asunto, si existe se recoge su información y se encapsula en un objeto.} \\ \hline
+\textbf{Precondiciones:} & \multicolumn{2}{|l|}{El manejador invoca al analizador con la información encapsulada.} \\ \hline 
+\textbf{Actores:} & \multicolumn{2}{|l|}{Analizador GMail} \\ \hline \hline
+\multicolumn{3}{|c|}{\textbf{Flujo principal}} \\ \hline 
+\multicolumn{3}{|p{13cm}|}{\raggedright 1. Se recibe un objeto encapsulado asociado a la app de GMail.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 2. Se busca entre los distintos campos del evento el identificador del elemento de la interfaz de usuario asociado al campo de texto donde se escribe el asunto del correo.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 3. Se extrae del atributo la información correspondiente a su contenido, en este caso el asunto del correo y en encapsula en un objeto.} \\ \hline
+\end{tabular}
+\caption[CU Registro del asunto en GMail.]{CU Registro del asunto en GMail.}
+\label{tab:CU Registro del asunto en GMail.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              <- ASUNTO GMAIL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               CUERPO GMAIL ->
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|} \hline
+\multicolumn{3}{|c|}{\textbf{Registro del cuerpo en GMail}} \\ \hline \hline
+\multicolumn{3}{|p{13cm}|}{\raggedright Se analiza el evento buscando el elemento de la interfaz asociado al cuerpo del mensaje, si existe se recoge su información y se encapsula en un objeto.} \\ \hline
+\textbf{Precondiciones:} & \multicolumn{2}{|l|}{El manejador invoca al analizador con la información encapsulada.} \\ \hline 
+\textbf{Actores:} & \multicolumn{2}{|l|}{Analizador GMail} \\ \hline \hline
+\multicolumn{3}{|c|}{\textbf{Flujo principal}} \\ \hline 
+\multicolumn{3}{|p{13cm}|}{\raggedright 1. Se recibe un objeto encapsulado asociado a la app de GMail.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 2. Se busca entre los distintos campos del evento el identificador del elemento de la interfaz de usuario asociado al campo de texto del propio cuerpo del correo.} \\
+\multicolumn{3}{|p{13cm}|}{\raggedright 3. Se extrae del atributo la información correspondiente a su contenido, en este caso el asunto del correo y en encapsula en un objeto.} \\ \hline
+\end{tabular}
+\caption[CU Registro del cuerpo en GMail.]{CU Registro del cuerpo en GMail.}
+\label{tab:CU Registro del cuerpo en GMail.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              <- ASUNTO GMAIL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

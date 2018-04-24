@@ -1,0 +1,21 @@
+
+
+------------------------------------------------------------
+\begin{sidewaysfigure}[ht]
+    \includegraphics[width=\textwidth]{figure.png}
+    \caption{Caption in landscape to a figure in landscape.}
+    \label{fig:LandscapeFigure}
+\end{sidewaysfigure}
+------------------------------------------------------------
+| ####
+------------------------------------------------------------
+ \begin{landscape}
+\begin{figure}[ht]
+  \begin{center} \setlength{\unitlength}{0.0105in}
+     \includegraphics[width=1\textwidth]{pictures/architecture/highLevelArch01.png}
+  \end{center}
+  \caption[Arquitectura de alto nivel]{Arquitectura de alto nivel.}
+    \label{fig:LandscapeFigure}
+\end{figure}
+\end{landscape}
+------------------------------------------------------------
