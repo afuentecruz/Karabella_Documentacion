@@ -536,17 +536,106 @@ Con el fin de explicar cual es el flujo que recorren los datos y las operaciones
 \end{figure}
 \end{landscape}
 \section{Diagramas de actividad}
-En esta sección veremos varios diagramas de actividad destinados a clarificar y documentar cual es el flujo lógico que realiza la aplicación a la hora de analizar y extraer el contenido de cada de las aplicaciones propuestas. 
+En esta sección veremos varios diagramas de actividad destinados a clarificar y documentar el flujo lógico que seguirá la aplicación, durante el proceso de análisis y extracción del contenido de cada de las aplicaciones propuestas. 
 \subsection{Gmail}
-
-%%% ------ 
+En la siguiente figura se documenta el proceso que lleva al registro de un correo mandado por el usuario a través de la aplicación de GMail. Se ha organizado el diagrama por niveles, desde la capa más externa de la aplicación hasta la capa de persistencia, así se puede observar el camino recorrido así como el procesamiento de la información en cada nivel.
+%%% ------ ACTIVIDAD GMAIL 
 \begin{figure}[H]
 		\includegraphics[width=1.4\textwidth,center]{pictures/activity/gmailActivityDiagram.png} 
-  \caption[Diagrama actividad GMail]{Diagrama de actividad del proceso de captura de gmail.}
+  \caption[Diagrama actividad GMail]{Diagrama de actividad de captura de un correo redactado con GMail.}
   \label{fig:Diagrama actividad GMail}
 \end{figure}
-%%% ------  
-culo
+%%% ------  /ACTIVIDAD GMAIL
+
+ Así, podemos desglosar el proceso en los siguientes puntos, explicando que se hace en cada componente. 
+\begin{itemize}
+\item \textbf{UI}. En primer lugar, el usuario inicia la actividad al lanzar la aplicación de GMail e interactuar con su interfaz. Esta acción provoca que se lance un evento de accesibilidad por cada elemento gráfico que compone la pantalla. 
+% -- item CAPTURADOR
+\item \textbf{Capturador}. Actúa como un listener de eventos de accesibilidad, de esta manera está a la escucha de todos los eventos producidos por el sistema, los cuales recoge y junto a la marca horaria del instante de la captura, se lo transfiere al manejador. 
+% -- item MANEJADOR
+\item \textbf{Manejador}. Comprueba el nombre del paquete que trae consigo el evento, asociado a la aplicación que le dió lugar. En este caso, si el nombre del paquete de la aplicación coincide con el de GMail, \textit{com.google.android.gm}, invoca al analizador de gmail y le delega el evento. 
+% -- item ANALIZADOR
+\item \textbf{Analizador}. Este es nivel con más carga, puesto que debe comprobar cada evento recibido buscando los componentes de la interfaz conocidos, es decir, aquellos en los que sabemos que se vierte la información que compone el correo. Estos elementos son; 
+\begin{itemize}
+% -- new subitem
+\item \textit{Widget Image Button}. Es el botón de editar que figura en la esquina inferior derecha de la interfaz. 
+ 	\begin{figure}[htb]
+		\begin{center}
+     		\includegraphics[scale=0.2]{pictures/IRL/GMail/dashboard_gmail_nuevo_correo_cutted.png}
+	    	\caption{Android Image Button}{Elemento botón que lanza la creación de un nuevo correo}
+    		\label{fig:Android Image Button}
+		\end{center}
+	\end{figure}
+\newline
+Al pulsarlo el usuario, el sistema lanza una nueva pantalla en la que redactará el correo. Con lo cual, la pulsación de este elemento de la UI nos inicia el proceso de captura poniendo a nuestro servicio un contenedor, donde compondremos la información del correo. 
+\newline
+\newline
+Cada vez que se pulse este elemento se instanciará un nuevo GmailDto, con el que se trabajará durante el proceso de captura. 
+
+% -- new subitem
+\item \textit{Widget Spinner}. Se trata del campo donde aparece el emisor, es decir, el correo del usuario. 
+ 	\begin{figure}[H]
+		\begin{center}
+     		\includegraphics[scale=0.2]{pictures/IRL/GMail/nuevo_correo_gmail_emisor.png}
+	    	\caption{Android Widget Spinner}{Elemento gráfico donde aparece el emisor.}
+    		\label{fig:Android Widget Spinner}
+		\end{center}
+	\end{figure}
+
+% -- new subitem
+\item \textit{Widget MultiAutoCompleteTextView}. Elemento de la interfaz donde aparecen los receptores, la potencia del componente permite que con las primeras letras del correo del receptor se sugiera la dirección completa.
+ 	\begin{figure}[H]
+		\begin{center}
+     		\includegraphics[scale=0.2]{pictures/IRL/GMail/nuevo_correo_gmail_receptor.png}
+	    	\caption{Android Widget MultiAutoCompleteTextView}{Elemento gráfico donde aparece el receptor/es del correo.}
+    		\label{fig:Android Widget MultiAutoCompleteTextView}
+		\end{center}
+	\end{figure}
+
+% -- new subitem
+\item \textit{Widget EditText}. Campo de texto donde escribir el asunto del correo. 
+ 	\begin{figure}[H]
+		\begin{center}
+     		\includegraphics[scale=0.2]{pictures/IRL/GMail/nuevo_correo_gmail_asunto.png}
+	    	\caption{Widget Edit Text}{Elemento de la interfaz donde escribir el asunto.}
+    		\label{fig:Android Widget EditText}
+		\end{center}
+	\end{figure}
+
+
+% -- new subitem 
+\item \textit{View}. Vista editable a modo de caja de texto donde se redacta el cuerpo del correo. 
+ 	\begin{figure}[H]
+		\begin{center}
+     		\includegraphics[scale=0.2]{pictures/IRL/GMail/nuevo_correo_gmail_cuerpo.png}
+	    	\caption{Android View}{Elemento donde redactar el cuerpo.}
+    		\label{fig:Android View}
+		\end{center}
+	\end{figure}
+\end{itemize} % -- elementos de la interfaz
+Cada uno de estos elementos descritos sobre la interfaz, generan un evento de accesibilidad que el analizador comprueba a través del nombre de la clase del elemento de la interfaz asociado al evento. Si el nombre coincide con alguno de los elementos aquí listados, se extrae el texto del evento y se infla en el GMailDto el atributo correspondiente (emisor, receptor, asunto y cuerpo). 
+Por último, tenemos el elemento \textit{Widget Toast}, típico mensaje que aparece en la mitad inferior de la pantalla que informa de algún suceso. 
+\newline
+\newline
+\begin{figure}[H]
+		\begin{center}
+     		\includegraphics[scale=0.2]{pictures/IRL/GMail/correo_enviado.png}
+	    	\caption{Android View}{Elemento donde redactar el cuerpo.}
+    		\label{fig:Android View}
+		\end{center}
+	\end{figure}
+En este caso el widget toast nos informa cada vez que se envía un correo, momento en el cual cerramos nuestro Dto y se lo pasamos al manejador de la base de datos para que lo persiste en la colección correspondiente. 
+\item \textbf{DBManager}. Capa encargada de la persistencia, se encarga mapear los GMailDto a un modelo y almacenarlo en la base de datos local. 
+\end{itemize} % -- niveles de app 
+
+
+
+
+ %% #########################
+ %% ### ACTIVIDAD WHATSAPP ##
+ %% #########################
+
+
 % -------------- %
 % --- DISEÑO --- %
 % -------------- % 
