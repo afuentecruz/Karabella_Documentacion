@@ -23,15 +23,15 @@
 \contentsline {subsubsection}{Dto}{20}{section*.24}
 \contentsline {subsubsection}{DB Manager}{21}{section*.25}
 \contentsline {subsection}{\numberline {4.2.2}Servidor Remoto}{22}{subsection.4.2.2}
-\contentsline {subsubsection}{Controller}{22}{section*.27}
+\contentsline {subsubsection}{Controller}{23}{section*.27}
 \contentsline {subsubsection}{Manager}{23}{section*.28}
 \contentsline {subsubsection}{Repository}{23}{section*.29}
 \contentsline {subsubsection}{DB NoSQL}{23}{section*.30}
-\contentsline {subsubsection}{Vista}{23}{section*.31}
-\contentsline {section}{\numberline {4.3}Diagrama de secuencia}{25}{section.4.3}
-\contentsline {section}{\numberline {4.4}Diagramas de actividad}{27}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Gmail}{27}{subsection.4.4.1}
-\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{32}{chapter.5}
-\contentsline {section}{\numberline {5.1}Arquitectura}{33}{section.5.1}
-\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{43}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{44}{chapter.7}
+\contentsline {subsubsection}{Vista}{24}{section*.31}
+\contentsline {section}{\numberline {4.3}Diagrama de secuencia}{24}{section.4.3}
+\contentsline {section}{\numberline {4.4}Diagramas de actividad}{26}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Gmail}{26}{subsection.4.4.1}
+\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura}{32}{section.5.1}
+\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{42}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{43}{chapter.7}
