@@ -161,7 +161,7 @@
 		\vspace{-3em}
 		\hspace{-0.5em}
 		\begin{minipage}{0.55\textwidth}
-			\begin{flushleft}F1
+			\begin{flushleft}
 				\includegraphics[width=1.75cm,natwidth=124,natheight=163]{pictures/logouex_transp.png}
 			\end{flushleft}
 		\end{minipage}
@@ -717,12 +717,15 @@ Dado que estos eventos pueden ser capturados por Eventos de Accesibilidad, nuest
 \\
 Así, en un primer vistazo, podemos ver la arquitectura usando un grano gordo del siguiente modo. 
 %%% ------ 
-\begin{figure}[H]
+\begin{landscape}
+\begin{figure}[htb]
 	\begin{center}
-		\includegraphics[scale=0.3]{pictures/architecture/arquitecturaGeneral02.png} 
+		\includegraphics[scale=0.45]{pictures/architecture/lowLevel/TFG_ArquitecturaBajoNivel01.png} 
 	\end{center}
 	\caption[Arquitectura general del sistema]{Arquitectura general del sistema}
 \end{figure}
+\end{landscape}
+
 %%% ------ 
 Donde la interfaz de usuario (UI) genera eventos de accesibilidad. Estos eventos, como ya se ha comentado, están asociados a cada acción que el usuario realiza con el teléfono sobre la interfaz. Será la implementación del evento de accesibilidad (Accesibility Service) el que nos permita capturarlos. 
 \newline
@@ -777,6 +780,24 @@ La lógica de negocio del sistema se encuentra, sin duda, en la capa correspondi
 
 
 \chapter{Implementación y desarrollo}
+\section{Bibliotecas de terceros}
+\subsection{Realm}
+Realm es una base de datos cuya implementación para Android nos ofrece una alternativa a SQLite, destactando por su rapidez y facilidad de uso. 
+
+Se trata de una base de datos orientada a objetos, facilitando así el mapeo objeto relacional a través del código, incluyendo de esta manera las facilidades de un ORM de forma nativa. 
+\newline \newline
+Para añadirla su dependencia basta con añadir en el build gradle (Project): 
+\begin{verbatim}
+		classpath "io.realm:realm-gradle-plugin:5.1.0"
+\end{verbatim}
+En este caso se está usando exactamente la versión 5.1.0. Deberemos añadir en el build gradle (App): 
+\begin{verbatim}
+		apply plugin: 'realm-android'
+
+\end{verbatim}
+
+
+
 
 %~\ref{fig:Calculo IDLE-PC} este valor es calculado automáticamente por el programa, algo que no pasa en versiones anteriores de este, donde se calculan varios valores que se muestran al usuario para que este seleccione uno de ellos.
 %\begin{figure}[h]
