@@ -412,15 +412,14 @@ Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cua
 \newline
  
 %----------- P A N O R A M I C O -------------------------------------------------
- \begin{landscape}
-\begin{figure}[ht]
-  \begin{center} \setlength{\unitlength}{0.0105in}
-     \includegraphics[width=1.2\textwidth]{pictures/architecture/highLevelArch01.png}
+
+\begin{figure}[H]
+  \begin{center}
+     \includegraphics[width=1\textwidth]{pictures/architecture/highLevel/altonivel01.png}
   \end{center}
   \caption[Arquitectura de alto nivel]{Arquitectura de alto nivel.}
-    \label{fig:LandscapeFigure}
+  \label{fig:LandscapeFigure}
 \end{figure}
-\end{landscape}
 %----------- P A N O R A M I C O -------------------------------------------------
 
 \newpage
@@ -745,10 +744,7 @@ Como estamos viendo, el servicio de accesibilidad (lo llamaremos simplemente ser
 Este bus lo estará escuchando el manejador, que capturará los elementos para realizar un primer chequeo, y es que en función del nombre de la aplicación (más concretamente su package name), invocará a un \textit{Scraper} encargado de extraer la información relevante del evento que estamos manejando. 
 \newline
 \newline
-Estos Scrapers son un concepto sacado del llamado \textit{Web Scraping}, técnica mediante la cual se transforman los datos sin estructura de la web en datos estructurados que pueden ser almacenados y analizados en una base de datos. 
-\newline
-\newline
-Así pues, en nuestro sistema tendremos de tantos Scrapers como aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por los Managers. Encargados de persistir en una base de datos local los datos generados por el sistema. 
+En nuestro sistema tendremos una interfaz Analizer, con tantas implementaciones como aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por los Managers. Encargados de persistir en una base de datos local los datos generados por el sistema. 
 \newline
 \newline
 Al final nuestra arquitectura a bajo nivel resulta en el siguiente diagrama. 
@@ -765,7 +761,7 @@ Este tratamiento que realiza el manejador no es otro que, en función de la app 
 \newline \newline
 Expliquemos más despacio en que consite esto. El manejador, como se ha dicho en alguna ocasión, analiza el package name del evento, este package name nos permite identificar el elemento del sistema android que lanzó el evento, ya sean relacionados con la aplicación en foco en ese momento como los relacionados con el uso de sensores del teléfono. 
 \newline \newline
-Los eventos de las aplicaciones serán tratados por los scrapers. Estos extraerán la información pertinente y la encapsularán en dtos. 
+Los eventos de las aplicaciones serán tratados por el analizador que le corresponda. Estos extraerán la información pertinente y la encapsularán en dtos. 
 \newline \newline
 Con los sensores la historia es diferente, puesto que la escucha de los mismos está ligada a la implementación de sendos listeners que recogen la información que van generando. En un apartado diferente entra la escucha del micrófono, puesto que para respetar la privacidad del usuario sólo se lanzará la captura de audio cuando un evento relacionado con la misma sea lanzado. Nos referimos a casos concretos del uso del móvil como comandos de voz, notas de audio, etc. 
 \newline \newline
