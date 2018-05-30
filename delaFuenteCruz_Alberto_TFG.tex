@@ -260,9 +260,25 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 \setcounter{page}{1}
 
 \chapter{Introducción}
-El proyecto de final de grado se plantea del siguiente modo. Es objetivo del proyecto es ser capaces de desarrollar una aplicación android capaz de escuchar lo que el usuario \textit{dice} al teléfono, con esto nos referimos a toda la información que surge del usuario al interactuar con su dispositivo y que por el momento pasa desapercibida. Esta información, sea del tipo que sea nos aportan un grado más de información acerca de nuestros usuarios, siendo el fin último ser capaces de registrar sus rutinas de comportamiento, uso y costumbres interactuando con la tecnología con el fin de inferir patrones sobre el usuario. 
-
-Es tarea del proyecto la parte relacionada con la recogida de información del sistema, actividad que nos ocupará en su estudio y desarrollo todo el recorrido del trabajo. 
+A día de hoy, Internet y el uso de las distintas plataformas que la tecnología nos ofrece, tienen un coste adicional nulo para el usuario (más allá de contratar un proveedor que nos comunique o la compra de una plataforma física que nos permita realizar esta comunicación). Esto atiende a una máxima muy conocida en el mundo tecnológico, \textit{si no estás pagando, eres tú el producto que están vendiendo}. 
+\newline 
+\newline 
+Esta cita hace referencia al hecho de que las compañías de software que no cobran por su servicio sacan rédito por otro sitio. Este punto de entrada de ingresos suele venir de la venta de los datos del usuario. Estos datos del usuario son generados mediante una técnica denominada \textit{user profiling}. Consiste en crear un perfil virtual de un usuario dado de su plataforma a partir del flujo de interacción que se realiza en la misma. A día de hoy las grandes empresas como Google, Facebook, Amazon... etc capturan lo máximo posible de sus usuarios (a menudo rozando los límites de la legalidad) para crear un perfil único asociado a la persona física detrás del usuario. 
+\newline
+\newline
+Estos datos, en teoría, se utilizan para mejorar el servicio dado, ofreciendo a un usuario concreto contenido, se supone, relevante para el mismo. Aún así, estas empresas cada vez están más bajo el punto de mira puesto que el comercio con estos datos no es ningún secreto. Recordemos el reciente caso de Facebook-Cambridge Analytica, que nos sirve además para demostrar que el empleo de estas técnicas de user profiling tienen profundo impacto en el mundo real. 
+\newline
+\newline
+Dejando a un lado el mal uso que se le pueda dar a estas técnicas, resulta innegable la utilidad que tienen para los desarrolladores o investigadores, puesto que nos permite definir el perfil de los usuarios reales de tu servicio, así como averiguar cómo interfactúa con el mismo, las zonas de la pantalla que más se miran, las funcionalidades más utilizadas, detectar flujos erróneos de comportamiento de la aplicación (por ejemplo detectar que una funcionalidad muy utilizada está escondida a lo largo de varios menús). Esta recolección de datos nos permite por tanto conocer más a nuestros usuarios y dotarles de un mejor servicio. 
+\newline
+\newline
+Teniendo claro entonces estos conceptos (recolección de datos, user profiling), el presente trabajo se enfoca en estudiar e implementar un sistema que nos permita capturar y almacenar los datos de un usuario de la plataforma Android. Estos datos deberán permitir identificar a un usuario único, para ello se pretende capturar datos de las aplicaciones con las que interactúa el usuario, tiempo empleado en ellas y en algunos casos, recoger de forma directa la interacción que el usuario realiza con las mismas. Es decir, si se envía un mensaje de texto, se pretende capturar la cadena enviada, si se abre un navegador, las urls visitadas... etc. 
+\newline
+\newline
+\section{Motivación y desarrollo}
+adsf
+\section{Alcance y objetivos}
+fdsa
 \chapter{Estado del Arte}
 -- aquí hablaremos sobre las distintas aproximaciones al problema en términos de implementación. 
 
