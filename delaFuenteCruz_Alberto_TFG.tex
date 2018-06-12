@@ -260,28 +260,65 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 \setcounter{page}{1}
 
 \chapter{Introducción}
-A día de hoy, Internet y el uso de las distintas plataformas que la tecnología nos ofrece, tienen un coste adicional nulo para el usuario (más allá de contratar un proveedor que nos comunique o la compra de una plataforma física que nos permita realizar esta comunicación). Esto atiende a una máxima muy conocida en el mundo tecnológico, \textit{si no estás pagando, eres tú el producto que están vendiendo}. 
-\newline 
-\newline 
-Esta cita hace referencia al hecho de que las compañías de software que no cobran por su servicio sacan rédito por otro sitio. Este punto de entrada de ingresos suele venir de la venta de los datos del usuario. Estos datos del usuario son generados mediante una técnica denominada \textit{user profiling}. Consiste en crear un perfil virtual de un usuario dado de su plataforma a partir del flujo de interacción que se realiza en la misma. A día de hoy las grandes empresas como Google, Facebook, Amazon... etc capturan lo máximo posible de sus usuarios (a menudo rozando los límites de la legalidad) para crear un perfil único asociado a la persona física detrás del usuario. 
-\newline
-\newline
-Estos datos, en teoría, se utilizan para mejorar el servicio dado, ofreciendo a un usuario concreto contenido, se supone, relevante para el mismo. Aún así, estas empresas cada vez están más bajo el punto de mira puesto que el comercio con estos datos no es ningún secreto. Recordemos el reciente caso de Facebook-Cambridge Analytica, que nos sirve además para demostrar que el empleo de estas técnicas de user profiling tienen profundo impacto en el mundo real. 
-\newline
-\newline
-Dejando a un lado el mal uso que se le pueda dar a estas técnicas, resulta innegable la utilidad que tienen para los desarrolladores o investigadores, puesto que nos permite definir el perfil de los usuarios reales de tu servicio, así como averiguar cómo interfactúa con el mismo, las zonas de la pantalla que más se miran, las funcionalidades más utilizadas, detectar flujos erróneos de comportamiento de la aplicación (por ejemplo detectar que una funcionalidad muy utilizada está escondida a lo largo de varios menús). Esta recolección de datos nos permite por tanto conocer más a nuestros usuarios y dotarles de un mejor servicio. 
-\newline
-\newline
-Teniendo claro entonces estos conceptos (recolección de datos, user profiling), el presente trabajo se enfoca en estudiar e implementar un sistema que nos permita capturar y almacenar los datos de un usuario de la plataforma Android. Estos datos deberán permitir identificar a un usuario único, para ello se pretende capturar datos de las aplicaciones con las que interactúa el usuario, tiempo empleado en ellas y en algunos casos, recoger de forma directa la interacción que el usuario realiza con las mismas. Es decir, si se envía un mensaje de texto, se pretende capturar la cadena enviada, si se abre un navegador, las urls visitadas... etc. 
-\newline
-\newline
+Introducción 
+Hoy en día, el uso de la tecnología y los servicios que nos ofrece Internet tienen un coste adicional invisible para el usuario, no siendo otro más que la invasión de su privacidad, la recolección de sus datos, el análisis de los mismos, su perfilado y en el peor de los casos, su venta al mejor postor.
+\newline \newline
+Esta recolección de datos normalmente  obedece a dos necesidades, por un lado, conocer al usuario del servicio y ofrecerle así una versión cada vez más personalizada del mismo, y por otro, la venta de esos datos a terceros. 
+\newline \newline
+Esta venta de datos, que parece un cuento de brujas, a día de hoy es una realidad, no hay más que ver uno de los casos más recientes donde Facebook vendió los datos de los perfiles de sus usuarios de EEUU a Cambridge Analytica, empresa dedicada al análisis y minería de datos, para influir en los resultados de las elecciones presidenciales. 
+\newline \newline
+Aún así, la recolección de datos no es mala per sé, por un lado, ayuda los desarrolladores a conocer al usuario y detectar posibles carencias y nuevas necesidades en sus aplicaciones. Por otro, ayuda al empresario, puesto que permite conocer el mercado, identificando necesidades específicas, focalizar el marketing, realizar una publicidad efectiva e incluso identificar nuevos nichos de mercado. 
+\newline \newline
+Con lo cual, podemos concluir que conocer a tu usuario es algo bueno y necesario cuando se quiere crecer y ofrecer un mejor servicio, el problema viene cuando esta recolección de datos de realiza sin control alguno e invadiendo de forma directa la privacidad del usuario. Un ejemplo aún más reciente que el de Facebook es el de la aplicación oficial de La Liga, donde se mandan datos de ubicación y fragmentos de audio del micrófono cada 30 minutos a sus servidores bajo el pretexto de identificar fraudes. Esta recolección sin medida produce tal volumen de datos que podemos llegar a dudar de su validez y efectividad. 
+\newline \newline
+Pero, ¿cómo hemos llegado a esta situación? La culpa es del marketing y su técnica Targeting Market, y su aplicación directa en la informática a través del Segmenting-Targeting-Positioning, a la que nos referiremos simplemente como Product Targeting
+\newline \newline
+Esta estrategia se basa en, como su propio nombre indica, segmentar el mercado en grupos cada vez más pequeños de acuerdo a unas variables, que de forma tradicional son; 
+Variables geográficas. En referencia a la región del mundo, clima, país, región, ciudad, etc. 
+Variables demográficas. Edad, género, ingresos, orientación sexual, nivel educativo, cultura, etc. 
+Variables psicográficas. Estilo de vida, personalidad, valores, intereses, etc. 
+Variables conductuales. Tasa de uso del servicio, fidelidad con la marca, etc. 
+\newline \newline
+Estas variables (datos, al fin y al cabo) se someten y a un proceso de relación y análisis que permite profundizar cada vez más en la segmentación, dando lugar a la segmentación profunda y si se dispone de la suficiente cantidad de información, acaba produciendo un perfil de usuario. Es obvio que este perfil mejorará en tanto en cuanto mayor sea el volumen de datos del que se dispone. 
+\newline \newline
+Entra en juego entonces la fuente de estos datos, puesto que deben salir de algún sitio. A día de hoy, si nos ponemos en el contexto de Internet, la mayoría de las páginas, por no decir todas, disponen de herramientas analíticas que permiten conocer al menos, el país origen de la conexión al servicio así como la fecha y hora exactas en la que se produjo. Este es el primer nivel que está enormemente implantado en el mercado. 
+\newline \newline
+En un segundo nivel, y situándonos en el uso de los servicios que ofrecen las distintas compañías, es habitual que todos nuestros movimientos dentro de ella se recolecten con el fin de aportar a los desarrolladores información acerca del uso de las herramientas que ellos mismo han producido. Esto va desde las features que usa hasta el registro del movimiento del ratón a lo largo de la interfaz. 
+\newline \newline
+En el tercer nivel, la recolección normalmente invade la privacidad del usuario, incluyendo datos como su posición GPS, capturas programáticas del sonido ambiente a través del micrófono, rastreo de conexiones a través de cookies, etc. 
+\newline \newline
+El problema derivado de este festival del rastreo viene de la mano con la enorme cantidad de datos que se acumulan en los servidores del rastreador. En otras palabras, no se realiza una recolección efectiva de datos que realmente aporten valor al conjunto, veamos un ejemplo; 
+\newline \newline
+Hace poco, escuchando un Podcast de desarrollo hablaba Nuria Ruiz (@pantojacoder), que gestiona el equipo de Analitics de Wikipedia, ponía en relieve el problema al que se enfrentan en la plataforma, quizás desde un extremo poco habitual pero necesario en su servicio, puesto que pretenden recolectar los menos datos posibles de sus usuarios para evitar persecución política de sus editores. En el caso expuesto a lo largo del programa, citaba como los desarrolladores querían rastrear todos los clicks de todos los usuarios para rastrear el uso de una feature que habían puesto recientemente en producción. 
+\newline \newline
+Nuria, cuyo trabajo consiste en el almacenamiento y análisis de estos datos, se lamentaba de que se exija tal cantidad de información cuando con la tercera parte de la misma las necesidades del equipo de desarrollo quedaban sobradamente cubiertas. 
+Esto nos da una idea de cual es el problema al que debemos enfrentarnos, que no es otro que la recolección efectiva de datos que aporten valor al perfil del usuario, y no recolectar por recolectar. 
+\newline \newline
+Definamos entonces los límites de estos datos y su recolección, puesto que nos referimos a rastrear y registrar datos que verdaderamente nos permitan conocer al usuario, cual es su rutina, el uso que realiza de las herramientas que dispone, para qué las emplea… en definitiva debemos aportar un contexto a los datos recolectados, puesto que sin este contexto estos datos únicamente son información en bruto. Debemos entonces realizar una recolección inteligente de la información de acuerdo al uso del servicio a lo largo de su ciclo de vida. 
+\newline \newline
+Con esta idea en mente, este proyecto debe, por tanto, extraer esos datos del usuario de algún modo para almacenarlos en un servidor, donde más adelante serán procesados. El proyecto cubre por tanto la primera capa de esa idea, idear y desarrollar una aplicación capaz de capturar el máximo número posible datos del usuario y enmascararla bajo la apariencia de una aplicación desarrollada con la intención de que el usuario tenga un punto de vista objetivo del grado de adicción a su terminal, mostrando estadísticas de uso, aplicaciones más frecuentes, etc. 
+\newline \newline
+A pesar de ser una idea con un uso potencialmente malicioso, se confía ciegamente en la labor de investigación de los profesionales del laboratorio y que el uso de los datos serán únicamente con propósitos de investigación. Además de lo atractivo que resulta jugar con los aparentes límites de la tecnología, capturando información que circula libremente sin que nadie le preste atención. 
 \section{Motivación y desarrollo}
-adsf
-\section{Alcance y objetivos}
-fdsa
+El proyecto surge como primera etapa de un proyecto más grande enmarcado en un Trabajo de Fin de Máster, donde la idea es poder inferir patrones de comportamiento de los usuarios de teléfonos inteligentes y así poder diagnosticar y predecir trastornos de comportamiento dentro del patrón de una persona. 
+\newline
+\newline
+El desarrollo de dividirá en varias etapas. La primera será estudiar las herramientas existentes en el y averiguar mediante que técnicas consiguen capturar, o más bien, leer, la pantalla del usuario, puesto que este es nuestro principal objetivo, registrar los cambios que ocurren en pantalla cuando el usuario interactúa con el teléfono. 
+\newline
+\newline
+Se seguirá con la definición de los requisitos y casos de uso del proyecto para así acotar los términos del sistema y poder definir una primera arquitectura, independiente de la plataforma, que nos permita identificar los componentes fundamentales. 
+\newline
+\newline
+Una vez definida esta arquitectura a alto nivel, se procederá a acoplar lo planteado al sistema Android y definir los flujos que permitan obtener la lógica necesaria para realizar la captura. De esta forma, podremos definir una arquitectura a bajo nivel, dependiente de la plataforma, que permita organizar los componentes que forman el sistema final. 
+\newline
+\newline
+El desarrollo seguirá un proceso iterativo a base de sprints, persiguiendo la idea de mantener siempre un artefacto software funcional que evolucionará conforme avance el proyecto. 
 \chapter{Estado del Arte}
--- aquí hablaremos sobre las distintas aproximaciones al problema en términos de implementación. 
-
+Al final, el propósito que se persigue es enterarnos de los cambios realizados en el teléfono por parte del usuario, veamos las diferentes aproximaciones a este problema. 
+\section{Traceview}
+Consiste en inspeccionar los logs generados por el sistema, con propósito de depuración en su mayor parte. -- a ampliar. 
+\section{Talkback}
+Lector de pantalla de google que emplea los servicios de accesibilidad que provee la plataforma para usuarios con discapacidades funcionales. -- a ampliar. 
 \chapter{Requisitos del proyecto}
 En esta capítulo se analiza el problema planteado por el proyecto y se detalla su descomposición como requisitos de un sistema software. No hay que perder de vista que nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
 \newpage

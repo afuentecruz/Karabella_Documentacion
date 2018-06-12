@@ -1,41 +1,42 @@
 \select@language {spanish}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{2}{chapter.1}
-\contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n y desarrollo}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}Alcance y objetivos}{3}{section.1.2}
-\contentsline {chapter}{\numberline {2}Estado del Arte}{4}{chapter.2}
-\contentsline {chapter}{\numberline {3}Requisitos del proyecto}{5}{chapter.3}
-\contentsline {section}{\numberline {3.1}Requisitos}{6}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Requisitos funcionales}{6}{subsection.3.1.1}
-\contentsline {subsubsection}{Aplicaciones de comunicaci\IeC {\'o}n}{6}{section*.5}
-\contentsline {subsubsection}{Aplicaciones de mensajer\IeC {\'\i }a instant\IeC {\'a}nea}{7}{section*.6}
-\contentsline {subsubsection}{Aplicaciones de b\IeC {\'u}squeda en la web}{7}{section*.7}
-\contentsline {subsubsection}{Aplicaciones de redes sociales}{8}{section*.8}
-\contentsline {subsubsection}{Sensores}{8}{section*.9}
-\contentsline {subsection}{\numberline {3.1.2}Requisitos no funcionales}{10}{subsection.3.1.2}
-\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis}{11}{chapter.4}
-\contentsline {section}{\numberline {4.1}Diagramas de Casos de Uso}{12}{section.4.1}
-\contentsline {section}{\numberline {4.2}Arquitectura de alto nivel}{16}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Smartphone}{17}{subsection.4.2.1}
-\contentsline {subsubsection}{Evento}{18}{section*.18}
-\contentsline {subsubsection}{Capturador}{19}{section*.19}
-\contentsline {subsubsection}{Evento + timestamp}{19}{section*.20}
-\contentsline {subsubsection}{Manejador}{19}{section*.21}
-\contentsline {subsubsection}{Sto}{20}{section*.22}
-\contentsline {subsubsection}{Analizador}{20}{section*.23}
-\contentsline {subsubsection}{Dto}{20}{section*.24}
-\contentsline {subsubsection}{DB Manager}{21}{section*.25}
-\contentsline {subsection}{\numberline {4.2.2}Servidor Remoto}{22}{subsection.4.2.2}
-\contentsline {subsubsection}{Controller}{23}{section*.27}
-\contentsline {subsubsection}{Manager}{23}{section*.28}
-\contentsline {subsubsection}{Repository}{23}{section*.29}
-\contentsline {subsubsection}{DB NoSQL}{23}{section*.30}
-\contentsline {subsubsection}{Vista}{24}{section*.31}
-\contentsline {section}{\numberline {4.3}Diagrama de secuencia}{24}{section.4.3}
-\contentsline {section}{\numberline {4.4}Diagramas de actividad}{26}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Gmail}{26}{subsection.4.4.1}
-\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{31}{chapter.5}
-\contentsline {section}{\numberline {5.1}Arquitectura}{32}{section.5.1}
-\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{42}{chapter.6}
-\contentsline {section}{\numberline {6.1}Bibliotecas de terceros}{42}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Realm}{42}{subsection.6.1.1}
-\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{43}{chapter.7}
+\contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n y desarrollo}{6}{section.1.1}
+\contentsline {chapter}{\numberline {2}Estado del Arte}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Traceview}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Talkback}{7}{section.2.2}
+\contentsline {chapter}{\numberline {3}Requisitos del proyecto}{8}{chapter.3}
+\contentsline {section}{\numberline {3.1}Requisitos}{9}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Requisitos funcionales}{9}{subsection.3.1.1}
+\contentsline {subsubsection}{Aplicaciones de comunicaci\IeC {\'o}n}{9}{section*.5}
+\contentsline {subsubsection}{Aplicaciones de mensajer\IeC {\'\i }a instant\IeC {\'a}nea}{10}{section*.6}
+\contentsline {subsubsection}{Aplicaciones de b\IeC {\'u}squeda en la web}{10}{section*.7}
+\contentsline {subsubsection}{Aplicaciones de redes sociales}{11}{section*.8}
+\contentsline {subsubsection}{Sensores}{11}{section*.9}
+\contentsline {subsection}{\numberline {3.1.2}Requisitos no funcionales}{13}{subsection.3.1.2}
+\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis}{14}{chapter.4}
+\contentsline {section}{\numberline {4.1}Diagramas de Casos de Uso}{15}{section.4.1}
+\contentsline {section}{\numberline {4.2}Arquitectura de alto nivel}{19}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Smartphone}{20}{subsection.4.2.1}
+\contentsline {subsubsection}{Evento}{21}{section*.18}
+\contentsline {subsubsection}{Capturador}{22}{section*.19}
+\contentsline {subsubsection}{Evento + timestamp}{22}{section*.20}
+\contentsline {subsubsection}{Manejador}{22}{section*.21}
+\contentsline {subsubsection}{Sto}{23}{section*.22}
+\contentsline {subsubsection}{Analizador}{23}{section*.23}
+\contentsline {subsubsection}{Dto}{23}{section*.24}
+\contentsline {subsubsection}{DB Manager}{24}{section*.25}
+\contentsline {subsection}{\numberline {4.2.2}Servidor Remoto}{25}{subsection.4.2.2}
+\contentsline {subsubsection}{Controller}{26}{section*.27}
+\contentsline {subsubsection}{Manager}{26}{section*.28}
+\contentsline {subsubsection}{Repository}{26}{section*.29}
+\contentsline {subsubsection}{DB NoSQL}{26}{section*.30}
+\contentsline {subsubsection}{Vista}{27}{section*.31}
+\contentsline {section}{\numberline {4.3}Diagrama de secuencia}{27}{section.4.3}
+\contentsline {section}{\numberline {4.4}Diagramas de actividad}{29}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Gmail}{29}{subsection.4.4.1}
+\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o}{34}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura}{35}{section.5.1}
+\contentsline {chapter}{\numberline {6}Implementaci\IeC {\'o}n y desarrollo}{45}{chapter.6}
+\contentsline {section}{\numberline {6.1}Bibliotecas de terceros}{45}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Realm}{45}{subsection.6.1.1}
+\contentsline {chapter}{\numberline {7}Conclusiones y trabajos futuros}{46}{chapter.7}
