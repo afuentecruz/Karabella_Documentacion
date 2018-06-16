@@ -40,7 +40,6 @@
 \usepackage{ragged2e}
 \usepackage{tabularx} % Para meter tablas que no excedan los márgenes del papel
 \usepackage{fancyhdr}
-
 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% XML %%%%%%%%%%
 \usepackage{listings}
@@ -91,7 +90,6 @@
 
 %%%% Carpeta de las figuras
 
-
 % Logo de la uex en el header de todas las páginas
 %\rhead{\begin{picture}(0,0) \put(0,0){\includegraphics[width=1cm,natwidth=124,natheight=163]{pictures/logouex_transp.png}}
 %\end{picture}}
@@ -106,8 +104,8 @@
 \rhead{\includegraphics[width=1cm,natwidth=124,natheight=163]{pictures/logouex_transp.png}}
 \fancyhead[L]{\leftmark}
 \headsep = 2cm
-	
 \begin{document}
+
 \sloppy
 \pagebreak
 %http://tex.stackexchange.com/questions/129º088/create-a-frame-for-a-title-page
@@ -260,19 +258,19 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 \setcounter{page}{1}
 
 \chapter{Introducción}
-Hoy en día, el uso de la tecnología y los servicios que nos ofrece Internet tienen un coste adicional invisible para el usuario, no siendo otro más que la invasión de su privacidad, la recolección de sus datos, el análisis de los mismos, su perfilado y en el peor de los casos, su venta al mejor postor.
+Hoy en día, el uso de la tecnología y los servicios que nos ofrece Internet tienen un coste adicional invisible para el usuario, no siendo otro más que la invasión de su privacidad, la recolección de sus datos, el análisis de los mismos, su perfilado y en el peor de los casos, su venta al mejor postor. 
 \newline \newline
 Esta recolección de datos normalmente  obedece a dos necesidades, por un lado, conocer al usuario del servicio y ofrecerle así una versión cada vez más personalizada del mismo, y por otro, la venta de esos datos a terceros. 
 \newline \newline
-Esta venta de datos, que parece un cuento de brujas, a día de hoy es una realidad, no hay más que ver uno de los casos más recientes donde Facebook vendió los datos de los perfiles de sus usuarios de EEUU a Cambridge Analytica, empresa dedicada al análisis y minería de datos, para influir en los resultados de las elecciones presidenciales. 
+Esta venta de datos, que parece un cuento de brujas, a día de hoy es una realidad, no hay más que ver uno de los casos más recientes donde \textit{Facebook} vendió los datos de los perfiles de sus usuarios de EEUU a \textit{Cambridge Analytica} \cite{fbCambridge}, empresa dedicada al análisis y minería de datos, para influir en los resultados de las elecciones presidenciales. 
 \newline \newline
 Aún así, la recolección de datos no es mala per sé, por un lado, ayuda los desarrolladores a conocer al usuario y detectar posibles carencias y nuevas necesidades en sus aplicaciones. Por otro, ayuda al empresario, puesto que permite conocer el mercado, identificando necesidades específicas, focalizar el marketing, realizar una publicidad efectiva e incluso identificar nuevos nichos de mercado. 
 \newline \newline
-Con lo cual, podemos concluir que conocer a tu usuario es algo bueno y necesario cuando se quiere crecer y ofrecer un mejor servicio, el problema viene cuando esta recolección de datos de realiza sin control alguno e invadiendo de forma directa la privacidad del usuario. Un ejemplo aún más reciente que el de Facebook es el de la aplicación oficial de La Liga, donde se mandan datos de ubicación y fragmentos de audio del micrófono cada 30 minutos a sus servidores bajo el pretexto de identificar fraudes. Esta recolección sin medida produce tal volumen de datos que podemos llegar a dudar de su validez y efectividad. 
+Con lo cual, podemos concluir que conocer a tu usuario es algo bueno y necesario cuando se quiere crecer y ofrecer un mejor servicio, el problema viene cuando esta recolección de datos de realiza sin control alguno e invadiendo de forma directa la privacidad del usuario. Un ejemplo aún más reciente que el de \textit{Facebook} es el de la aplicación oficial de La Liga \cite{LaLiga}, donde se mandan datos de ubicación y fragmentos de audio del micrófono cada 30 minutos a sus servidores bajo el pretexto de identificar fraudes. Esta recolección sin medida produce tal volumen de datos que podemos llegar a dudar de su validez y efectividad. 
 \newline \newline
-Pero, ¿cómo hemos llegado a esta situación? La culpa es del marketing y su técnica Targeting Market, y su aplicación directa en la informática a través del Segmenting-Targeting-Positioning, a la que nos referiremos simplemente como Product Targeting
+Pero, ¿cómo hemos llegado a esta situación? La culpa es del marketing y su técnica \textit{Targeting Market}, y su aplicación directa en la informática a través del \textit{Segmenting-Targeting-Positioning} \cite{STP}, a la que nos referiremos simplemente como \textit{Product Targeting}
 \newline \newline
-Esta estrategia se basa en, como su propio nombre indica, segmentar el mercado en grupos cada vez más pequeños de acuerdo a unas variables, que de forma tradicional son; 
+Esta estrategia se basa en segmentar el mercado en grupos cada vez más pequeños de acuerdo a unas variables, que de forma tradicional son; 
 Variables geográficas. En referencia a la región del mundo, clima, país, región, ciudad, etc. 
 Variables demográficas. Edad, género, ingresos, orientación sexual, nivel educativo, cultura, etc. 
 Variables psicográficas. Estilo de vida, personalidad, valores, intereses, etc. 
@@ -282,13 +280,13 @@ Estas variables (datos, al fin y al cabo) se someten y a un proceso de relación
 \newline \newline
 Entra en juego entonces la fuente de estos datos, puesto que deben salir de algún sitio. A día de hoy, si nos ponemos en el contexto de Internet, la mayoría de las páginas, por no decir todas, disponen de herramientas analíticas que permiten conocer al menos, el país origen de la conexión al servicio así como la fecha y hora exactas en la que se produjo. Este es el primer nivel que está enormemente implantado en el mercado. 
 \newline \newline
-En un segundo nivel, y situándonos en el uso de los servicios que ofrecen las distintas compañías, es habitual que todos nuestros movimientos dentro de ella se recolecten con el fin de aportar a los desarrolladores información acerca del uso de las herramientas que ellos mismo han producido. Esto va desde las features que usa hasta el registro del movimiento del ratón a lo largo de la interfaz. 
+En un segundo nivel, y situándonos en el uso de los servicios que ofrecen las distintas compañías, es habitual que todos nuestros movimientos dentro de ella se recolecten con el fin de aportar a los desarrolladores información acerca del uso de las herramientas que ellos mismo han producido. Esto va desde las funcionalidades utilizadas hasta el registro del movimiento del ratón a lo largo de la interfaz. 
 \newline \newline
 En el tercer nivel, la recolección normalmente invade la privacidad del usuario, incluyendo datos como su posición GPS, capturas programáticas del sonido ambiente a través del micrófono, rastreo de conexiones a través de cookies, etc. 
 \newline \newline
 El problema derivado de este festival del rastreo viene de la mano con la enorme cantidad de datos que se acumulan en los servidores del rastreador. En otras palabras, no se realiza una recolección efectiva de datos que realmente aporten valor al conjunto, veamos un ejemplo; 
 \newline \newline
-Hace poco, escuchando un Podcast de desarrollo hablaba Nuria Ruiz (@pantojacoder), que gestiona el equipo de Analitics de Wikipedia, ponía en relieve el problema al que se enfrentan en la plataforma, quizás desde un extremo poco habitual pero necesario en su servicio, puesto que pretenden recolectar los menos datos posibles de sus usuarios para evitar persecución política de sus editores. En el caso expuesto a lo largo del programa, citaba como los desarrolladores querían rastrear todos los clicks de todos los usuarios para rastrear el uso de una feature que habían puesto recientemente en producción. 
+Hace poco, escuchando un Podcast de desarrollo \cite{codeontherocks} hablaba Nuria Ruiz (@pantojacoder) \cite{pantojacoder}, que gestiona el equipo de Analitics de Wikipedia, ponía en relieve el problema al que se enfrentan en la plataforma, quizás desde un extremo poco habitual pero necesario en su servicio, puesto que pretenden recolectar los menos datos posibles de sus usuarios para evitar persecución política de sus editores. En el caso expuesto a lo largo del programa, citaba como los desarrolladores querían rastrear todos los clicks de todos los usuarios para rastrear el uso de una feature que habían puesto recientemente en producción. 
 \newline \newline
 Nuria, cuyo trabajo consiste en el almacenamiento y análisis de estos datos, se lamentaba de que se exija tal cantidad de información cuando con la tercera parte de la misma las necesidades del equipo de desarrollo quedaban sobradamente cubiertas. 
 Esto nos da una idea de cual es el problema al que debemos enfrentarnos, que no es otro que la recolección efectiva de datos que aporten valor al perfil del usuario, y no recolectar por recolectar. 
@@ -879,9 +877,9 @@ En este caso se está usando exactamente la versión 5.1.0. Deberemos añadir en
 \thispagestyle{empty}
 \pagestyle{empty}
 %%%% https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
-\addcontentsline{toc}{chapter}{Bibliografía}
-\bibliographystyle{unsrt}
-\bibliography{LocalBibliography.bib}
+\bibliography{bib}
+
+\bibliographystyle{plain}
 \end{document}
 %%%%%\section{Secciones}
 %%%%%Las secciones se crean con \textit{section}. Las subsecciones y %%%%subsubsecciones con \textit{subsection} y \textit{subsubsection}, %%%%respectivamente. Si se desea que alguna subsección en concreto no salga %%%%en el índice se pueden usar los mismos comandos añadiéndoles un %%asterisco al final (\textit{subsection*} y \textit{subsubsection*}).
@@ -895,7 +893,8 @@ En este caso se está usando exactamente la versión 5.1.0. Deberemos añadir en
 %%%%%%¡Por defecto las subsubsecciones no aparecen en el índice! Este %%%%%%comportamiento se puede cambiar.
 
 %%%%%%\section{Citas y referencias}
-%%%%%Para citar un texto hay que incluirlo en el fichero %%%%\textit{LocalBibliography.bib} de esta plantilla. Una vez hecho se %%%%%puede referenciar usando el comando \textit{cite}~\cite{LaTeX_tutorials}.
+%%%%%Para citar un texto hay que incluirlo en el fichero %%%%\textit{LocalBibliography.bib} de esta plantilla. Una vez hecho se 
+%%%%%puede referenciar usando el comando \textit{cite}~\cite{LaTeX_tutorials}.
 %%%%Para referenciar imágenes, secciones o tablas se usa el %%%%comando~\textit{ref}. Por ejemplo~\ref{fig:logoEpcc}. Es importante %%%%haber añadido una etiqueta con el nombre correspondiente al emenento a %referenciar.
 %%%%%\par
 %%%%%%Para facilitar la lectura, cuando se insertan citas y referencias %%%%%%es conveniente insertar un caracter de espacio sin salto de línea %%%%%%%%\textit{\~} antes del comando de cita o referencia.
