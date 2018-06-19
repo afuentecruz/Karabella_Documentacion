@@ -299,7 +299,7 @@ La idea principal es alejarnos de la captura enfocada a una aplicación, como vi
 \newline \newline
 Debemos por tanto diseñar e implementar un sistema capaz de reunir y analizar los datos de un usuario de tal manera que estos aporten un perfil completo del usuario, no centrado en una aplicación, si no en un conjunto de ellas (la intención es registrar las aplicaciones más usadas en cada ámbito) cuyos datos de uso nos ayuden a extraer un modelo de los rasgos de la personalidad de un usuario, incluyendo sus rutinas, sus gustos y preferencias, aficiones, datos que en última instancia nos ayuden a establecer un patrón asociado a una persona y detectar cambios en su comportamiento. 
 \newline \newline
-Esta información, además, será pública y podrá ser consumida a través de una API. De esta forma se promueve la consulta libre de estos datos al público, dado hasta ahora cada compañía jamás ha liberado los resultados de este proceso, convirtiéndose en fórmulas de éxito protegidas bajo siete llaves. Se pretende abrir esta base de conocimiento, puesto que no sólo sirve para incrementar los beneficios de un negocio, puesto que cuenta con el potencial suficiente como para tener un impacto real y positivo en la vida de las personas, más allá de sugerir amistades o zapatillas. 
+Esta información, además, debe ser pública y podrá consumirse a través de una API. De esta forma se promueve la libre consulta de estos datos por parte del público, dado hasta ahora cada compañía jamás ha liberado los resultados de este proceso, convirtiéndose en fórmulas de éxito protegidas bajo siete llaves. Se pretende así abrir esta base de conocimiento, dado que no sólo sirve para incrementar los beneficios de un negocio, si no que cuenta con el potencial suficiente como para tener un impacto real y positivo en la vida de las personas, más allá de sugerir amistades o zapatillas. 
 \section{Motivación y desarrollo}
 El proyecto surge como primera etapa de un proyecto más grande enmarcado en un Trabajo de Fin de Máster, donde la idea es poder inferir patrones de comportamiento de los usuarios de teléfonos inteligentes y así poder diagnosticar y predecir trastornos de comportamiento dentro del patrón de una persona. 
 \newline
@@ -313,13 +313,37 @@ Se seguirá con la definición de los requisitos y casos de uso del proyecto par
 Una vez definida esta arquitectura a alto nivel, se procederá a acoplar lo planteado al sistema Android y definir los flujos que permitan obtener la lógica necesaria para realizar la captura. De esta forma, podremos definir una arquitectura a bajo nivel, dependiente de la plataforma, que permita organizar los componentes que forman el sistema final. 
 \newline
 \newline
-El desarrollo seguirá un proceso iterativo a base de sprints, persiguiendo la idea de mantener siempre un artefacto software funcional que evolucionará conforme avance el proyecto. 
+El desarrollo seguirá un proceso iterativo a base de \textit{Sprints}, persiguiendo la idea de mantener siempre un artefacto software funcional que evolucionará conforme avance el proyecto. 
+\chapter{Objetivos}
+Una vez establecidos los límites del dominio que se pretende manejar, vamos a establecer una serie de objetivos, partiendo de la base de que se implementará una aplicación Android donde el usuario no deberá tomar ningún partido a la hora de introducir los datos. Así pues; 
+\begin{itemize}
+\item Se debe realizar una captura pasiva de los datos, es decir, no se debe interrumpir el flujo normal de interacción del usuario con su teléfono. 
+\item Esta captura será pasiva en tanto en cuanto correrá una aplicación en segundo plano (servicio Android) que atenderá a un determinado tipo de eventos, siendo tarea del desarrollador implementar sendos modelos que extraigan la información perseguida. 
+\item Esta información estará acotada en cinco grupos. Así, contaremos con un grupo de navegación web, mensajería instantánea, comunicación, redes sociales y sensores. Dentro de cada grupo se atenderán a las aplicaciones más utilizadas en cada campo. 
+\item Esta captura debe ser tener valor semántico, es decir, debe tener información referencial que ayude a situar en un contexto la información. 
+\item La información capturada será almacenada de forma temporal de forma local en el almacenamiento hardware del dispositivo, y, de forma programática realizar volcados periódicos cada poco tiempo, con doble objetivo. Por un lado, no saturar el espacio de almacenamiento y por otro, para asegurar los datos en un servidor remoto de manera que estos estén siempre disponibles. 
+\item Este volcado se realizará a través de una API que permitirá el propio volcado y su consumo, comportándose así como una interfaz de acceso al manejo de los datos. 
+\end{itemize}
 \chapter{Estado del Arte}
-Al final, el propósito que se persigue es enterarnos de los cambios realizados en el teléfono por parte del usuario, veamos las diferentes aproximaciones a este problema. 
-\section{Traceview}
-Consiste en inspeccionar los logs generados por el sistema, con propósito de depuración en su mayor parte. -- a ampliar. 
-\section{Talkback}
-Lector de pantalla de google que emplea los servicios de accesibilidad que provee la plataforma para usuarios con discapacidades funcionales. -- a ampliar. 
+Está claro que para este proyecto no estamos inventando la rueda, el rastreo del usuario es una técnica que existe prácticamente desde que el uso de internet se hizo mayoritario, por ello vamos a ver como ha evolucionado este rastreo y captura a lo largo de los años. 
+\section{Análisis Web}
+Entendemos por análisis web la medición, recolección, análisis y procesado de los datos generados  la  navegación  con la idea de comprender y optimizar el uso de una determinada página. 
+\newline \newline
+Este análisis no se limita únicamente a la medición del tráfico, si no que puede utilizarse como una herramienta de negocio mediante la cual mejorar el \textit{marketing} y el impacto de una web, además de aportar la información necesaria para realizar campañas publicitarias por zonas geográficas, variables demográficas, etc. Se trata de conocer al usuario y comprender las tareas que realiza dentro de un sitio a través de su \textit{tracking}. Este \textit{trackeo} puede realizarse de distintas formas, veamos algunas a continuación.  
+\subsection{Geolocalización}
+A través de la dirección IP es posible conocer la localización del usuario en distintas granularidades, que van desde el país, la comunidad y ciudad. 
+\newline \newline
+Esto es posible gracias a la propia naturaleza del protocolo TCP/IP \cite{manolito}, donde a cada dispositivo de acceso a Internet se le asigna una dirección única que identifica la conexión. Además, como se ha estudiado durante la carrera, esta dirección IP que identifica al usuario va adjunta en los datagramas de las peticiones generadas durante la navegación, quedando registrada como ip origen de la conexión. 
+\newline \newline
+De esta forma, ya sabemos que nuestra dirección IP viaja continuamente en cada comunicación que establecemos en internet, pero ¿quién controla y registra la vinculación de una dirección con un espacio físico? Hay diversos organismos, que a través de la organización \textit{Regional Internet Registry} \cite{RIR}, dedicada a supervisar la asignación y registro de recursos de números de internet en cada región del mundo. Tenemos así 5 RIR en funcionamiento, una por cada continente. 
+\newline \newline
+Gracias a estas organizaciones es posible saber quien es el dueño de cada dirección, conociendo además detalles de la conexión \cite{ripe}. 
+\subsection{Click analytics}
+lorem %https://en.wikipedia.org/wiki/Web_analytics ipsum
+\subsection{Customer lifecycle analytics}
+lorem ipsum 
+\subsection{Problems with cookies}
+lorem ipsum 
 \chapter{Requisitos del proyecto}
 En esta capítulo se analiza el problema planteado por el proyecto y se detalla su descomposición como requisitos de un sistema software. No hay que perder de vista que nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
 \newpage

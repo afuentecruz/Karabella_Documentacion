@@ -1,5 +1,16 @@
 \begin{thebibliography}{1}
 
+\bibitem{RIR}
+Regional internet registries, Junio 2018.
+
+\bibitem{ripe}
+Ripe network coordination centre, Junio 2018.
+
+\bibitem{manolito}
+Manuel Díaz~Díaz.
+\newblock {\em Fundamentos de Redes y Comunicaciones}.
+\newblock Escuela Politécnica de Cáceres, 1996.
+
 \bibitem{STP}
 Annmarie Hanlon.
 \newblock How to use segmentation, targeting and positioning (stp) to develop

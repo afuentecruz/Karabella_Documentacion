@@ -3,44 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: delaFuenteCruz_Alberto_TFG.aux
 The style file: plain.bst
 Database file #1: bib.bib
-You've used 5 entries,
+Warning--to sort, need author or key in RIR
+Warning--to sort, need author or key in ripe
+You've used 8 entries,
             2118 wiz_defined-function locations,
-            520 strings with 4471 characters,
-and the built_in function-call counts, 1011 in all, are:
-= -- 84
-> -- 35
+            530 strings with 4641 characters,
+and the built_in function-call counts, 1534 in all, are:
+= -- 129
+> -- 44
 < -- 0
-+ -- 16
-- -- 10
-* -- 39
-:= -- 168
-add.period$ -- 10
-call.type$ -- 5
-change.case$ -- 20
++ -- 21
+- -- 12
+* -- 63
+:= -- 236
+add.period$ -- 15
+call.type$ -- 8
+change.case$ -- 29
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 35
-empty$ -- 111
-format.name$ -- 10
-if$ -- 215
+cite$ -- 10
+duplicate$ -- 61
+empty$ -- 179
+format.name$ -- 12
+if$ -- 337
 int.to.chr$ -- 0
-int.to.str$ -- 5
-missing$ -- 0
-newline$ -- 23
-num.names$ -- 10
-pop$ -- 44
+int.to.str$ -- 8
+missing$ -- 2
+newline$ -- 34
+num.names$ -- 12
+pop$ -- 70
 preamble$ -- 1
-purify$ -- 15
+purify$ -- 22
 quote$ -- 0
-skip$ -- 42
+skip$ -- 64
 stack$ -- 0
-substring$ -- 26
-swap$ -- 5
+substring$ -- 41
+swap$ -- 8
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 20
-warning$ -- 0
-while$ -- 10
-width$ -- 6
-write$ -- 41
+type$ -- 30
+warning$ -- 2
+while$ -- 12
+width$ -- 9
+write$ -- 63
+(There were 2 warnings)
