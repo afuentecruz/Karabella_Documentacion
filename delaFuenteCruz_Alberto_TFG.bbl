@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{RIR}
 Regional internet registries, Junio 2018.
@@ -10,6 +10,20 @@ Ripe network coordination centre, Junio 2018.
 Manuel Díaz~Díaz.
 \newblock {\em Fundamentos de Redes y Comunicaciones}.
 \newblock Escuela Politécnica de Cáceres, 1996.
+
+\bibitem{rgpd}
+Parlamento Europeo.
+\newblock Regulation (eu) 2016/679 of the european parliament and of the
+  council of 27 april 2016 on the protection of natural persons with regard to
+  the processing of personal data and on the free movement of such data, and
+  repealing directive 95/46/ec (general data protection regulation), Abril
+  2016.
+
+\bibitem{guachos}
+Juan D.~Velásquez Gino Slanzi~R, Joaquín Jadue~M.
+\newblock Predicción de la intención de click del usuario web, usando
+  análisis de dilatación pupila.
+\newblock Junio 2018.
 
 \bibitem{STP}
 Annmarie Hanlon.

@@ -329,7 +329,7 @@ Está claro que para este proyecto no estamos inventando la rueda, el rastreo de
 \section{Análisis Web}
 Entendemos por análisis web la medición, recolección, análisis y procesado de los datos generados  la  navegación  con la idea de comprender y optimizar el uso de una determinada página. 
 \newline \newline
-Este análisis no se limita únicamente a la medición del tráfico, si no que puede utilizarse como una herramienta de negocio mediante la cual mejorar el \textit{marketing} y el impacto de una web, además de aportar la información necesaria para realizar campañas publicitarias por zonas geográficas, variables demográficas, etc. Se trata de conocer al usuario y comprender las tareas que realiza dentro de un sitio a través de su \textit{tracking}. Este \textit{trackeo} puede realizarse de distintas formas, veamos algunas a continuación.  
+Este análisis no se limita únicamente a la medición del tráfico, si no que puede utilizarse como una herramienta de negocio mediante la cual mejorar el \textit{marketing} y el impacto de una web, además de aportar la información necesaria para realizar campañas publicitarias por zonas geográficas, variables demográficas, etc. Se trata entonces de establecer un perfil de usuario y comprender las tareas que realiza dentro de un sitio a través del \textit{tracking}. Este \textit{trackeo} puede hacerse de distintas maneras, muchas veces implementando todas ellas para obtener información más completa.
 \subsection{Geolocalización}
 A través de la dirección IP es posible conocer la localización del usuario en distintas granularidades, que van desde el país, la comunidad y ciudad. 
 \newline \newline
@@ -337,13 +337,30 @@ Esto es posible gracias a la propia naturaleza del protocolo TCP/IP \cite{manoli
 \newline \newline
 De esta forma, ya sabemos que nuestra dirección IP viaja continuamente en cada comunicación que establecemos en internet, pero ¿quién controla y registra la vinculación de una dirección con un espacio físico? Hay diversos organismos, que a través de la organización \textit{Regional Internet Registry} \cite{RIR}, dedicada a supervisar la asignación y registro de recursos de números de internet en cada región del mundo. Tenemos así 5 RIR en funcionamiento, una por cada continente. 
 \newline \newline
-Gracias a estas organizaciones es posible saber quien es el dueño de cada dirección, conociendo además detalles de la conexión \cite{ripe}. 
-\subsection{Click analytics}
-lorem %https://en.wikipedia.org/wiki/Web_analytics ipsum
-\subsection{Customer lifecycle analytics}
-lorem ipsum 
-\subsection{Problems with cookies}
-lorem ipsum 
+Gracias a estas organizaciones es posible saber la situación geográfica de cada dirección, conociendo además detalles de la conexión \cite{ripe}. 
+\subsection{Análisis de los gestos del ratón}
+Este tipo de captura y análisis está centrado en el movimiento que hace el usuario a lo largo de la pantallla y los clicks realizados con el ratón sobre los diferentes enlaces que componen la interfaz. 
+\newline \newline
+Normalmente, la información que se obtiene por este método es útil tanto para desarrolladores, diseñadores y redactores de una página a la hora de evaluar el rendimiento, diseño e conocer los contenidos más relevantes, respectivamente. Esta técnica es tremendamente útil puesto que permite conocer como se \textit{mueven} los usuarios dentro de un sitio, que \textit{habitaciones} visitan más y detectar así puntos calientes a los que prestar más atención, así como fugas de interés, encontrando puntos ciegos, para proceder a un análisis de las causas y mejorar así el rendimiento de un portal. 
+\newline \newline
+Desde un punto de vista técnico, esta recolección de datos puede ocurrir en tiempo real o bien los datos serán almacenados para manipularlos después. A día de hoy muchas \textit{suites} de analíticas implementan esta funcionalidad a través de código Javascript insertado en las páginas con métodos que capturan y rastrean la interacción del ratón dentro de la página. 
+\newline \newline
+Este método a ido evolucionando con el tiempo hacia nuevas aproximaciones, como la predicción del click, donde mediante un programa que siga el movimiento del ojo del usuario y midiendo la dilatación de su pupila podemos predecir donde se realizará la pulsación y adaptar así la respuesta del servicio a la nueva situación prevista \cite{guachos}. 
+\subsection{Cookies}
+Las cookies, aunque estén tan de moda últimamente con la salida del \textit{nuevo} RGPD \cite{rgpd} (Reglamento General de Protección de Datos) sustituyendo a la nacional LOPD (Ley Oficial de Protección de Datos), surgieron en los albores de internet, siendo el primer método de \textit{rastreo} utilizado. 
+\newline \newline 
+Las cookies surgieron por la necesidad de mantener información sobre la sesión del usuario después de un login, mantener los elementos de un carrito de la compra o sencillamente para guardar información sobre preferencias del sitio (idioma, tema...). No son más que un par clave-valor que se genera en el servidor y que es enviado al cliente para que este lo almacene en local. Más tarde esta información es consultada para adaptar el contenido en base a esa información.  
+\newline \newline
+En teoría, una cookie solo puede ser consultada por su origen, es decir, por el servidor que la generó, pero con el tiempo y la aparición de servidores compartidos (servidores de publicidad, por ejemplo) es posible generar una cookie que podrá ser consultada por todas las páginas que empleen ese servidor, estas son las llamadas \textit{third party cookies}, que guardan o usan información del usuario sin que este tenga que navegar directamente en su dominio, dado que está incrustada en la web anfitrión. 
+\newline \newline 
+Entre la información que es posible capturar con una cookie se incluye el sistema operativo, la dirección IP, el navegador, la ubicación, uso horario, idioma y lo más importante, los sitios por los que se navega. Por ejemplo, si se busca en una tienda online (pongamos Amazon como ejemplo), esa información sobre la búsqueda se queda almacenada en la cookie, si otra web emplea publicidad de esa tienda, sabrá los términos de la búsqueda y podrá mostrar publicidad relacionada. 
+\newline \newline 
+Normalmente, la técnica para el rastreo con cookies pasa por la creación de un identificador único de usuario que se almacena en la cookie. Este ID nos mantendrá identificados durante nuestra navegación y será empleado por las páginas que usen los servicios del proveedor de esa cookie, de esta manera, si cada página emplea cookies propias o de terceros, seremos conscientes de que estamos continuamente generando información y que además esta información no pasa desapercibida, si no que es registrada, enviada, usada y compartida entre compañías. 
+\section{Google y la plataforma Android}
+Hasta ahora hemos visto los métodos de captura de información a través de la web, pero en los últimos 10 años el mercado ha cambiado mucho con la aparición del smartphone, considerando 2008 como el año 0, puesto fué en ese año donde la Android debutó por primera vez, ocupando dos años después gran parte del mercado. 
+\newline \newline 
+Es por tanto una línea muy a tener en cuenta, estamos hablando de que llevamos un dispositivo inteligente con nosotros todo el día que se ha convertido en una extensión más de nuestro cuerpo. Pensar que aún teniendo eso en el bolsillo aún somos anónimos es pecar de optimistas. Estudiemos entonces si Google aprovecha esta plataforma para recopilar datos de sus usuarios y cómo lo hace. 
+\subsection{a buscar como un cerdo!}
 \chapter{Requisitos del proyecto}
 En esta capítulo se analiza el problema planteado por el proyecto y se detalla su descomposición como requisitos de un sistema software. No hay que perder de vista que nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
 \newpage
