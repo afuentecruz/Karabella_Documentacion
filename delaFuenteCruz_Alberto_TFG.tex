@@ -357,10 +357,53 @@ Entre la información que es posible capturar con una cookie se incluye el siste
 \newline \newline 
 Normalmente, la técnica para el rastreo con cookies pasa por la creación de un identificador único de usuario que se almacena en la cookie. Este ID nos mantendrá identificados durante nuestra navegación y será empleado por las páginas que usen los servicios del proveedor de esa cookie, de esta manera, si cada página emplea cookies propias o de terceros, seremos conscientes de que estamos continuamente generando información y que además esta información no pasa desapercibida, si no que es registrada, enviada, usada y compartida entre compañías. 
 \section{Google y la plataforma Android}
-Hasta ahora hemos visto los métodos de captura de información a través de la web, pero en los últimos 10 años el mercado ha cambiado mucho con la aparición del smartphone, considerando 2008 como el año 0, puesto fué en ese año donde la Android debutó por primera vez, ocupando dos años después gran parte del mercado. 
+Hasta ahora hemos visto los métodos de captura de información a través de la web, pero en los últimos 10 años el mercado ha cambiado mucho con la aparición del smartphone. Las cifras son apabullantes, en 2008 nace Android y en el tramo de 10 años la implantación del smartphone en la sociedad está fuera de cualquier duda. 
+\begin{figure}[H]
+	\begin{center}
+   		\includegraphics[scale=0.5]{pictures/data/smartphone_sells.png}
+	    	\caption{Venta global de smarthpones según el sistema operativo}
+   		\label{fig:Venta de Smartphones}
+	\end{center}
+\end{figure}
+Es por tanto una línea muy a tener en cuenta, estamos hablando que llevamos un dispositivo inteligente con nosotros todo el día, se ha convertido en una extensión más de nuestro cuerpo. Pensar que aún teniendo eso en el bolsillo aún somos anónimos es pecar de optimistas.Además,  estamos hablando de Google, una empresa que factura millones al año y no cobra absolutamente nada por sus servicios al usuario. 
+\subsection{Los servicios de Google y la localización}
+Durante el 2017 salió a la luz la noticia de que Google registraba y almacenaba la localización de los teléfonos Android incluso cuando este servicio estaba desactivado \cite{googleLocalizacion}. Esto fue confirmado poco después por Google, quien afirmó que abandonaron esa práctica al poco de darse a conocer estos hechos. 
 \newline \newline 
-Es por tanto una línea muy a tener en cuenta, estamos hablando de que llevamos un dispositivo inteligente con nosotros todo el día que se ha convertido en una extensión más de nuestro cuerpo. Pensar que aún teniendo eso en el bolsillo aún somos anónimos es pecar de optimistas. Estudiemos entonces si Google aprovecha esta plataforma para recopilar datos de sus usuarios y cómo lo hace. 
-\subsection{a buscar como un cerdo!}
+Es lógico pensar que cuando estamos usando algún servicio de google que incluya localización esta se mande a sus servidores, son sus reglas y si quieres usar el servicio es un coste asumido. De hecho, Google no oculta esta práctica, pudiendo consultar tu histórico de localizaciones en su propio portal \cite{googleLocationHistory}. A continuación se adjunta la imagen del histórico de localizaciones del autor en la ciudad de Cáceres. 
+% IMAGEN 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.5]{pictures/data/google_location_history.png}
+	\caption{Historial de localizaciones en Cáceres}
+	\label{fig:Historico de localizaciones}
+\end{center}
+\end{figure}
+Por lo tanto, esta práctica de Google no es ningún secreto, siendo además una \textit{feature} de su sistema y sus servicio de mapas, ofreciendo rutas alternativas al itinerario habitual en función del tráfico, guardar la posición del aparcamiento, etc. 
+\newline \newline 
+El problema viene cuando se pierde el control de esta información. La  noticia citada al principio de esta sección pone en relieve la problemática, puesto que Google envía información de tu localización a sus servidores incluso cuando este servicio está desactivado en el teléfono y la SIM quitada. 
+\newline \newline 
+Pero, ¿cómo sabe Google donde estás si tienes este servicio desactivado? Aprovecha las antenas de telefonía. En primer lugar se identifica al usuario por su CellID (identificador único de cada teléfono) y cada vez que el terminal se conecta a una torre se manda la información de esa conexión junto con el cellID a sus servidores. Esa información de la conexión incluye el identificador de la torre, que permite saber su localización exacta. 
+\newline \newline 
+En un primer momento pudiera parecer que esta práctica no es demasiado intrusiva, solamente se manda información sobre la torre más cercana a la que se ha conectado el teléfono, pero cuando esta práctica se extiende a lo largo del tiempo (durante 24 horas por ejemplo), se puede llegar a triangular la posición exacta del teléfono gracias a la información de las torres a las que se ha ido conectando. 
+\newline \newline 
+Google reconoció los hechos y aportó más información al respecto, afirmando que además de la información de las torres de telefonía empleaban otros datos, como la cercanía con redes Wifi u otros dispositivos. 
+\newline \newline 
+Esto hila con otro escándalo que esta vez esta relacionado con el coche que Google emplea para mapear las ciudades para su servicio de Google Maps. Resulta que este coche, además de fotografiar las calles, iba recolectando la información de las redes Wifi abiertas, obteniendo así un mapeo de las redes y su localización exacta \cite{gmaps}. 
+\newline \newline
+Con estas fuentes de datos es tremendamente sencillo para Google saber que está haciendo el usuario en cada momento, puesto que es posible determinar si estás en un núcleo urbano, en lo alto de una montaña, si vas andando, bicicleta, usas el transporte público, etc. Esta información es tremendamente útil para hacer crecer la base de conocimiento de Google y mejorar el targeting de su servicio de publicidad (AdWords). 
+\subsection{Aplicaciones de terceros}
+Hemos visto como Google aprovecha su propia plataforma para registrar datos del usuario, veamos ahora como otras compañías se aprovechan de la plataforma para recolectar información de los usuarios. 
+\subsubsection{Aplicación de La Liga}
+% https://reversecodes.wordpress.com/2018/06/12/analizando-la-app-de-la-liga-para-android/. 
+\subsubsection{Aplicación Linterna}
+% ó la aplicación de facebook o así. 
+\section{Dispositivos IOT}
+En los últimos años hemos visto como \textit{el internet de las cosas} ha comenzado a implantarse en los hogares, desde bombillas inteligentes que podemos controlar con nuestro teléfono hasta frigoríficos que nos avisan cuando falta algún producto en la nevera. 
+\newline \newline 
+Esta evolución ha seguido su camino y las compañías no han querido perderse la fiesta, desarrollando cada una sus propias versiones de asistentes personales para, en teoría, facilitarnos la vida dentro de nuestra casa, es el caso del Google Home de Google, Alexa de Amazon o el Apple homePod de Apple. Estos dispositivos comparten todos la característica de  activarse mediante comandos de voz, lo cual implica una escucha pasiva en segundo plano a la espera de reconocer algún comando y activarse. 
+\newline \newline 
+Esta tecnología, dado su enorme potencial, hizo que muchos usuarios mirasen con lupa a estos dispositivos, dando como resultado lo que veremos a continuación. 
+\subsection{Amazon Alexa}
 \chapter{Requisitos del proyecto}
 En esta capítulo se analiza el problema planteado por el proyecto y se detalla su descomposición como requisitos de un sistema software. No hay que perder de vista que nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
 \newpage
@@ -634,9 +677,13 @@ En esta sección veremos varios diagramas de actividad destinados a clarificar y
 En la siguiente figura se documenta el proceso que lleva al registro de un correo mandado por el usuario a través de la aplicación de GMail. Se ha organizado el diagrama por niveles, desde la capa más externa de la aplicación hasta la capa de persistencia, así se puede observar el camino recorrido así como el procesamiento de la información en cada nivel.
 %%% ------ ACTIVIDAD GMAIL 
 \begin{figure}[H]
-		\includegraphics[width=1.4\textwidth,center]{pictures/activity/gmailActivityDiagram.png} 
+\begin{center}
+
+
+		\includegraphics[width=1.4\textwidth]{pictures/activity/gmailActivityDiagram.png} 
   \caption[Diagrama actividad GMail]{Diagrama de actividad de captura de un correo redactado con GMail.}
   \label{fig:Diagrama actividad GMail}
+  \end{center}
 \end{figure}
 %%% ------  /ACTIVIDAD GMAIL
 
@@ -845,9 +892,11 @@ En nuestro sistema tendremos una interfaz Analizer, con tantas implementaciones 
 Al final nuestra arquitectura a bajo nivel resulta en el siguiente diagrama. 
 %%% ------ 
 \begin{figure}[H]
-		\includegraphics[width=1.3\textwidth,center]{pictures/architecture/arquitecturaGeneral03.png} 
+\begin{center}
+		\includegraphics[width=1.3\textwidth]{pictures/architecture/arquitecturaGeneral03.png} 
 %	\end{large}
 	\caption[Arquitectura detallada]{Arquitectura detallada}
+	\end{center}
 \end{figure}
 %%% ------  
 En primer lugar nos encontramos la ui que alimenta al servicio de accesibilidad con eventos. Este servicio se encarga de meterlos en un bus de forma que el manejador pueda recogerlos y computarlos. 

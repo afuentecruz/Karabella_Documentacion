@@ -1,5 +1,8 @@
 \begin{thebibliography}{10}
 
+\bibitem{googleLocationHistory}
+Google location history.
+
 \bibitem{RIR}
 Regional internet registries, Junio 2018.
 
@@ -25,6 +28,10 @@ Juan D.~Velásquez Gino Slanzi~R, Joaquín Jadue~M.
   análisis de dilatación pupila.
 \newblock Junio 2018.
 
+\bibitem{gmaps}
+The Guardian.
+\newblock Google admits collecting wi-fi data through street view cars, 2010.
+
 \bibitem{STP}
 Annmarie Hanlon.
 \newblock How to use segmentation, targeting and positioning (stp) to develop
@@ -37,6 +44,11 @@ Stephanie~Baker Michael~Riley, Sarah~Frier.
 \bibitem{codeontherocks}
 Code on~the Rocks.
 \newblock A todo datas! con @pantojacoder @soygema y @javisantana, Mayo 2017.
+
+\bibitem{googleLocalizacion}
+Quartz.
+\newblock Google collects android users’ locations even when location
+  services are disabled, Noviembre 2017.
 
 \bibitem{pantojacoder}
 Nuria Ruiz.
