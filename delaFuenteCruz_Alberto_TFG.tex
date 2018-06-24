@@ -392,11 +392,29 @@ Esto hila con otro escándalo que esta vez esta relacionado con el coche que Goo
 \newline \newline
 Con estas fuentes de datos es tremendamente sencillo para Google saber que está haciendo el usuario en cada momento, puesto que es posible determinar si estás en un núcleo urbano, en lo alto de una montaña, si vas andando, bicicleta, usas el transporte público, etc. Esta información es tremendamente útil para hacer crecer la base de conocimiento de Google y mejorar el targeting de su servicio de publicidad (AdWords). 
 \subsection{Aplicaciones de terceros}
-Hemos visto como Google aprovecha su propia plataforma para registrar datos del usuario, veamos ahora como otras compañías se aprovechan de la plataforma para recolectar información de los usuarios. 
+Hemos visto como Google aprovecha su propia plataforma para registrar datos del usuario, veamos ahora como otras compañías se aprovechan de ella para recolectar información de los usuarios a través de las aplicaciones que implementan para este mismo sistema. 
 \subsubsection{Aplicación de La Liga}
-% https://reversecodes.wordpress.com/2018/06/12/analizando-la-app-de-la-liga-para-android/. 
+A principios de Junio de 2018 salió a la luz un nuevo caso de espionaje al usuario. En esta ocasión se trataba de la aplicación oficial de La Liga \cite{noticiaLaLiga}, la cual usaba el micrófono de los usuarios para, en teoría, detectar posibles fraudes. 
+\newline \newline 
+Para ello la aplicación pedía permisos de micrófono y de localización para, de nuevo supuestamente, activar esta funcionalidad en las franjas horarias de los partidos de fútbol y analizando el audio capturado junto con la localización, detectar posibles fraudes. 
+\newline \newline 
+El revuelo vino porque los usuarios no eran conscientes de que esto sucediese, lo cual dice muy poco de nosotros como usuarios, se estaban aceptando unas condiciones legales en las figuraba una línea indicando claramente este uso, así como la autorización explícita a la aplicación para usar el micrófono. 
+\newline \newline 
+Al poco tiempo de que la noticia salía a la luz la empresa realizó un comunicado donde se repetían lo dicho arriba, que ese audio era únicamente para detectar fraudes en el territorio Español y no era usado para otros propósitos. Dada la vaguedad de las declaraciones, hubo usuarios que analizaron la aplicación y estudiaron su comportamiento \cite{laLigaJaker}, lo que nos permite hacer un resumen de como está implementada esta lógica. 
+\newline \newline 
+En primer lugar, la aplicación comprobaba los permisos de micrófono y localización en cada ejecución, solicitándolos en caso de no estar asignados. Después, mediante un listener, detecta cada cambio de ubicación y va creando un registro que, cada 30 minutos, se manda a un servidor y se borra del teléfono. 
+\newline \newline 
+El micrófono, en cuanto está disponible, comienza a grabar y mandar los archivos al servidor Durante cuanto tiempo permanece activa esa grabación es un misterio, así como el comportamiento de la activación del micrófono, puesto que lo lógico sería pensar que la aplicación, en función de la localización y el horario, active el micrófono, pero el análisis del código rebela que esta activación es arbitraria y nada tiene que ver con cuando suceden los partidos de fútbol 
+\newline \newline 
+Esto ha demostrado que la escucha a los usuarios por parte de las compañías es una práctica que está a la orden del día, de hecho, cada vez son más las voces que afirman que Facebook a través de su aplicación emplea el micrófono para escuchar conversaciones privadas y aunque Facebook ha negado siempre esta práctica, las sospechas siempre estarán ahí, quedando demostrado además, como acabamos de ver, que ésta práctica existe y lo preocupante realmente es saber que pasa con ese archivo de audio desde el momento en el que sale del teléfono, puesto que se pierde cualquier control sobre estos datos. 
 \subsubsection{Aplicación Linterna}
-% ó la aplicación de facebook o así. 
+En este caso, vamos a irnos a una aplicación que saltó a la palestra a lo largo de 2013, cuando se descubrió que una aplicación a primera vista inocente dedicada a activar el led de la cámara y proveer así de una linterna, mandaba los datos de ubicación de sus usuarios a sus servidores junto con datos acerca de las redes wifi disponibles para más tarde vender los datos a terceros. 
+\newline \newline 
+Este caso está ampliamente documentado, llegando a publicar un comunicado de la Comisión Federal del Comercio de EEUU (un homólogo al patrio FACUA) donde se describen y condena esta práctica \cite{CFCEEUU}. 
+\newline \newline 
+En el documento citado se condena a la compañía por estas acciones, entre las que se incluyen la posibilidad de tomar fotos a través de la cámara del dispositivo sin que el usuario tome partido en ello y el envío de datos de localización a empresas de publicidad. 
+\newline \newline 
+Este caso nos sirve como muestra, junto con el anterior, de que estas prácticas llevan muchos años en el sector y pone en relieve la falta de control de los datos del usuario, además, nos hace plantearnos que hacen las grandes compañías con sus aplicaciones, en las que entra en juego mayor alcance de usuarios y por tanto mayor rédito económico. 
 \section{Dispositivos IOT}
 En los últimos años hemos visto como \textit{el internet de las cosas} ha comenzado a implantarse en los hogares, desde bombillas inteligentes que podemos controlar con nuestro teléfono hasta frigoríficos que nos avisan cuando falta algún producto en la nevera. 
 \newline \newline 

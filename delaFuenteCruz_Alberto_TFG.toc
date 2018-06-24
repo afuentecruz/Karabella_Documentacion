@@ -11,42 +11,42 @@
 \contentsline {subsection}{\numberline {3.2.1}Los servicios de Google y la localizaci\IeC {\'o}n}{14}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Aplicaciones de terceros}{16}{subsection.3.2.2}
 \contentsline {subsubsection}{Aplicaci\IeC {\'o}n de La Liga}{17}{section*.7}
-\contentsline {subsubsection}{Aplicaci\IeC {\'o}n Linterna}{17}{section*.8}
-\contentsline {section}{\numberline {3.3}Dispositivos IOT}{17}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Amazon Alexa}{17}{subsection.3.3.1}
-\contentsline {chapter}{\numberline {4}Requisitos del proyecto}{18}{chapter.4}
-\contentsline {section}{\numberline {4.1}Requisitos}{19}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Requisitos funcionales}{19}{subsection.4.1.1}
-\contentsline {subsubsection}{Aplicaciones de comunicaci\IeC {\'o}n}{19}{section*.9}
-\contentsline {subsubsection}{Aplicaciones de mensajer\IeC {\'\i }a instant\IeC {\'a}nea}{20}{section*.10}
-\contentsline {subsubsection}{Aplicaciones de b\IeC {\'u}squeda en la web}{20}{section*.11}
-\contentsline {subsubsection}{Aplicaciones de redes sociales}{21}{section*.12}
-\contentsline {subsubsection}{Sensores}{21}{section*.13}
-\contentsline {subsection}{\numberline {4.1.2}Requisitos no funcionales}{23}{subsection.4.1.2}
-\contentsline {chapter}{\numberline {5}An\IeC {\'a}lisis}{24}{chapter.5}
-\contentsline {section}{\numberline {5.1}Diagramas de Casos de Uso}{25}{section.5.1}
-\contentsline {section}{\numberline {5.2}Arquitectura de alto nivel}{29}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Smartphone}{30}{subsection.5.2.1}
-\contentsline {subsubsection}{Evento}{31}{section*.22}
-\contentsline {subsubsection}{Capturador}{32}{section*.23}
-\contentsline {subsubsection}{Evento + timestamp}{32}{section*.24}
-\contentsline {subsubsection}{Manejador}{32}{section*.25}
-\contentsline {subsubsection}{Sto}{33}{section*.26}
-\contentsline {subsubsection}{Analizador}{33}{section*.27}
-\contentsline {subsubsection}{Dto}{33}{section*.28}
-\contentsline {subsubsection}{DB Manager}{34}{section*.29}
-\contentsline {subsection}{\numberline {5.2.2}Servidor Remoto}{35}{subsection.5.2.2}
-\contentsline {subsubsection}{Controller}{36}{section*.31}
-\contentsline {subsubsection}{Manager}{36}{section*.32}
-\contentsline {subsubsection}{Repository}{36}{section*.33}
-\contentsline {subsubsection}{DB NoSQL}{36}{section*.34}
-\contentsline {subsubsection}{Vista}{37}{section*.35}
-\contentsline {section}{\numberline {5.3}Diagrama de secuencia}{37}{section.5.3}
-\contentsline {section}{\numberline {5.4}Diagramas de actividad}{39}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Gmail}{39}{subsection.5.4.1}
-\contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o}{44}{chapter.6}
-\contentsline {section}{\numberline {6.1}Arquitectura}{45}{section.6.1}
-\contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{55}{chapter.7}
-\contentsline {section}{\numberline {7.1}Bibliotecas de terceros}{55}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}Realm}{55}{subsection.7.1.1}
-\contentsline {chapter}{\numberline {8}Conclusiones y trabajos futuros}{56}{chapter.8}
+\contentsline {subsubsection}{Aplicaci\IeC {\'o}n Linterna}{18}{section*.8}
+\contentsline {section}{\numberline {3.3}Dispositivos IOT}{19}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Amazon Alexa}{19}{subsection.3.3.1}
+\contentsline {chapter}{\numberline {4}Requisitos del proyecto}{20}{chapter.4}
+\contentsline {section}{\numberline {4.1}Requisitos}{21}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Requisitos funcionales}{21}{subsection.4.1.1}
+\contentsline {subsubsection}{Aplicaciones de comunicaci\IeC {\'o}n}{21}{section*.9}
+\contentsline {subsubsection}{Aplicaciones de mensajer\IeC {\'\i }a instant\IeC {\'a}nea}{22}{section*.10}
+\contentsline {subsubsection}{Aplicaciones de b\IeC {\'u}squeda en la web}{22}{section*.11}
+\contentsline {subsubsection}{Aplicaciones de redes sociales}{23}{section*.12}
+\contentsline {subsubsection}{Sensores}{23}{section*.13}
+\contentsline {subsection}{\numberline {4.1.2}Requisitos no funcionales}{25}{subsection.4.1.2}
+\contentsline {chapter}{\numberline {5}An\IeC {\'a}lisis}{26}{chapter.5}
+\contentsline {section}{\numberline {5.1}Diagramas de Casos de Uso}{27}{section.5.1}
+\contentsline {section}{\numberline {5.2}Arquitectura de alto nivel}{31}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Smartphone}{32}{subsection.5.2.1}
+\contentsline {subsubsection}{Evento}{33}{section*.22}
+\contentsline {subsubsection}{Capturador}{34}{section*.23}
+\contentsline {subsubsection}{Evento + timestamp}{34}{section*.24}
+\contentsline {subsubsection}{Manejador}{34}{section*.25}
+\contentsline {subsubsection}{Sto}{35}{section*.26}
+\contentsline {subsubsection}{Analizador}{35}{section*.27}
+\contentsline {subsubsection}{Dto}{35}{section*.28}
+\contentsline {subsubsection}{DB Manager}{36}{section*.29}
+\contentsline {subsection}{\numberline {5.2.2}Servidor Remoto}{37}{subsection.5.2.2}
+\contentsline {subsubsection}{Controller}{38}{section*.31}
+\contentsline {subsubsection}{Manager}{38}{section*.32}
+\contentsline {subsubsection}{Repository}{38}{section*.33}
+\contentsline {subsubsection}{DB NoSQL}{38}{section*.34}
+\contentsline {subsubsection}{Vista}{39}{section*.35}
+\contentsline {section}{\numberline {5.3}Diagrama de secuencia}{39}{section.5.3}
+\contentsline {section}{\numberline {5.4}Diagramas de actividad}{41}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Gmail}{41}{subsection.5.4.1}
+\contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o}{46}{chapter.6}
+\contentsline {section}{\numberline {6.1}Arquitectura}{47}{section.6.1}
+\contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{57}{chapter.7}
+\contentsline {section}{\numberline {7.1}Bibliotecas de terceros}{57}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Realm}{57}{subsection.7.1.1}
+\contentsline {chapter}{\numberline {8}Conclusiones y trabajos futuros}{58}{chapter.8}

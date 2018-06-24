@@ -14,6 +14,10 @@ Manuel Díaz~Díaz.
 \newblock {\em Fundamentos de Redes y Comunicaciones}.
 \newblock Escuela Politécnica de Cáceres, 1996.
 
+\bibitem{CFCEEUU}
+Chairwoman. Julie Brill. Maureen K. Ohlhausen. Joshua D.~Wright Edith~Ramirez.
+\newblock Complaint 131205, 2013.
+
 \bibitem{rgpd}
 Parlamento Europeo.
 \newblock Regulation (eu) 2016/679 of the european parliament and of the
@@ -30,7 +34,8 @@ Juan D.~Velásquez Gino Slanzi~R, Joaquín Jadue~M.
 
 \bibitem{gmaps}
 The Guardian.
-\newblock Google admits collecting wi-fi data through street view cars, 2010.
+\newblock Google admits collecting wi-fi data through street view cars, Mayo
+  2010.
 
 \bibitem{STP}
 Annmarie Hanlon.
@@ -45,17 +50,22 @@ Stephanie~Baker Michael~Riley, Sarah~Frier.
 Code on~the Rocks.
 \newblock A todo datas! con @pantojacoder @soygema y @javisantana, Mayo 2017.
 
+\bibitem{noticiaLaLiga}
+El~País.
+\newblock La liga quiere usar móviles de particulares como espías a través
+  de su aplicación, Junio 2018.
+
 \bibitem{googleLocalizacion}
 Quartz.
 \newblock Google collects android users’ locations even when location
   services are disabled, Noviembre 2017.
 
+\bibitem{laLigaJaker}
+reversecoder.
+\newblock Analizando la app de la liga para android, Junio 2018.
+
 \bibitem{pantojacoder}
 Nuria Ruiz.
 \newblock Twitter personal de nuria ruiz.
-
-\bibitem{LaLiga}
-SadFud.
-\newblock Analizando la app de la liga para android, Junio 2018.
 
 \end{thebibliography}
