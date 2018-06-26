@@ -421,16 +421,28 @@ En los últimos años hemos visto como \textit{el internet de las cosas} ha come
 Esta evolución ha seguido su camino y las compañías no han querido perderse la fiesta, desarrollando cada una sus propias versiones de asistentes personales para, en teoría, facilitarnos la vida dentro de nuestra casa, es el caso del Google Home de Google, Alexa de Amazon o el Apple homePod de Apple. Estos dispositivos comparten todos la característica de  activarse mediante comandos de voz, lo cual implica una escucha pasiva en segundo plano a la espera de reconocer algún comando y activarse. 
 \newline \newline 
 Esta tecnología, dado su enorme potencial, hizo que muchos usuarios mirasen con lupa a estos dispositivos, dando como resultado lo que veremos a continuación. 
-\subsection{Amazon Alexa}
+\subsection{Asistentes personales}
+En este último año han irrumpido en el mercado un montón de asistentes personales por parte de Google, Amazon y Apple. Estos asistentes son precisamente eso, un asistente personal que nos ayuda a gestionar nuestra agenda e interactuar con el sistema de la compañía desarrolladora. 
+\newline \newline 
+Su funcionamiento está al alcance de cualquier usuario, puesto que todos comparten la activación por voz como principal punto de entrada, una vez el dispositivo está activado mediante el comando pertinente (Ok Google… Alexa… ) el dispositivo pasa de un estado de reposo al activo, con el que podemos interactuar hablando. 
+\newline \newline 
+No hay duda de que se tratan de aparatos tremendamente interesante y que a día de hoy es hacia donde se mueve el mercado, meter en casa un dispositivo con inteligencia artificial que nos facilite la vida, podamos encender la televisión, poner música, hacer anotaciones, llamar a nuestros contactos, etc, sin tener que hacer mayor gesto que el que hace el aire al pasar por nuestras cuerdas vocales. 
+\newline \newline 
+Pero como hemos visto hasta ahora, todo tiene un coste, y es que estamos metiendo en nuestras casas a dispositivos inteligentes que escuchan siempre en segundo plano esperando a reconocer el comando que los activa. El dispositivo escucha de manera permanente el ruido de fondo para detectar palabras clave. 
+\newline \newline 
+Sin duda es una funcionalidad muy bonita el hecho de tener tu propio asistente personal, pero el problema va intrínseco a ello. A lo largo de esta sección ha quedado claro que las compañías quieren tus datos para saber más de ti y así mejorar sus servicios de publicidad y sus perfiles de usuario, ¿Quién se atreve a asegurar que estos dispositivos solo registran nuestras voces cuando los activamos explícitamente?. 
+\newline \newline
+En el caso de Amazon Alexa ha quedado demostrado que el dispositivo realiza escuchas aleatorias \cite{alexaSpy}, de duración indeterminada, que, hasta donde se ha podido averiguar, quedan almacenadas en el dispositivo. No es así en el caso del Google Home, donde todos los fragmentos de audio que se registren son enviados a sus servidores, de hecho lo dejan bien claro en su política de privacidad \cite{GooglePrivacy}
 \chapter{Requisitos del proyecto}
 En esta capítulo se analiza el problema planteado por el proyecto y se detalla su descomposición como requisitos de un sistema software. No hay que perder de vista que nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
 \newpage
 \section{Requisitos}
+Se propone el desarrollo de una aplicación móvil que, en segundo plano, registre los movimientos del usuario y la interacción que realiza con el teléfono. Este registro de actividad debe cubrir los requisitos listados a continuación para componer un sistema final que satisfaga los objetivos expuestos con anterioridad. 
 \subsection{Requisitos funcionales}
 El sistema deberá: 
 \begin{itemize}
-  \item Registrar cada aplicación que lanza el usuario, con información suficiente que permita identificarla. 
-  \item Aportar un contexto temporal de cuando las aplicaciones son ejecutadas, esto es, fecha y hora exactas. 
+  \item Registrar cada aplicación que lanza el usuario detectando y almacenando el nombre del paquete asociado a ella. 
+  \item Aportar un contexto temporal de cuando las aplicaciones son ejecutadas, esto es, el \textit{timestamp} del momento de su ejecución. 
   \item Incluyendo lo anterior, registrar el uso dado a aplicaciones relacionadas con, comunicación, mensajería instantánea, búsqueda web,redes sociales y por último sensores. 
   \item Dentro de comunicación se incluye la aplicación de Gmail, Mensajes (sms) y el Teléfono. 
   \item Dentro mensajería instantánea prestaremos atención a Telegram, Whatsapp Messenger y Facebook Messenger. 
@@ -454,9 +466,11 @@ El sistema deberá:
   \item En \textbf{Facebook Messenger} capturar, el nombre del contacto o grupo interlocutor. 
   \item Los mensajes enviados en la conversación por parte del usuario. 
 \subsubsection{Aplicaciones de búsqueda en la web}
-  \item En \textbf{Chrome} capturar el objeto de búsqueda. 
-  \item El tiempo invertido en la aplicación. 
-  \item En \textbf{Búsqueda de google} el objeto de búsqueda. 
+  \item En \textbf{Chrome} capturar las páginas visitadas. 
+  \item El tiempo invertido en cada una de ellas. 
+  \item En \textbf{Firefox} capturar las páginas visitadas. 
+  \item El tiempo invertido en cada una de ellas. 
+  \item En \textbf{Búsqueda de Google} el objeto de búsqueda. 
 \subsubsection{Aplicaciones de redes sociales}
   \item En \textbf{Twitter} capturar, el nombre de los perfiles visitados. 
   \item Los los \textit{retuits} realizados. 
@@ -468,12 +482,6 @@ El sistema deberá:
   \item Los estados compartidos dentro de la red social. 
   \item Las subidas de fotos y su título. 
   \item Los \textit{me gusta} dados. 
-  \item En \textbf{Instagram} capturar, el nombre de los perfiles visitados. 
-  \item Los comentarios hechos en dichos perfiles. 
-  \item Las subidas de fotos y su descripción. 
-  \item Los \textit{me gusta} dados.
-  \item Los mensajes directos. 
-  \item El interlocutor de esos mensajes directos. 
 \end{itemize}
 \subsubsection{Sensores}
 \begin{itemize}
@@ -497,50 +505,45 @@ El sistema deberá:
 Para centrar el problema y enfocar los requisitos a un proceso que nos lleve a obtener un proyecto de ingeniería, haremos uso de distintos diagramas que nos ayudaran a resolver el problema y plantear una solución. Así en el capítulo nos encontramos con los diagramas de casos de uso, indicando las tareas que debe resolver el sistema, y un diagrama de arquitectura a alto nivel que plantea una solución inicial. 
 \pagebreak
 \section{Diagramas de Casos de Uso}
-Si nos fijamos en como está planteado el proyecto, no tendremos un usuario como tal, si no que nos aprovecharemos de los movimientos de este para registrar de forma pasiva lo que hace. 
+Los casos de uso del sistema están planteados de modo que el usuario, al interactuar con el teléfono, dispara siempre la acción, aunque en muchos casos la acción del usuario será pasiva, es decir, no tendrá que realizar ninguna acción en concreto para disparar, por ejemplo, la captura de los sensores, pero será su propia actividad la que nos permita realizar dicha captura. 
 \newline
 \newline
-Plantearemos entonces los casos de uso desde dos puntos de vista, el primero será aquel en el que usuario será el actor interaccionando con el teléfono y se dispara la recogida de información. 
-\newline 
-\newline
-El segundo punto de vista en el que nos basaremos será aquel donde el actor será la propia recogida de información, empleando para ello sucesivos casos de uso que conformarán la lógica de negocio general del sistema. 
-\newline 
-\newline 
-Aquí tenemos los casos de uso del usuario entonces; 
+Por lo demás, hemos agrupado las aplicaciones en 5 categorías, comunicación, mensajería, navegación web, redes sociales y sensores. Dado que la mayoría de estas aplicaciones comparten la información a capturar, los veremos agrupados por comodidad para el lector. 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.30]{pictures/usecases/usecases01.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+		\includegraphics[scale=0.7]{pictures/usecases/usecases01.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 01]{Casos de uso próximos al usuario.}
+	\caption[Casos de uso 01]{Casos de uso de cualquier aplicación.}
 \end{figure}
 %%% ------
+Vemos como la captura de información extiende del lanzamiento de una aplicación, esto es así porque esta captura no se hará siempre, si no que dependerá de si la aplicación lanzada es objeto de captura. 
 \pagebreak
-Siendo los casos de uso desde el punto de vista de la captura de información los siguientes. Si nos centramos en el apartado de aplicaciones de comunicación; 
+Si nos centramos en el apartado de aplicaciones de comunicación; 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.30]{pictures/usecases/usecases02.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+		\includegraphics[scale=0.70]{pictures/usecases/usecases02.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 02]{CU Apps de comunicación.}
+	\caption[Casos de uso 02]{Casos de uso de aplicaciones de comunicación.}
 \end{figure}
 %%% ------
 En el grupo de mensajería instantánea.
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.30]{pictures/usecases/usecases03.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+		\includegraphics[scale=0.70]{pictures/usecases/usecases03.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 03]{CU Apps de mensajería.}
+	\caption[Casos de uso 03]{Casos de uso de aplicaciones de mensajería instantánea.}
 \end{figure}
 %%% ------
 Aplicaciones de navegación y consulta de la web. 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.30]{pictures/usecases/usecases04.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+		\includegraphics[scale=0.70]{pictures/usecases/usecases04.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 04]{CU Apps de navegación web.}
+	\caption[Casos de uso 04]{Casos de uso de aplicaciones de navegación web.}
 \end{figure}
 %%% ------
 Si nos fijamos ahora en las aplicaciones de redes sociales, tenemos los siguientes casos de uso; 
