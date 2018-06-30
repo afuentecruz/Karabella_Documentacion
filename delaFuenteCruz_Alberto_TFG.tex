@@ -326,36 +326,53 @@ Una vez establecidos los límites del dominio que se pretende manejar, vamos a e
 \end{itemize}
 \chapter{Estado del Arte}
 Está claro que para este proyecto no estamos inventando la rueda, el rastreo del usuario es una técnica que existe prácticamente desde que el uso de internet se hizo mayoritario, por ello vamos a ver como ha evolucionado este rastreo y captura a lo largo de los años. 
+\newline \newline 
+Comenzaremos viendo las técnicas de análisis web, implantadas desde hace décadas, como primera forma de conocer a los usuarios a través de sus visitas a páginas y aplicaciones web. 
+\newline \newline
+Siguiendo el mismo camino que ha marcado el desarrollo de la tecnología, veremos como estas técnicas se han adaptado, persiguiendo el mismo objetivo, a los Smartphones, centrándonos además en el ecosistema Android. 
+\newline \newline 
+Por último veremos el caso de los dispositivos IOT que poco a poco comienzan a hacer su aparición en el mercado, nos referimos a asistentes personales como Amazon Echo ó Google Home, de reciente aparición pero con potencial para instalarse en los hogares de muchas familias.
+\newpage 
 \section{Análisis Web}
 Entendemos por análisis web la medición, recolección, análisis y procesado de los datos generados  la  navegación  con la idea de comprender y optimizar el uso de una determinada página. 
 \newline \newline
 Este análisis no se limita únicamente a la medición del tráfico, si no que puede utilizarse como una herramienta de negocio mediante la cual mejorar el \textit{marketing} y el impacto de una web, además de aportar la información necesaria para realizar campañas publicitarias por zonas geográficas, variables demográficas, etc. Se trata entonces de establecer un perfil de usuario y comprender las tareas que realiza dentro de un sitio a través del \textit{tracking}. Este \textit{trackeo} puede hacerse de distintas maneras, muchas veces implementando todas ellas para obtener información más completa.
 \subsection{Geolocalización}
-A través de la dirección IP es posible conocer la localización del usuario en distintas granularidades, que van desde el país, la comunidad y ciudad. 
+A través de la dirección IP es posible conocer la localización del usuario en distintas granularidades, que van desde el país hasta la ciudad. 
 \newline \newline
-Esto es posible gracias a la propia naturaleza del protocolo TCP/IP \cite{manolito}, donde a cada dispositivo de acceso a Internet se le asigna una dirección única que identifica la conexión. Además, como se ha estudiado durante la carrera, esta dirección IP que identifica al usuario va adjunta en los datagramas de las peticiones generadas durante la navegación, quedando registrada como ip origen de la conexión. 
+Esto es posible gracias a la propia naturaleza del protocolo TCP/IP \cite{manolito}, donde a cada dispositivo de acceso a Internet se le asigna una dirección única que identifica la conexión. Además, como se ha estudiado durante la carrera, esta dirección IP que identifica al usuario va adjunta en los datagramas de las peticiones generadas durante la navegación, quedando registrada como IPorigen de la conexión. 
 \newline \newline
-De esta forma, ya sabemos que nuestra dirección IP viaja continuamente en cada comunicación que establecemos en internet, pero ¿quién controla y registra la vinculación de una dirección con un espacio físico? Hay diversos organismos, que a través de la organización \textit{Regional Internet Registry} \cite{RIR}, dedicada a supervisar la asignación y registro de recursos de números de internet en cada región del mundo. Tenemos así 5 RIR en funcionamiento, una por cada continente. 
+De esta forma, ya sabemos que nuestra dirección IP viaja continuamente en cada comunicación que establecemos en internet, pero ¿quién controla y registra la vinculación de una dirección con un espacio físico? Hay diversos organismos, que a través de la organización \textit{Regional Internet Registry} (RIR) \cite{RIR}, se dedica a supervisar la asignación y registro de recursos de números de internet en cada región del mundo. Tenemos así 5 RIR en funcionamiento, una por cada continente. 
 \newline \newline
-Gracias a estas organizaciones es posible saber la situación geográfica de cada dirección, conociendo además detalles de la conexión \cite{ripe}. 
+Gracias a estas organizaciones es posible saber la situación geográfica de cada dirección, conociendo además detalles de la conexión \cite{ripe} como los servidores DNS utilizados, los puntos de acceso por los que ha pasado la conexión para realizar el \textit{routing}, etc. A continuación se adjunta una captura de la información obtenida al consultar la IP en la propia plataforma del RIPE. 
+\begin{figure}[H]
+	\begin{center}
+   		\includegraphics[scale=0.5]{pictures/data/ripedata.png}
+	    	\caption{Datos obtenidos mediante RIPE}
+   		\label{fig:Datos obtenidos mediante RIPE}
+	\end{center}
+\end{figure}
+Se puede 
 \subsection{Análisis de los gestos del ratón}
 Este tipo de captura y análisis está centrado en el movimiento que hace el usuario a lo largo de la pantallla y los clicks realizados con el ratón sobre los diferentes enlaces que componen la interfaz. 
 \newline \newline
-Normalmente, la información que se obtiene por este método es útil tanto para desarrolladores, diseñadores y redactores de una página a la hora de evaluar el rendimiento, diseño e conocer los contenidos más relevantes, respectivamente. Esta técnica es tremendamente útil puesto que permite conocer como se \textit{mueven} los usuarios dentro de un sitio, que \textit{habitaciones} visitan más y detectar así puntos calientes a los que prestar más atención, así como fugas de interés, encontrando puntos ciegos, para proceder a un análisis de las causas y mejorar así el rendimiento de un portal. 
+Normalmente, la información que se obtiene por este método es útil tanto para desarrolladores, diseñadores y redactores de una página a la hora de evaluar el rendimiento, diseño y conocer los contenidos más relevantes, respectivamente. Esta técnica es tremendamente útil puesto que permite conocer cómo se \textit{mueven} los usuarios dentro de un sitio, que secciones dentro de una página visitan más, incluso generar mapas de calor con las zonas por las que más se mueven los usuarios y detectar así puntos calientes a los que prestar más atención, así como fugas de interés, encontrando puntos ciegos, para proceder a un análisis de las causas y mejorar así el rendimiento de un portal. 
 \newline \newline
-Desde un punto de vista técnico, esta recolección de datos puede ocurrir en tiempo real o bien los datos serán almacenados para manipularlos después. A día de hoy muchas \textit{suites} de analíticas implementan esta funcionalidad a través de código Javascript insertado en las páginas con métodos que capturan y rastrean la interacción del ratón dentro de la página. 
+Desde un punto de vista técnico, esta recolección de datos puede ocurrir en tiempo real o bien los datos serán almacenados para manipularlos después. A día de hoy muchas \textit{suites} analíticas implementan esta funcionalidad a través de código Javascript insertado en las páginas con métodos que capturan y rastrean la interacción del ratón dentro de la página. 
 \newline \newline
 Este método a ido evolucionando con el tiempo hacia nuevas aproximaciones, como la predicción del click, donde mediante un programa que siga el movimiento del ojo del usuario y midiendo la dilatación de su pupila podemos predecir donde se realizará la pulsación y adaptar así la respuesta del servicio a la nueva situación prevista \cite{guachos}. 
 \subsection{Cookies}
 Las cookies, aunque estén tan de moda últimamente con la salida del \textit{nuevo} RGPD \cite{rgpd} (Reglamento General de Protección de Datos) sustituyendo a la nacional LOPD (Ley Oficial de Protección de Datos), surgieron en los albores de internet, siendo el primer método de \textit{rastreo} utilizado. 
 \newline \newline 
-Las cookies surgieron por la necesidad de mantener información sobre la sesión del usuario después de un login, mantener los elementos de un carrito de la compra o sencillamente para guardar información sobre preferencias del sitio (idioma, tema...). No son más que un par clave-valor que se genera en el servidor y que es enviado al cliente para que este lo almacene en local. Más tarde esta información es consultada para adaptar el contenido en base a esa información.  
+Las cookies surgieron por la necesidad de mantener información sobre la sesión del usuario después de un login, mantener los elementos de un carrito de la compra o sencillamente para guardar información sobre preferencias del sitio (idioma, tema...). 
+\newline \newline 
+Estas cookies consisten en un par clave-valor que, generado por el servidor, es enviado al cliente para que este lo almacene en local. Más tarde esta información es consultada para adaptar el contenido en base a esa información.  
 \newline \newline
 En teoría, una cookie solo puede ser consultada por su origen, es decir, por el servidor que la generó, pero con el tiempo y la aparición de servidores compartidos (servidores de publicidad, por ejemplo) es posible generar una cookie que podrá ser consultada por todas las páginas que empleen ese servidor, estas son las llamadas \textit{third party cookies}, que guardan o usan información del usuario sin que este tenga que navegar directamente en su dominio, dado que está incrustada en la web anfitrión. 
 \newline \newline 
-Entre la información que es posible capturar con una cookie se incluye el sistema operativo, la dirección IP, el navegador, la ubicación, uso horario, idioma y lo más importante, los sitios por los que se navega. Por ejemplo, si se busca en una tienda online (pongamos Amazon como ejemplo), esa información sobre la búsqueda se queda almacenada en la cookie, si otra web emplea publicidad de esa tienda, sabrá los términos de la búsqueda y podrá mostrar publicidad relacionada. 
+Entre la información que es posible capturar con una cookie se incluye el sistema operativo, la dirección IP, el navegador, la ubicación, uso horario, idioma y lo más importante, los sitios por los que se navega. Por ejemplo, si se busca en una tienda online (pongamos Amazon como ejemplo), esa información sobre la búsqueda se queda almacenada en la cookie. Si otra web emplea publicidad de esa tienda, sabrá los términos de la búsqueda y podrá mostrar publicidad relacionada. 
 \newline \newline 
-Normalmente, la técnica para el rastreo con cookies pasa por la creación de un identificador único de usuario que se almacena en la cookie. Este ID nos mantendrá identificados durante nuestra navegación y será empleado por las páginas que usen los servicios del proveedor de esa cookie, de esta manera, si cada página emplea cookies propias o de terceros, seremos conscientes de que estamos continuamente generando información y que además esta información no pasa desapercibida, si no que es registrada, enviada, usada y compartida entre compañías. 
+Normalmente, la técnica para el rastreo con cookies pasa por la creación de un identificador único de usuario que se almacena en la cookie. Este ID nos mantendrá identificados durante nuestra navegación y será empleado por las páginas que usen los servicios del proveedor de esa cookie. De esta manera, si cada página emplea cookies propias o de terceros, seremos conscientes de que estamos continuamente generando información y que además esta información no pasa desapercibida, si no que es registrada, enviada, usada y compartida entre compañías. 
 \section{Google y la plataforma Android}
 Hasta ahora hemos visto los métodos de captura de información a través de la web, pero en los últimos 10 años el mercado ha cambiado mucho con la aparición del smartphone. Las cifras son apabullantes, en 2008 nace Android y en el tramo de 10 años la implantación del smartphone en la sociedad está fuera de cualquier duda. 
 \begin{figure}[H]
@@ -473,15 +490,12 @@ El sistema deberá:
   \item En \textbf{Búsqueda de Google} el objeto de búsqueda. 
 \subsubsection{Aplicaciones de redes sociales}
   \item En \textbf{Twitter} capturar, el nombre de los perfiles visitados. 
-  \item Los los \textit{retuits} realizados. 
-  \item Los \textit{me gusta} dados. 
+  \item Los tuits publicados. 
   \item El contenido de los mensajes directos. 
-  \item Interlocutor de esos mensajes directos. 
   \item En \textbf{Facebook} capturar, el nombre de los perfiles visitados. 
   \item Los comentarios hechos en dichos perfiles. 
   \item Los estados compartidos dentro de la red social. 
   \item Las subidas de fotos y su título. 
-  \item Los \textit{me gusta} dados. 
 \end{itemize}
 \subsubsection{Sensores}
 \begin{itemize}
@@ -550,7 +564,7 @@ Si nos fijamos ahora en las aplicaciones de redes sociales, tenemos los siguient
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.30]{pictures/usecases/usecases05.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+		\includegraphics[scale=0.70]{pictures/usecases/usecases05.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
 	\caption[Casos de uso 05]{CU Apps RRSS.}
 \end{figure}
@@ -559,14 +573,14 @@ Por último, en el apartado de los sensores, donde el actor será el capturador 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.30]{pictures/usecases/usecases06.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+		\includegraphics[scale=0.70]{pictures/usecases/usecases06.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
 	\caption[Casos de uso 06]{CU Sensores.}
 \end{figure}
 %%% ------
 \pagebreak
 \section{Arquitectura de alto nivel}
-Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cuales serán los elementos que, interactuando entre ellos, resuelvan el problema final. 
+Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cuáles serán los elementos que, interactuando entre ellos, resuelvan el problema final. 
 \newline 
 \newline
  
@@ -574,7 +588,7 @@ Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cua
 
 \begin{figure}[H]
   \begin{center}
-     \includegraphics[width=1\textwidth]{pictures/architecture/highLevel/altonivel01.png}
+     \includegraphics[width=0.8\textwidth]{pictures/architecture/highLevel/altonivel01.png}
   \end{center}
   \caption[Arquitectura de alto nivel]{Arquitectura de alto nivel.}
   \label{fig:LandscapeFigure}
@@ -593,7 +607,7 @@ Este proceso de captura se detalla en el siguiente fragmento de la arquitectura.
  %%% ------ 
 \begin{figure}[hbt]
   \begin{center} \setlength{\unitlength}{0.0105in}
-     \includegraphics[width=0.5\textwidth]{pictures/architecture/highLevelArch02.png}
+     \includegraphics[width=0.6\textwidth]{pictures/architecture/highLevelArch02.png}
   \end{center}
   \caption[Arquitectura de alto nivel. Smartphone]{Arquitectura de alto nivel. Detalle de la parte móvil.}
 \end{figure}
@@ -611,7 +625,7 @@ Estamos ante la información de entrada única y por tanto fundamental del siste
 Los genera el sistema cada vez que ocurre un cambio notable en la pantalla, y su propósito es dar el mayor feedback posible del usuario. 
 \newline
 \newline
-Muchas veces esta información no surge en el instante en el que se produce el evento, que no deja de ser una instantánea de la pantalla en ese momento, si no que se necesita un contexto, que lo aporta la relación que existe entre los eventos al estar asociados a través de un árbol, representando la vista que está viendo el usuario. 
+Muchas veces esta información no surge en el instante en el que se produce el evento, que no deja de ser una instantánea de la pantalla en ese momento, si no que se necesita un contexto. Esa es la parte complicada del desarrollo, necesitamos desarrollar sendas máquinas de estado 	que nos ayuden a relacionar los eventos entre ellos y procesarlos de tal modo que se produzca información útil y estructurada. 
 \newline
 \newline
 Es por tanto, una unidad de datos muy cruda y desestructurada a la que hay que extraer el significado en su procesamiento en las capas inferiores. Por tanto este evento será producido por el sistema y la fuente de entrada del nuestro, a través del \textbf{capturador}.
@@ -629,12 +643,12 @@ Recibe un evento y su marca horaria y debe encapsularlo para que el nivel inferi
 Para ello, cuando reciba el evento, en primer lugar lo encapsula junto a su marca horaria en un objeto que hemos llamado Sto. Simple Transfer Object. 
 \newline
 \newline
-Una vez encapsulado, consulta la aplicación fuente del evento, es decír, la aplicación que lo generó, que nos permite establecer nuestro primer filtro y discernir si se trata de gmail, telegram, facebook... etc. 
+Una vez encapsulado, consulta la aplicación fuente del evento, es decir, la aplicación que lo generó, que nos permite establecer nuestro primer filtro y discernir si se trata de gmail, telegram, facebook... etc. 
 \newline
 \newline
 En función de esto, se llamará a una implementación del analizador u otra, puesto que cada aplicación sigue su propio flujo lógico. Por ello se le comunica un Sto con la información fundamental que necesita. 
 \subsubsection{Sto}
-Es la unidad de datos empleado para comunicar el \textbf{manejador} con el \textbf{analizador}, se trata de una unidad de datos cuyo objetivo es encapsular la información en unidades contenidas y controladas. Será consumido por en analizador a través de la consulta de su evento y su marca horaria, siendo esta última fundamental para aportar el contexto necesario por el analizador. 
+Es la unidad de datos empleado para comunicar el \textbf{manejador} con el \textbf{analizador}, se trata de una unidad de datos cuyo objetivo es encapsular la información en unidades contenidas y controladas. Será consumido en el analizador a través de la consulta de su evento y su marca horaria, siendo esta última fundamental para aportar el contexto necesario por el analizador. 
 \subsubsection{Analizador}
 Recibe los citados Stos, objetos sencillos, del manejador, para tratarlos, procesarlos y extraer su significao. 
 \newline
@@ -649,11 +663,14 @@ Será por tanto contenido semántico de esta interacción, siendo por ejemplo, u
 \newline 
 Una vez estos Dtos están listos se les pasa al DB Manager. 
 \subsubsection{DB Manager}
-Capa encargada de la persistencia de los datos que le pasa el analizador. El manager los convierte en modelos para su almacenamiento en una base de datos local. 
+Capa encargada de la persistencia de los datos que le pasa el analizador. El manager los convierte en modelos para su almacenamiento en una base de datos local en la memoria del teléfono. 
 \newline 
 \newline 
-En este manager recae una tarea también fundamental para el sistema, puesto que debe realizar un volcado periódico la base de datos a un servidor remoto para su seguridad y almacenamiento para posibles usos. 
+En este manager recae una tarea también fundamental para el sistema, puesto que debe realizar un volcado periódico la base de datos a un servidor remoto para su seguridad y almacenamiento para posibles usos. Este funcionamiento de almacenar en local hasta que llegue el momento del volcado se ha tomado teniendo en mente la minimización del número de conexiones con el servicio externo. No podría ser una llamada a la API para persistir la información en la nube cada vez que una unidad de datos esté lista, puesto que la cantidad de información generada al día puede ser ingente. 
+\newline \newline
+La idea es almacenar en local hasta que pase un tiempo razonable (por ejemplo, 24 horas, tiempo en el que la base de datos se habrá ido llenando poco a poco) para volcar su contenido, liberar espacio y llevar los datos a la nube para persistir y asegurar la propia información. Así, no se satura la memoria interna del teléfono y la información viaja en bloques, minimizando la comunicación con el servicio externo y ahorrando batería, puesto que la conexión se realiza una vez al día. 
 \newpage
+
 \subsection{Servidor Remoto}
 En este apartado analizaremos la arquitectura del entorno remoto planteado por la arquitectura. Consiste en un servicio en la nube que acepta el volcado que realiza la base de datos del teléfono cada poco tiempo y permite además visualizar los datos allí vertidos. 
  %%% ------ 
@@ -682,7 +699,7 @@ Se trata de nuestra base de datos en la nube, se opta por un sistema NoSQL debid
 \subsubsection{Vista}
 Punto de salida de nuestra plataforma cloud, proporcionando así una interfaz de consulta de los datos almacenados, generados por la aplicación. \\
 \section{Diagrama de secuencia}
-Con el fin de explicar cual es el flujo que recorren los datos y las operaciones que realiza cada componente así como los mensajes que se intercambian entre ellos, se incluye a continuación un diagrama de secuencia que describe el ciclo de vida de un evento desde el instante en el que se dispara hasta el momento en el que se almacena su información. 
+Con el fin de explicar cuál es el flujo que recorren los datos y las operaciones que realiza cada componente así como los mensajes que se intercambian entre ellos, se incluye a continuación un diagrama de secuencia que describe el ciclo de vida de un evento desde el instante en el que se dispara hasta el momento en el que se almacena su información. 
 \begin{landscape}
 \begin{figure}[htb]
   \begin{center}
@@ -846,7 +863,7 @@ Estas clases permitirán instanciar objetos que reprensentarán a los actores pr
 	\caption[Clean Architecture]{Arquitectura clean}
 \end{figure}
 %%% ------ 
-Los casos de uso (use cases) están muy relacionados con las entidades, puesto que implementarán la lógica de negocio del sistema, puesto que deben orquestar y orientar todo el flujo de datos del sistema. 
+Los casos de uso (use cases) están muy relacionados con las entidades, puesto que implementarán la lógica de negocio del sistema, orquestando y orientando el flujo de datos del sistema. 
 \newline
 \newline
 La capa de los Interface Adapters realiza la conversión de los datos de manera que se puedan comunicar los niveles superiores con los casos de uso y entidades (en MVC corresponde a los Controladores, MVVP al presenter... etc). 
@@ -871,9 +888,9 @@ Es natural esta clasificación puesto que el proyecto se basa en la implementaci
 \newline \newline
 Estos servicios de accesibilidad son la solución de Google para asistir y dar soportes a usuarios con diversidad funcional. Su naturaleza y comportamiento es lo que nos permite aprovechar estos servicios para obtener información de lo que hace el usuario. 
 \newline \newline
-Se comporta además como cualquier otro servicio de Android, (es decir, procesos ideados para correr en segundo plano con un ciclo de vida prolongado en el tiempo). Los Servicios de Accesibilidad se comportan al final como listeners de Eventos de Accesibilidad, que lanzados por el sistema. Estos Eventos de Accesibilidad son la entidad que manejan los servicios de accesibilidad. 
+Se comporta además como cualquier otro servicio de Android, (es decir, procesos ideados para correr en segundo plano con un ciclo de vida prolongado en el tiempo). El Servicio de Accesibilidad se comporta como listener de Eventos de Accesibilidad, que lanzados por el sistema, son recogidos por la clase que implemente este servicio, donde son capturados y tratados como mejor convenga. Estos eventos serán, entonces, la unidad de información más básica que manejará nuestro sistema, pero a la vez la más compleja, dado que llevan dentro toda la información sobre la cual se construyen el resto de capas.
 \newline \newline
-Los eventos llevan consigo información sobre la interfaz de usuario, por ejemplo los eventos se lanza cuando entra en foco un elemento (con la descripción del elemento, botones, entradas de texto, nombres de ventanas...). Nuestra solución pasa por extraer la información de esos eventos y procesarla. 
+Los eventos llevan consigo información sobre la interfaz de usuario, por ejemplo los eventos se lanzan cuando entra en foco un elemento (con la descripción del elemento, botones, entradas de texto, nombres de ventanas...). Nuestra solución pasa por extraer la información de esos eventos y procesarla. 
 \newline \newline
 Dado que estos eventos pueden ser capturados por Eventos de Accesibilidad, nuestro sistema contará con un servicio que lo implemente y que realiza esta captura, este será un elemento fundamental en la arquitectura puesto que será la base sobre la que se asentarán el resto de elementos. 
 \\
