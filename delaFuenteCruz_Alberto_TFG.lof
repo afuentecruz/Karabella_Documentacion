@@ -2,34 +2,34 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Datos obtenidos mediante RIPE\relax }}{12}{figure.caption.5}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Venta global de smarthpones seg\IeC {\'u}n el sistema operativo\relax }}{15}{figure.caption.6}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Historial de localizaciones en C\IeC {\'a}ceres\relax }}{17}{figure.caption.7}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Datos obtenidos mediante RIPE\relax }}{12}{figure.caption.4}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Venta global de smarthpones seg\IeC {\'u}n el sistema operativo\relax }}{15}{figure.caption.5}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Historial de localizaciones en C\IeC {\'a}ceres\relax }}{17}{figure.caption.6}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Casos de uso 01}}{30}{figure.caption.15}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Casos de uso 02}}{31}{figure.caption.16}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Casos de uso 03}}{31}{figure.caption.17}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Casos de uso 04}}{32}{figure.caption.18}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Casos de uso 05}}{32}{figure.caption.19}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Casos de uso 06}}{33}{figure.caption.20}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Arquitectura de alto nivel}}{34}{figure.caption.21}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Arquitectura de alto nivel. Smartphone}}{36}{figure.caption.22}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Arquitectura de alto nivel. Cloud}}{40}{figure.caption.31}
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Diagrama de secuencia}}{43}{figure.caption.37}
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Diagrama actividad GMail}}{45}{figure.caption.38}
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Android Image Button\relax }}{46}{figure.caption.39}
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Android Widget Spinner\relax }}{47}{figure.caption.40}
-\contentsline {figure}{\numberline {5.14}{\ignorespaces Android Widget MultiAutoCompleteTextView\relax }}{47}{figure.caption.41}
-\contentsline {figure}{\numberline {5.15}{\ignorespaces Widget Edit Text\relax }}{47}{figure.caption.42}
-\contentsline {figure}{\numberline {5.16}{\ignorespaces Android View\relax }}{48}{figure.caption.43}
-\contentsline {figure}{\numberline {5.17}{\ignorespaces Android View\relax }}{48}{figure.caption.44}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Casos de uso 01}}{30}{figure.caption.14}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Casos de uso 02}}{31}{figure.caption.15}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Casos de uso 03}}{31}{figure.caption.16}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Casos de uso 04}}{32}{figure.caption.17}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Casos de uso 05}}{32}{figure.caption.18}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Casos de uso 06}}{33}{figure.caption.19}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Arquitectura de alto nivel}}{34}{figure.caption.20}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Arquitectura de alto nivel. Smartphone}}{36}{figure.caption.21}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Arquitectura de alto nivel. Cloud}}{40}{figure.caption.30}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Diagrama de secuencia}}{43}{figure.caption.36}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Diagrama actividad GMail}}{45}{figure.caption.37}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Android Image Button\relax }}{46}{figure.caption.38}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Android Widget Spinner\relax }}{47}{figure.caption.39}
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Android Widget MultiAutoCompleteTextView\relax }}{47}{figure.caption.40}
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Widget Edit Text\relax }}{47}{figure.caption.41}
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Android View\relax }}{48}{figure.caption.42}
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Android View\relax }}{48}{figure.caption.43}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Android stack}}{50}{figure.caption.45}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Detalle del Android Stack}}{51}{figure.caption.46}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Clean Architecture}}{53}{figure.caption.47}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Arquitectura dentro del android stack}}{54}{figure.caption.48}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Arquitectura general del sistema}}{56}{figure.caption.49}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Arquitectura detallada}}{58}{figure.caption.50}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Android stack}}{50}{figure.caption.44}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Detalle del Android Stack}}{51}{figure.caption.45}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Clean Architecture}}{53}{figure.caption.46}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Arquitectura dentro del android stack}}{54}{figure.caption.47}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Arquitectura general del sistema}}{56}{figure.caption.48}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Arquitectura detallada}}{58}{figure.caption.49}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

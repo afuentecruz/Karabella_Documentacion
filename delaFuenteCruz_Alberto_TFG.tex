@@ -213,7 +213,7 @@ Debemos afrontar este hecho y, si la recolección de datos existe, tomar parte e
 \tableofcontents
 %\pagebreak
 %\newpage
-\listoftables
+%\listoftables
 %\newpage
 \listoffigures
 %\newpage
@@ -730,15 +730,15 @@ En esta sección veremos varios diagramas de actividad destinados a clarificar y
 \subsection{Gmail}
 En la siguiente figura se documenta el proceso que lleva al registro de un correo mandado por el usuario a través de la aplicación de GMail. Se ha organizado el diagrama por niveles, desde la capa más externa de la aplicación hasta la capa de persistencia, así se puede observar el camino recorrido así como el procesamiento de la información en cada nivel.
 %%% ------ ACTIVIDAD GMAIL 
-\begin{figure}[H]
-\begin{center}
-
-
-		\includegraphics[width=1.4\textwidth]{pictures/activity/gmailActivityDiagram.png} 
-  \caption[Diagrama actividad GMail]{Diagrama de actividad de captura de un correo redactado con GMail.}
-  \label{fig:Diagrama actividad GMail}
-  \end{center}
+\begin{landscape}
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=1.1\textwidth]{pictures/activity/gmailActivityDiagram.png} 
+	  \caption[Diagrama actividad GMail]{Diagrama de actividad de captura de un correo redactado con GMail.}
+	  \label{fig:Diagrama actividad GMail}
+  	\end{center}
 \end{figure}
+\end{landscape}
 %%% ------  /ACTIVIDAD GMAIL
 
  Así, podemos desglosar el proceso en los siguientes puntos, explicando que se hace en cada componente. 
@@ -861,9 +861,9 @@ Si avanzamos un poco más vemos que en las dos últimas capas están relacionada
 	\caption[Detalle del Android Stack]{Márgenes del sistema}
 \end{figure}
 %%% ------
-Estas dos últimas capas serán en las que se situará nuestra arquitectura. Además será conceptualmente parecida puesto que como hemos visto, Android dispone de un sistema organizado por capas, algo bastante lógica y habitual en los sistemas software, y nuestro objetivo por tanto debe ser separar funcionalidades y agruparlas bajo este patrón.
-\newpage
-\break
+Estas dos últimas capas serán en las que se situará nuestra arquitectura. Además será conceptualmente parecida puesto que como hemos visto, Android dispone de un sistema organizado por capas, algo bastante lógico y habitual en los sistemas software, y nuestro objetivo por tanto debe ser separar funcionalidades y agruparlas bajo este patrón.
+\newline
+\newline
 Teniendo este concepto claro, nos fijaremos en la publicación de Robert C. Martin, Clean Architecture, en la que se plantea el concepto de Arquitectura Limpia, sin ser más que una serie de condiciones que debe cumplir una arquitectura para que se la considere ”clean". Nos encontramos entonces con una serie de reglas, cuyo cumplimiento ayuda a diferenciar y dividir el software en capas, obteniendo además un software independiente de elementos externos (como la ui, frameworks y bases de datos), testeable y mantenible. 
 \newline
 \newline
