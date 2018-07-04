@@ -1004,6 +1004,30 @@ En este caso el widget toast nos informa cada vez que se envía un correo, momen
 \end{itemize} % -- niveles de app 
 \newpage
 \subsection{Whatsapp}
+En la captura de los mensajes enviados con Whatsapp entran en juego dos tipos de eventos. Por un lado, aquellos que pertenecen (ó cuyo nombre del paquete) corresponde con el propio Whatsapp, \textit{com.whatsapp}, y por el otro, los relacionados con el teclado, \textit{com.google.android.inputmethod.latin}.
+\newline \newline 
+Jugando con estos dos eventos seremos capaces de recoger con quién habla el usuario, lo que escribe y durante cuanto tiempo permanece en una conversación o en la propia pantalla principal de la aplicación. 
+\newline \newline 
+Los eventos que son originados por la aplicación de Whatsapp nos aportan información acerca de los gestos que realiza el usuario dentro de la misma. Así, con estos eventos podemos situar el contexto de la información, puesto que nos permiten obtener el interlocutor y nos dan información acerca de la pantalla que está viendo el usuario en ese momento. De esta forma podremos saber si está mirando la pantalla principal, en una conversación o escribiendo en el campo de texto donde escribimos los mensajes. Esta última parte, la relacionada con los mensajes, es la más enrevesada y a la que debemos prestar más atención. Parémonos un momento a explicar el asunto. 
+\newline \newline 
+Cuando escribimos un mensaje en el campo de texto de la aplicación se generan tantos eventos de accesibilidad como letras pulsemos en el teclado, estos eventos son originados por Whatsapp, con lo cual seguirán el flujo destinado para su captura. Pero al mismo tiempo, esta generación de contenido es \textit{dummy}, es decir, únicamente recibimos información a chorro, sin saber cuando se envía una cadena, cuando se borra o cuando un mensaje es descartado navegando hacia atrás en la pantalla. 
+\newline \newline 
+Para darle sentido a este flujo tonto de información deberemos atender los eventos que genera el teclado. Estos eventos nos aportan la información de lo que hace el usuario con el teclado a través del texto que contiene. De esta forma, cuando el teclado se muestra por primera vez, el texto asociado al evento que genera será \textit{Mostrando teclado español (España) (QWERTY (Ñ))} (en el caso de usar un teclado con la distribución en español). h
+\newline \newline 
+Siguiendo esta lógica, podemos saber cuándo el usuario acaba de enviar una cadena de texto, dado que cada vez que el campo de texto se queda vacío (recordemos el funcionamiento de la app, cuando enviamos un mensaje se vacía el campo), significa que el usuario ha mandado una cadena. 
+\newline \newline 
+Una vez tenemos esto claro, la captura de las cadenas enviadas es relativamente sencilla, puesto que iremos almacenando en una variable el contenido que genera el usuario en el campo a medida que éste se va escribiendo. Cuando llegue un evento asociado al teclado, y se corresponda con la situación descrita anteriormente, le confirmamos al analizador que la cadena se ha enviado, encargándose este de añadirla a la lista de mensajes, junto a su timestamp. 
+\newline \newline 
+La captura del resto de campos que nos interesan es sencilla, como hemos dicho, en esta parte solo necesitamos los eventos generados por Whatsapp. Una vez establecido este primer filtro, deberemos tratar los eventos en función del elemento de la interfaz asociado al mismo, ó dicho en términos de implementación, el \textit{className} del origen del evento. De esta forma tenemos: 
+\begin{itemize}
+\item \textit{com.whatsapp.HomeActivity}. Se corresponde a la pantalla principal del Whatsapp. Nos sirve para almacenar en la base de datos cualquier objeto existente que contenga información. Una vez hecho esto, instanciamos una nueva versión del mismo y limpiamos los atributos de la clase relacionados con el interlocutor y el mensaje que escribe el usuario. 
+\item \textit{android.widget.RelativeLayout}. Por si sólo, un relative layout es simplemente una patrón para disponer los elementos en la pantalla, pero si su origen es Whatsapp (recordemos, el nombre del paquete, un filtro que en este momento ya se ha superado), sabremos que el usuario ha pulsado sobre una conversación. 
+\newline \newline 
+Además, el mismo evento que nos indica la entrada en una conversación lleva asociado el nombre del contacto, con lo cual para saber con quién está hablando el usuario bastará con extraer el texto del evento. 
+\item \textit{android.widget.EditText}. Como es obvio, este evento estará asociado al campo de texto donde el usuario escribe su conversación. Deberemos, por tanto, capturar en todo momento el texto que llevan asociados este tipo de eventos, puesto que ahí estará el contenido real de lo que el usuario está escribiendo a su contacto. 
+\newline \newline 
+Este contenido se irá almacenando en una variable que se añadirá al Dto asociado cuando entre en juego un evento de teclado. Con las condiciones descritas anteriormente, recordemos, eventos con nombre de paquete \textit{com.google.android.inputmethod.latin} y cuyo texto implique la acción de mostrar el teclado limpio, esperando una nueva entrada de texto. 
+\end{itemize}
 % amos primo! 
 \subsection{Chrome}
 % dale caña hermano! 
