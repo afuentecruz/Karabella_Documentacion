@@ -817,6 +817,7 @@ La capa de los Interface Adapters realiza la conversión de los datos de manera 
 \newline
 \newline
 En la última capa y más externa, Frameworks and Drivers, residen las plataformas y herramientas externas, donde se incluye la interfaz de usuario, web... 
+\newpage
 \subsection{Arquitectura a bajo nivel}
 Una vez tenemos claro como está estructurado Android y los servicios que ofrece al desarrollador, debemos plantearnos cómo diseñar una aplicación que sea capaz de implementar estos servicios de accesibilidad para capturar, procesar y extraer la  información de los eventos que se generan, deberemos abstraernos del problema y ser capaces de, a partir de una vista general del sistema inferir las capas que finalmente nos guiarán la implementación. 
 \newline
@@ -839,8 +840,8 @@ Se comporta además como cualquier otro servicio de Android, (es decir, procesos
 Los eventos llevan consigo información sobre la interfaz de usuario, por ejemplo los eventos se lanzan cuando entra en foco un elemento (con la descripción del elemento, botones, entradas de texto, nombres de ventanas...). Nuestra solución pasa por extraer la información de esos eventos y procesarla. 
 \newline \newline
 Dado que estos eventos pueden ser capturados por Eventos de Accesibilidad, nuestro sistema contará con un servicio que lo implemente y que realiza esta captura, este será un elemento fundamental en la arquitectura puesto que será la base sobre la que se asentarán el resto de elementos. 
-\\
-Así, en un primer vistazo, podemos ver la arquitectura usando un grano gordo del siguiente modo. 
+\newline \newline 
+De esta forma, y siguiendo las líneas definidas, obtenemos una arquitectura detallada en el siguiente diagrama. 
 %%% ------ 
 \begin{landscape}
 \begin{figure}[htb]
@@ -1006,35 +1007,108 @@ En este caso el widget toast nos informa cada vez que se envía un correo, momen
 \subsection{Whatsapp}
 En la captura de los mensajes enviados con Whatsapp entran en juego dos tipos de eventos. Por un lado, aquellos que pertenecen (ó cuyo nombre del paquete) corresponde con el propio Whatsapp, \textit{com.whatsapp}, y por el otro, los relacionados con el teclado, \textit{com.google.android.inputmethod.latin}.
 \newline \newline 
-Jugando con estos dos eventos seremos capaces de recoger con quién habla el usuario, lo que escribe y durante cuanto tiempo permanece en una conversación o en la propia pantalla principal de la aplicación. 
+Jugando con estos dos eventos seremos capaces de recoger con quién habla el usuario, lo que escribe y durante cuanto tiempo permanece en una conversación o en la propia pantalla principal de la aplicación. Veámoslo por partes. 
+\subsubsection{Eventos de com.whatsapp} 
+Este tipo de evento, cuyo origen es la propia aplicación de Whatsapp, nos aportará información acerca de los gestos que realiza el usuario dentro de la misma. Gracias a esto, podremos añadir un contexto a la información recogida, puesto que nos permiten obtener datos como el nombre del contacto con el que habla el usuario, a la vez que nos aportan información acerca de la pantalla que está viendo el usuario a cada momento.
+\newline \newline
+A la hora de recoger el texto vertido por el usuario en una conversación determinada la captura se complica, puesto que entran en juego eventos externos, sin los cuales no podríamos dotar de sentido a las cadenas escritas. Veámoslo en detalle, dado que no es un asunto trivial. Expliquemos en primer lugar como se capturan los caracteres escritos. 
 \newline \newline 
-Los eventos que son originados por la aplicación de Whatsapp nos aportan información acerca de los gestos que realiza el usuario dentro de la misma. Así, con estos eventos podemos situar el contexto de la información, puesto que nos permiten obtener el interlocutor y nos dan información acerca de la pantalla que está viendo el usuario en ese momento. De esta forma podremos saber si está mirando la pantalla principal, en una conversación o escribiendo en el campo de texto donde escribimos los mensajes. Esta última parte, la relacionada con los mensajes, es la más enrevesada y a la que debemos prestar más atención. Parémonos un momento a explicar el asunto. 
+Cuando escribimos un mensaje en el campo de texto de la aplicación, se generan tantos eventos de accesibilidad como letras pulsadas en el teclado. Estos eventos son originados por Whatsapp, con lo cual seguirán el flujo destinado para su captura, y diferenciando el widget de la UI asociado al mismo, podremos capturar el texto del evento, donde se encuentra nuestra preciada información, las letras que el usuario pulsa. 
+\newline \newline
+Pero al mismo tiempo, contamos con un inconveniente, y es que esta generación de contenido es \textit{dummy}, es decir, únicamente recibimos información a chorro, sin saber cuando se envía una cadena, cuando se borra o cuando un mensaje es descartado navegando hacia atrás en la pantalla. 
 \newline \newline 
-Cuando escribimos un mensaje en el campo de texto de la aplicación se generan tantos eventos de accesibilidad como letras pulsemos en el teclado, estos eventos son originados por Whatsapp, con lo cual seguirán el flujo destinado para su captura. Pero al mismo tiempo, esta generación de contenido es \textit{dummy}, es decir, únicamente recibimos información a chorro, sin saber cuando se envía una cadena, cuando se borra o cuando un mensaje es descartado navegando hacia atrás en la pantalla. 
+Para darle sentido a este flujo continuo de información deberemos atender los eventos que genera el teclado. 
+\subsubsection{Eventos de com.google.android.inputmethod.latin}
+Estos eventos nos aportan la información de lo que hace el usuario con el teclado a través del texto que muestra a modo de \textit{placeholder}. De esta forma, cuando el teclado se muestra por primera vez o el campo está vacío, el texto asociado al evento generado será \textit{Mostrando teclado español (España) (QWERTY (Ñ))} (en el caso de usar un teclado con la distribución en español). 
 \newline \newline 
-Para darle sentido a este flujo tonto de información deberemos atender los eventos que genera el teclado. Estos eventos nos aportan la información de lo que hace el usuario con el teclado a través del texto que contiene. De esta forma, cuando el teclado se muestra por primera vez, el texto asociado al evento que genera será \textit{Mostrando teclado español (España) (QWERTY (Ñ))} (en el caso de usar un teclado con la distribución en español). h
+Pero no es tan sencillo como aparentemente parece, puesto el teclado genera eventos de este tipo cada vez que el usuario hace gestos inesperados, como por ejemplo mandar un emoji, buscar un gif o simplemente cambiar al teclado de símbolos para acceder a los números o símbolos de puntuación. 
 \newline \newline 
-Siguiendo esta lógica, podemos saber cuándo el usuario acaba de enviar una cadena de texto, dado que cada vez que el campo de texto se queda vacío (recordemos el funcionamiento de la app, cuando enviamos un mensaje se vacía el campo), significa que el usuario ha mandado una cadena. 
+Manteniendo esto en mente, podemos saber cuándo el usuario acaba de enviar una cadena de texto, dado que cada vez que el campo de texto se queda vacío (recordemos el funcionamiento de la app, cuando enviamos un mensaje se vacía el campo), significa que el usuario ha mandado una cadena. Cada vez que un evento con estas características es generado, se notificará al analizador de WhatsApp mediante la llamada al método \textit{confirmKeyboardInput}, el cual verificará el estado del Dto que contiene la información capturada hasta el momento. 
 \newline \newline 
-Una vez tenemos esto claro, la captura de las cadenas enviadas es relativamente sencilla, puesto que iremos almacenando en una variable el contenido que genera el usuario en el campo a medida que éste se va escribiendo. Cuando llegue un evento asociado al teclado, y se corresponda con la situación descrita anteriormente, le confirmamos al analizador que la cadena se ha enviado, encargándose este de añadirla a la lista de mensajes, junto a su timestamp. 
+Esta verificación del estado del objeto consiste en chequear la correcta inicialización de las variables, que no se ha capturado una cadena vacía ó que el texto capturado no se corresponde con el \textit{placeholder} que incrusta Whatsapp en su aplicación, que reza \textit{Escribir mensaje}. 
+\newline \newline
+Una vez pasado este primer chequeo, se comprueba el array donde almacenamos las cadenas escritas junto a su timestamp. Dado que los eventos, dependiendo de los gestos del usuario, pueden venir duplicados, (por ejemplo cambiar el layout del teléfono, abrir y cerrar el teclado, etc), deberemos comprobar que, en caso de que el array no esté vacío, la cadena a añadir no exista en el array. 
 \newline \newline 
-La captura del resto de campos que nos interesan es sencilla, como hemos dicho, en esta parte solo necesitamos los eventos generados por Whatsapp. Una vez establecido este primer filtro, deberemos tratar los eventos en función del elemento de la interfaz asociado al mismo, ó dicho en términos de implementación, el \textit{className} del origen del evento. De esta forma tenemos: 
+La captura del resto de campos (interlocutor y pantalla principal) es sencilla, como hemos dicho, para esto sólo atenderemos a los eventos generados por Whatsapp. Una vez establecido este primer filtro, deberemos tratar los eventos en función del elemento de la interfaz asociado al mismo, ó dicho en términos de implementación, el \textit{className} del origen del evento. De esta forma tenemos: 
 \begin{itemize}
 \item \textit{com.whatsapp.HomeActivity}. Se corresponde a la pantalla principal del Whatsapp. Nos sirve para almacenar en la base de datos cualquier objeto existente que contenga información. Una vez hecho esto, instanciamos una nueva versión del mismo y limpiamos los atributos de la clase relacionados con el interlocutor y el mensaje que escribe el usuario. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/IRL/whatsapp/whatsapp_home.png}
+	    	\caption{Whatsapp Home}{Pantalla principal de Whatsapp}
+    	\label{fig:Whatsapp Home}
+	\end{center}
+\end{figure}
+
 \item \textit{android.widget.RelativeLayout}. Por si sólo, un relative layout es simplemente una patrón para disponer los elementos en la pantalla, pero si su origen es Whatsapp (recordemos, el nombre del paquete, un filtro que en este momento ya se ha superado), sabremos que el usuario ha pulsado sobre una conversación. 
 \newline \newline 
 Además, el mismo evento que nos indica la entrada en una conversación lleva asociado el nombre del contacto, con lo cual para saber con quién está hablando el usuario bastará con extraer el texto del evento. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/IRL/whatsapp/whatsapp_layout.png}
+	    	\caption{Whatsapp layout de una conversación}{Layout de una conversación de usuario}
+    	\label{fig:Whatsapp Relative Layout}
+	\end{center}
+\end{figure}
 \item \textit{android.widget.EditText}. Como es obvio, este evento estará asociado al campo de texto donde el usuario escribe su conversación. Deberemos, por tanto, capturar en todo momento el texto que llevan asociados este tipo de eventos, puesto que ahí estará el contenido real de lo que el usuario está escribiendo a su contacto. 
 \newline \newline 
 Este contenido se irá almacenando en una variable que se añadirá al Dto asociado cuando entre en juego un evento de teclado. Con las condiciones descritas anteriormente, recordemos, eventos con nombre de paquete \textit{com.google.android.inputmethod.latin} y cuyo texto implique la acción de mostrar el teclado limpio, esperando una nueva entrada de texto. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/IRL/whatsapp/whatsapp_text.png}
+	    	\caption{Campo de texto de Whatsapp}{Campo de texto de Whatsapp}
+    	\label{fig:Whatsapp editText widget}
+	\end{center}
+\end{figure}
 \end{itemize}
-% amos primo! 
+Veamos ahora, mediante un diagrama de actividad, una visualización gráfica del algoritmo de captura descrito anteriormente. 
+\begin{landscape}
+\begin{figure}[htb]
+	\begin{center}
+     	\includegraphics[scale=0.4]{pictures/activity/whatsappActivityDiagram1.png}
+	    	\caption{Diagrama de actividad de Whatsapp (1)}{Diagrama de actividad de Whatsapp (1)}
+    	\label{fig:Diagrama de actividad Whatsapp (1)}
+	\end{center}
+\end{figure}
+\end{landscape}
+\begin{landscape}
+\begin{figure}[htb]
+	\begin{center}
+     	\includegraphics[scale=0.4]{pictures/activity/whatsappActivityDiagram2.png}
+	    	\caption{Diagrama de actividad de Whatsapp (2)}{Diagrama de actividad de Whatsapp (2)}
+    	\label{fig:Diagrama de actividad Whatsapp (2)}
+	\end{center}
+\end{figure}
+\end{landscape}
+Como vemos, el algoritmo de captura recae en su mayor parte en el WhatsappAnalyzerImpl. Vemos sendas actividades vinculadas a métodos. Veamos en que consisten estos métodos, puesto que conforman los pilares sobre los que se asientan la caputura. 
+\subsubsection{Compute(eventSto}
+Este método recibe una instancia de la clase EventSto, que como ya hemos visto, incluye el propio evento de accesibilidad, su className y packageName. 
+\newline \newline 
+Mirando el className construimos un switch, que en función de su valor dirige el flujo de captura hacia un lado u otro. 
+\newline \newline
+En caso de coincidir el valor con \textit{com.whatsapp.HomeActivity}, llamaremos al método que chequea y guarda en la base de datos cualquier instancia existente del WhatsappDto. 
+\newline \newline 
+Si por el contrario nos encontramos con \textit{android.widget.RelativeLayout}, sabremos que el usuario ha entrado en una conversación de Whatsapp, deberemos por tanto setear el valor del interlocutor al correspondiente al texto extraído del evento. 
+\newline \newline 
+Por último, si estamos tratando con un evento relacionado con \textit{android.widget.EditText}, significará que el usuario se encuentra escribiendo en el campo de texto, y deberemos extraer y almacenar el propio texto del evento. 
+\subsubsection{storePreviousDtoInRealm()}
+Es el método responsable de llamar al DBManager para persistir el objeto en el que estamos guardando la información de captura de una conversación. 
+\newline \newline 
+En primer lugar, este método asigna el timestamp del momento de captura del evento al atributo endTimestamp del WhatsappDto, de esta forma añadiremos al contexto del usuario el momento exacto en el que abandona la conversación con su contacto. 
+\newline \newline 
+Una vez hecho esto, se realiza una comprobación del resto de atributos del dto, incluyendo, que exista el propio objeto (que no sea nulo) y que el interlocutor no sea una cadena vacía. Si estas condicione se cumplen, el objeto será almacenado en la base de datos del teléfono llamando al DBManager. 
+\subsubsection{instanceNewDto(timestamp)}
+El nombre del método clarifica bastante su tarea. Esta consiste en instanciar un nuevo objeto del tipo WhatsappDto y añadirle el timestamp, cuyo origen es el momento en que se capturó el evento, para asignarlo al atributo startTimestamp del nuevo objeto WhatsappDto. 
+\newline \newline 
+De esta manera aportamos contexto a la captura, puesto que nos permite conocer el momento exacto en el que un usuario abre una conversación. Esto, junto con el endTimestamp nos permitirá averiguar cuánto tiempo pasa el usuario en cada una de sus conversaciones. 
+\subsubsection{confirmKeyboardInput(timestamp)}
+A este método público se le llama directamente desde el manejador de eventos. Esto ocurre cuando se detecta un evento de teclado que coincide con la apertura del teclado ó sencillamente cuando el teclado se vacía después de escribir. 
+\newline \newline 
+Como se ha explicado al inicio de esta sección, esto se traduce en el hecho de que el usuario ha mandado la cadena que se encontraba escribiendo, por lo tanto el método debe encargarse de chequear la validez de esa cadena y añadirla a la lista de mensajes del WhatsappDto
+\newline \newline 
+Gracias a este algoritmo, conseguiremos una completa recolección de lo que hace el usuario dentro del Whatsapp, sabremos con quien habla, lo que dice y durante cuanto tiempo se relaciona con sus contactos. Esta información por lo tanto se denota muy valiosa, ya que Whatsapp es la aplicación más usada para hablar con nuestro alegados, gracias al contexto aportado podremos conocer de que forma se relaciona el usuario con su entorno social más cercano. 
 \subsection{Chrome}
 % dale caña hermano! 
- %% #########################
- %% ### ACTIVIDAD WHATSAPP ##
- %% #########################
-
 \section{Bibliotecas de terceros}
 \subsection{Realm}
 Realm es una base de datos cuya implementación para Android nos ofrece una alternativa a SQLite, destactando por su rapidez y facilidad de uso. 

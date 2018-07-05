@@ -45,12 +45,18 @@
 \contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o}{47}{chapter.6}
 \contentsline {section}{\numberline {6.1}Arquitectura}{48}{section.6.1}
 \contentsline {subsection}{\numberline {6.1.1}Decisiones de dise\IeC {\~n}o}{48}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Arquitectura a bajo nivel}{52}{subsection.6.1.2}
-\contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{58}{chapter.7}
-\contentsline {section}{\numberline {7.1}Diagramas de actividad}{59}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}Gmail}{59}{subsection.7.1.1}
-\contentsline {subsection}{\numberline {7.1.2}Whatsapp}{64}{subsection.7.1.2}
-\contentsline {subsection}{\numberline {7.1.3}Chrome}{66}{subsection.7.1.3}
-\contentsline {section}{\numberline {7.2}Bibliotecas de terceros}{66}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}Realm}{66}{subsection.7.2.1}
-\contentsline {chapter}{\numberline {8}Conclusiones y trabajos futuros}{68}{chapter.8}
+\contentsline {subsection}{\numberline {6.1.2}Arquitectura a bajo nivel}{53}{subsection.6.1.2}
+\contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{59}{chapter.7}
+\contentsline {section}{\numberline {7.1}Diagramas de actividad}{60}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Gmail}{60}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Whatsapp}{65}{subsection.7.1.2}
+\contentsline {subsubsection}{Eventos de com.whatsapp}{65}{section*.50}
+\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{66}{section*.51}
+\contentsline {subsubsection}{Compute(eventSto}{73}{section*.57}
+\contentsline {subsubsection}{storePreviousDtoInRealm()}{73}{section*.58}
+\contentsline {subsubsection}{instanceNewDto(timestamp)}{74}{section*.59}
+\contentsline {subsubsection}{confirmKeyboardInput(timestamp)}{74}{section*.60}
+\contentsline {subsection}{\numberline {7.1.3}Chrome}{75}{subsection.7.1.3}
+\contentsline {section}{\numberline {7.2}Bibliotecas de terceros}{75}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Realm}{75}{subsection.7.2.1}
+\contentsline {chapter}{\numberline {8}Conclusiones y trabajos futuros}{76}{chapter.8}
