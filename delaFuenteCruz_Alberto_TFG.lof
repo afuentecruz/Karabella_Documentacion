@@ -25,21 +25,22 @@
 \contentsline {figure}{\numberline {6.5}{\ignorespaces Arquitectura general del sistema}}{55}{figure.caption.41}
 \contentsline {figure}{\numberline {6.6}{\ignorespaces Arquitectura detallada}}{57}{figure.caption.42}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Diagrama actividad GMail}}{61}{figure.caption.43}
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Android Image Button\relax }}{62}{figure.caption.44}
-\contentsline {figure}{\numberline {7.3}{\ignorespaces Android Widget Spinner\relax }}{63}{figure.caption.45}
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Android Widget MultiAutoCompleteTextView\relax }}{63}{figure.caption.46}
-\contentsline {figure}{\numberline {7.5}{\ignorespaces Widget Edit Text\relax }}{63}{figure.caption.47}
-\contentsline {figure}{\numberline {7.6}{\ignorespaces Android View\relax }}{64}{figure.caption.48}
-\contentsline {figure}{\numberline {7.7}{\ignorespaces Android View\relax }}{64}{figure.caption.49}
-\contentsline {figure}{\numberline {7.8}{\ignorespaces Whatsapp Home\relax }}{68}{figure.caption.52}
-\contentsline {figure}{\numberline {7.9}{\ignorespaces Whatsapp layout de una conversaci\IeC {\'o}n\relax }}{69}{figure.caption.53}
-\contentsline {figure}{\numberline {7.10}{\ignorespaces Campo de texto de Whatsapp\relax }}{70}{figure.caption.54}
-\contentsline {figure}{\numberline {7.11}{\ignorespaces Diagrama de actividad de Whatsapp (1)\relax }}{71}{figure.caption.55}
-\contentsline {figure}{\numberline {7.12}{\ignorespaces Diagrama de actividad de Whatsapp (2)\relax }}{72}{figure.caption.56}
-\contentsline {figure}{\numberline {7.13}{\ignorespaces Componente edit text de Chrome)\relax }}{77}{figure.caption.62}
-\contentsline {figure}{\numberline {7.14}{\ignorespaces Componente frameLayout de sitios frecuentes en Chrome)\relax }}{78}{figure.caption.63}
-\contentsline {figure}{\numberline {7.15}{\ignorespaces Componente view group de sugerencias en Chrome)\relax }}{79}{figure.caption.64}
-\contentsline {figure}{\numberline {7.16}{\ignorespaces Diagrama de actividad de Chrome (1)\relax }}{81}{figure.caption.66}
-\contentsline {figure}{\numberline {7.17}{\ignorespaces Diagrama de actividad de Chrome (2)\relax }}{82}{figure.caption.67}
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Diagrama actividad GMail (1)}}{66}{figure.caption.43}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Diagrama actividad GMail (2)}}{67}{figure.caption.44}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Android Image Button\relax }}{68}{figure.caption.45}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Android Widget Spinner\relax }}{69}{figure.caption.46}
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Android Widget MultiAutoCompleteTextView\relax }}{69}{figure.caption.47}
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Widget Edit Text\relax }}{69}{figure.caption.48}
+\contentsline {figure}{\numberline {7.7}{\ignorespaces Android View\relax }}{70}{figure.caption.49}
+\contentsline {figure}{\numberline {7.8}{\ignorespaces Android View\relax }}{70}{figure.caption.50}
+\contentsline {figure}{\numberline {7.9}{\ignorespaces Whatsapp Home\relax }}{76}{figure.caption.53}
+\contentsline {figure}{\numberline {7.10}{\ignorespaces Whatsapp layout de una conversaci\IeC {\'o}n\relax }}{77}{figure.caption.54}
+\contentsline {figure}{\numberline {7.11}{\ignorespaces Campo de texto de Whatsapp\relax }}{78}{figure.caption.55}
+\contentsline {figure}{\numberline {7.12}{\ignorespaces Diagrama de actividad de Whatsapp (1)\relax }}{79}{figure.caption.56}
+\contentsline {figure}{\numberline {7.13}{\ignorespaces Diagrama de actividad de Whatsapp (2)\relax }}{80}{figure.caption.57}
+\contentsline {figure}{\numberline {7.14}{\ignorespaces Componente edit text de Chrome)\relax }}{86}{figure.caption.63}
+\contentsline {figure}{\numberline {7.15}{\ignorespaces Componente frameLayout de sitios frecuentes en Chrome)\relax }}{87}{figure.caption.64}
+\contentsline {figure}{\numberline {7.16}{\ignorespaces Componente view group de sugerencias en Chrome)\relax }}{88}{figure.caption.65}
+\contentsline {figure}{\numberline {7.17}{\ignorespaces Diagrama de actividad de Chrome (1)\relax }}{90}{figure.caption.67}
+\contentsline {figure}{\numberline {7.18}{\ignorespaces Diagrama de actividad de Chrome (2)\relax }}{91}{figure.caption.68}
 \addvspace {10\p@ }

@@ -330,6 +330,16 @@ Una vez establecidos los límites del dominio que se pretende manejar, vamos a e
 \item La información capturada será almacenada de forma temporal de forma local en el almacenamiento hardware del dispositivo, y, de forma programática realizar volcados periódicos cada poco tiempo, con doble objetivo. Por un lado, no saturar el espacio de almacenamiento y por otro, asegurar los datos en un servidor remoto de manera que estos estén siempre disponibles. 
 \item Este volcado se realizará a través de una API que permitirá el propio volcado y su consumo, comportándose así como una interfaz de acceso al manejo de los datos. 
 \end{itemize}
+\newpage
+\section{Planificación}
+Para conseguir estos objetivos se realizó una planificación inicial en el momento en el que se acordaron los términos del trabajo. Pero antes, un poco de contexto. 
+\newline \newline 
+Este proyecto surgió en uno de los grupos de investigación de la Escuela Politécnica de Cáceres, en concreto, en el SpiLab. Como condición necesaria para hacer el trabajo de fin de grado, se estableció que debía asistir al laboratorio de Lunes a Jueves durante todo el curso. En esa planificación inicial, los tiempos estaban claros, durante el primer cuatrimestre realizaría labores de investigación y análisis en el horario establecido. Durante el segundo, realizaría el diseño y la implementación. De esta forma, la fecha de entrega estaba proyectada para el mes de Junio. 
+\newline \newline
+Pero es estimación no se pudo cumplir. Durante el primer cuatrimestre hice un parón para dedicarme a terminar las asignaturas pendientes que me quedaban, así, durante el mes de noviembre y diciembre no pude asistir al laboratorio. Ahí se rompió la planificación. Además, en Enero encontré trabajo, con lo cual el tiempo que podía dedicar al TFG, pese a no reducirse en gran medida, sufrió desgaste. A partir de ese momento sólo podía trabajar entre 5 y 6 horas por las tardes. 
+\newline \newline 
+De esta forma, la planificación real que resume los tiempos trabajados, las fechas y las tareas dedicadas en cada una, se resume en la siguiente figura. 
+
 \chapter{Estado del Arte}
 Está claro que para este proyecto no estamos inventando la rueda, el rastreo del usuario es una técnica que existe prácticamente desde que el uso de internet se hizo mayoritario, por ello vamos a ver como ha evolucionado este rastreo y captura a lo largo de los años. 
 \newline \newline 
@@ -907,18 +917,126 @@ La lógica de negocio del sistema se encuentra, sin duda, en la capa correspondi
 
 \chapter{Implementación y desarrollo}
 Durante el siguiente capítulo veremos documentada la lógica que sigue la aplicación, centrándonos en el servicio de escucha en segundo plano, responsable de capturar los datos del usuario en cada una de las aplicaciones que nos permitirán conocer su perfil completo en cada una de sus facetas. Recordemos, comunicación, mensajería, navegación, redes sociales y el plano físico mediante los sensores. 
+\newline \newline 
+En primer lugar, debemos conocer los objetos y los datos con los que estamos trabajando. A lo largo del proyecto hemos citado en innumerables ocasiones los eventos de accesibilidad, pero el lector aún no conoce su forma, su contenido ni cómo se generan. También se adjuntará una descripción de los objetos Dto donde almacenaremos la información, con el fin de situar al lector dentro del marco en el que se ha realizado la implementación del proyecto. 
 \newpage
-\section{Diagramas de actividad}
-En este apartado veremos los diagramas de actividad de tres aplicaciones clave para el perfilado del usuario, Gmail, Whatsapp y el navegador Chrome. Tienen como objetivo clarificar y documentar el flujo lógico que seguirá la aplicación, durante el proceso de análisis y extracción del contenido de cada de las aplicaciones propuestas. 
-\subsection{Gmail}
+\section{Accessibility Events}
+\begin{verbatim}
+D/Helper: [type] TYPE_VIEW_TEXT_CHANGED 
+[eventId] 16 [class] android.widget.EditText 
+[package] com.whatsapp [time] 06/07/2018 19:51:25 
+[text] Hola! Lector
+
+D/Helper: [type] TYPE_WINDOW_STATE_CHANGED 
+[eventId] 32 [class]  
+[package] com.google.android.inputmethod.latin 
+[time] 06/07/2018 19:51:25 
+[text] Se han rechazado las alternativas
+
+D/Helper: [type] TYPE_WINDOW_STATE_CHANGED 
+[eventId] 32 [class]  
+[package] com.google.android.inputmethod.latin 
+[time] 06/07/2018 19:51:25 
+[text] Mostrando teclado español (España) (QWERTY (Ñ))
+
+D/Helper: [type] TYPE_WINDOW_STATE_CHANGED 
+[eventId] 32 [class]
+[package] com.google.android.inputmethod.latin 
+[time] 06/07/2018 19:51:30 
+[text] El teclado español (España) (QWERTY (Ñ)) está oculto
+
+D/Helper: [type] TYPE_WINDOW_STATE_CHANGED 
+[eventId] 32 [class] com.google.android.launcher.GEL 
+[package] com.google.android.googlequicksearchbox 
+ [time] 06/07/2018 19:51:32 
+ [text] Aplicaciones
+ 
+D/Helper: [type] TYPE_WINDOW_STATE_CHANGED 
+[eventId] 32 [class] com.google.android.launcher.GEL 
+[package] com.google.android.googlequicksearchbox 
+[time] 06/07/2018 19:51:34 
+[text] Pantalla de inicio 1 de 1
+
+D/Helper: [type] 16384 
+[eventId] 16384 [class] android.view.ViewGroup 
+[package] com.google.android.googlequicksearchbox 
+[time] 06/07/2018 19:51:35
+[text] Pantalla de inicio 1 de 1
+
+D/Helper: [type] TYPE_WINDOW_STATE_CHANGED 
+[eventId] 32 [class] android.widget.FrameLayout 
+[package] com.android.systemui 
+[time] 06/07/2018 19:51:38 
+[text] Pantalla de bloqueo.
+\end{verbatim}
+El output listado arriba se corresponde con la acción de enviar una cadena de texto a un contacto de Whatsapp y, mediante el botón de \textit{back}, navegar hacia la pantalla principal de la app, llegar a la caja de aplicaciones y volver a la pantalla principal. Una vez ahí se ha bloqueado el dispositivo. 
+\newline \newline 
+La gran complicación del proyecto consiste en la enorme cantidad de información que generan acciones que tenemos muy automatizadas como usuarios. Es nuestro objetivo entonces consiste en poner orden a ese carro de datos. 
+\newline \newline 
+Para ello, durante el proceso de implementación, cada vez que nos enfrentamos a una nueva captura, debemos debugguear los servicios generados (con outputs similares al de arriba) y estudiarla hasta detectar el patrón que se corresponde a la acción que queremos capturar (por ejemplo, la escritura en Whatsapp o una búsqueda Web). 
+\newline \newline 
+Una vez detectado este patrón, se debe implementar el analizador. En primer lugar, esta implementación consiste en imponer filtros y condicionales que descarten aquellos eventos que no son de nuestro interés. De esta manera, a la capa del analizador llegan únicamente los eventos asociados a la aplicación que queremos escuchar en ese momento. 
+\newline \newline
+Una vez hecho esto, se debe implementar el método \textit{compute} del analizador correspondiente. Sendos condicionales consiguen que en función del elemento de la interfaz donde fué originado el evento, consigamos leer la información del ellos y asociarla a los atributos del Dto donde guardaremos la información. 
+\newline \newline 
+De esta manera, detectando patrones, filtrando eventos y leyendo su información, conseguiremos imbuir información a los objetos dtos, los cuales usaremos para persistir el fruto de nuestra captura. 
+\newline \newline 
+En el proyecto se incluyen capturas de varias aplicaciones, veamos a continuación tres de ellas que, por su relevancia, consideramos interesantes estudiar en detalle. 
+\newpage 
+\section{Captura de Gmail}
+En este apartado, y los que siguen, veremos los objetos destinados a guardar la información y los diagramas de actividad de tres aplicaciones clave para el perfilado del usuario, Gmail, Whatsapp y el navegador Chrome. Tienen como objetivo clarificar y documentar el flujo lógico que seguirá cada aplicación, durante el proceso de análisis y extracción del contenido de cada de las aplicaciones propuestas.
+\subsection{GmailDto}
+El objeto donde guardaremos la información de captura se compone de los siguiente atributos; 
+\begin{verbatim}
+public class GmailDto extends RealmObject {
+ 	@PrimaryKey
+    private String id;
+
+    /** The mail sender */
+    private String sender;
+
+    /** The mail receivers */
+    private RealmList<String> receivers;
+
+    /** Mail subject */
+    private String subject;
+
+    /** Mail content */
+    private String body;
+
+    /** When the mail was sended */
+    private Date timestamp;
+ 	
+ 	// -- getters and setters   
+}
+\end{verbatim}
+En primer lugar nos encontramos un identificador. Esto es necesario en tanto el cuanto el objeto herede de RealmObject. Este RealmObject es propio del framework Realm, una base de datos orientada a objetos que destaca por su rapidez. La veremos más adelante en la sección de librerías de terceros. 
+\newline \newline 
+Empezando ya con los atributos relevantes para la captura, por un lado tenemos un atributo \textbf{sender}, destinado a almacenar el emisor del correo. Se podría pensar que es obvio que el que manda un correo es el usuario del teléfono, pero hoy en día es habitual que una persona tenga varias cuentas de correo, por ello almacenaremos en este atributo cuál de ellas elige. 
+\newline \newline 
+El atributo \textbf{receivers} consiste en una lista (del framework Realm) de Strings. El motivo de que este atributo sea una lista y no un String sin más es sencillo, y es que un correo puede tener varios destinatarios. Almacenaremos como elementos independientes del array cada dirección de correo que el usuario escribe. 
+\newline \newline 
+El atributo \textbf{subject} tiene como destino almacenar el asunto del correo. Lo mismo ocurre con \textbf{body}, cuya aplicabilidad no es otra que guardar el cuerpo del mensaje en sí. 
+\newline \newline 
+Por último no encontramos con un atributo \textbf{timestamp} del tipo java.util.Date. Su propósito es aportar un contexto temporal sobre el momento del día en el que el usuario se dedica a mandar correos electrónicos. 
+\subsection{Diagrama de actividad}
 En la siguiente figura se documenta el proceso que lleva al registro de un correo mandado por el usuario a través de la aplicación de GMail. Se ha organizado el diagrama por niveles, desde la capa más externa de la aplicación hasta la capa de persistencia, así se puede observar tanto el camino recorrido por los datos como el procesamiento de la información en cada nivel.
 %%% ------ ACTIVIDAD GMAIL 
 \begin{landscape}
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=1.1\textwidth]{pictures/activity/gmailActivityDiagram.png} 
-	  \caption[Diagrama actividad GMail]{Diagrama de actividad de captura de un correo redactado con GMail.}
-	  \label{fig:Diagrama actividad GMail}
+		\includegraphics[width=1.1\textwidth]{pictures/activity/gmailActivityDiagram1.png} 
+	  \caption[Diagrama actividad GMail (1)]{Diagrama de actividad de captura de un correo redactado con GMail (1).}
+	  \label{fig:Diagrama actividad GMail (1)}
+  	\end{center}
+\end{figure}
+\end{landscape}
+\begin{landscape}
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=1.1\textwidth]{pictures/activity/gmailActivityDiagram2.png} 
+	  \caption[Diagrama actividad GMail (2)]{Diagrama de actividad de captura de un correo redactado con GMail (2).}
+	  \label{fig:Diagrama actividad GMail (2)}
   	\end{center}
 \end{figure}
 \end{landscape}
@@ -1005,7 +1123,51 @@ En este caso el widget toast nos informa cada vez que se envía un correo, momen
 \item \textbf{DBManager}. Capa encargada de la persistencia, se encarga mapear los GMailDto a un modelo y almacenarlo en la base de datos local. 
 \end{itemize} % -- niveles de app 
 \newpage
-\subsection{Whatsapp}
+\section{Captura de Whatsapp}
+Veamos ahora como es la captura de Whatsapp y cómo es la estructura del objeto en el que se asienta. 
+\subsection{WhatsappDto}
+Los atributos que componente este objeto son; 
+\begin{verbatim}
+public class WhatsappDto extends RealmObject {
+	@PrimaryKey
+    private String id;
+
+    /** Name of the contact who the user is talking to*/
+    private String interlocutor;
+
+    /** A list of the messages sent, including the timestamp of the send */
+    private RealmList<TimestampString> textList;
+
+    /** Describes the timestamp when the user clicked a conversation */
+    private Date startTimestamp;
+
+    /** Describes the timestamp when the user abandoned a conversation */
+    private Date endTimestamp;
+    
+    // -- getters and setters
+}
+\end{verbatim}
+En primer lugar, el consabido identificador, necesario para la base de datos. 
+\newline \newline 
+A este identificado le sigue el atributo \textbf{interlocutor}, destinado a almacenar el nombre del contacto con quien el usuario está hablando. 
+\newline \newline 
+A continuación figura una RealmList con objetos del tipo TimestampString. 
+\begin{verbatim}
+public class TimestampString extends RealmObject {
+
+    /** String with the content of the text */
+    private String text;
+
+    /** Timestamp describing the exact moment when the text was written */
+    private Date timestamp;
+   
+   // -- getters and setters 
+}
+\end{verbatim}
+Este tipo de objeto consiste en un String, para almacenar la cadena enviada, y un timestamp para controlar el momento exacto del envío de la misma. 
+
+Por último, en WhatsappDto, nos encontramos con dos java.util.Date, \textbf{startTimestamp}, para almacenar el momento en el que el usuario abre una conversación, y en \textbf{endTimestamp} para, como sospecharán los lectores más hábiles, almacenar el momento exacto en el que esa misma conversación es abandonada. 
+\subsection{Diagrama de actividad}
 En la captura de los mensajes enviados con Whatsapp entran en juego dos tipos de eventos. Por un lado, aquellos que pertenecen (ó cuyo nombre del paquete) corresponde con el propio Whatsapp, \textit{com.whatsapp}, y por el otro, los relacionados con el teclado, \textit{com.google.android.inputmethod.latin}.
 \newline \newline 
 Jugando con estos dos eventos seremos capaces de recoger con quién habla el usuario, lo que escribe y durante cuanto tiempo permanece en una conversación o en la propia pantalla principal de la aplicación. Veámoslo por partes. 
@@ -1109,9 +1271,29 @@ Como se ha explicado al inicio de esta sección, esto se traduce en el hecho de 
 \newline \newline 
 Gracias a este algoritmo, conseguiremos una completa recolección de lo que hace el usuario dentro del Whatsapp, sabremos con quien habla, lo que dice y durante cuanto tiempo se relaciona con sus contactos. Esta información por lo tanto se denota muy valiosa, ya que Whatsapp es la aplicación más usada para hablar con nuestro alegados, gracias al contexto aportado podremos conocer de que forma se relaciona el usuario con su entorno social más cercano. 
 \newpage
-\subsection{Chrome}
+\section{Captura de Chrome}
 La captura de las búsquedas y páginas realizadas Chrome se antoja más sencilla, puesto que sólo necesitamos controlar las cadenas de búsqueda así como la marca horaria en la que fueron realizadas. 
+\subsection{ChromeDto}
+El objeto sobre el que construimos la información capturada durante la navegación tiene el siguiente aspecto; 
+\begin{verbatim}
+public class ChromeDto extends RealmObject {
+
+    @PrimaryKey
+    private String id;
+
+    /** String containing the visited urls or search terms */ 
+    private String searchUrl;
+
+    /** Timestamp when the search happened */ 
+    private Date timestamp;
+	
+	// -- getters and setters 
+}
+\end{verbatim}
+Obviemos ahora el id de Realm. Tenemos por un lado el atributo \textbf{searchUrl}, destinado a almacenar la url de las páginas visitadas o los términos de una búsqueda. 
 \newline \newline 
+Por otro, el atributo \textbf{timestamp}, de tipo java.util.Date, que nos ayudará a situar en un marco temporal las búsquedas del usuario. De este modo persiguiendo nuestro objetivo de lograr un perfil lo más completo del mismo, podremos saber en qué momento del día el usuario realiza sus búsquedas Web, conociendo además el motivo de esa búsqueda. 
+\subsection{Diagram de actividad}
 De nuevo, nos encontramos en una situación en la que necesitamos controlar dos tipos de evento, por un lado los relacionados con la propia aplicación de Chrome, \textit{com.android.chrome}, y por otro, el teclado \textit{com.google.android.inputmethod.latin}. 
 \subsubsection{Eventos de com.android.chrome}
 Estos eventos nos permitirán conocer lo que el usuario escribe en la barra de búsqueda, así como los sitios frecuentes que la propia aplicación muestra cada vez que abrimos una nueva pestaña. 

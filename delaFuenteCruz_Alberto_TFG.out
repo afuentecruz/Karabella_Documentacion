@@ -1,35 +1,42 @@
 \BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 1
 \BOOKMARK [1][-]{section.1.1}{Motivaci\363n y desarrollo}{chapter.1}% 2
 \BOOKMARK [0][-]{chapter.2}{Objetivos}{}% 3
-\BOOKMARK [0][-]{chapter.3}{Estado del Arte}{}% 4
-\BOOKMARK [1][-]{section.3.1}{An\341lisis Web}{chapter.3}% 5
-\BOOKMARK [2][-]{subsection.3.1.1}{Geolocalizaci\363n}{section.3.1}% 6
-\BOOKMARK [2][-]{subsection.3.1.2}{An\341lisis de los gestos del rat\363n}{section.3.1}% 7
-\BOOKMARK [2][-]{subsection.3.1.3}{Cookies}{section.3.1}% 8
-\BOOKMARK [1][-]{section.3.2}{Google y la plataforma Android}{chapter.3}% 9
-\BOOKMARK [2][-]{subsection.3.2.1}{Los servicios de Google y la localizaci\363n}{section.3.2}% 10
-\BOOKMARK [2][-]{subsection.3.2.2}{Aplicaciones de terceros}{section.3.2}% 11
-\BOOKMARK [1][-]{section.3.3}{Dispositivos IOT}{chapter.3}% 12
-\BOOKMARK [2][-]{subsection.3.3.1}{Asistentes personales}{section.3.3}% 13
-\BOOKMARK [0][-]{chapter.4}{Requisitos del proyecto}{}% 14
-\BOOKMARK [1][-]{section.4.1}{Requisitos}{chapter.4}% 15
-\BOOKMARK [2][-]{subsection.4.1.1}{Requisitos funcionales}{section.4.1}% 16
-\BOOKMARK [2][-]{subsection.4.1.2}{Requisitos no funcionales}{section.4.1}% 17
-\BOOKMARK [0][-]{chapter.5}{An\341lisis}{}% 18
-\BOOKMARK [1][-]{section.5.1}{Diagramas de Casos de Uso}{chapter.5}% 19
-\BOOKMARK [1][-]{section.5.2}{Arquitectura de alto nivel}{chapter.5}% 20
-\BOOKMARK [2][-]{subsection.5.2.1}{Smartphone}{section.5.2}% 21
-\BOOKMARK [2][-]{subsection.5.2.2}{Servidor Remoto}{section.5.2}% 22
-\BOOKMARK [1][-]{section.5.3}{Diagrama de secuencia}{chapter.5}% 23
-\BOOKMARK [0][-]{chapter.6}{Dise\361o}{}% 24
-\BOOKMARK [1][-]{section.6.1}{Arquitectura}{chapter.6}% 25
-\BOOKMARK [2][-]{subsection.6.1.1}{Decisiones de dise\361o}{section.6.1}% 26
-\BOOKMARK [2][-]{subsection.6.1.2}{Arquitectura a bajo nivel}{section.6.1}% 27
-\BOOKMARK [0][-]{chapter.7}{Implementaci\363n y desarrollo}{}% 28
-\BOOKMARK [1][-]{section.7.1}{Diagramas de actividad}{chapter.7}% 29
-\BOOKMARK [2][-]{subsection.7.1.1}{Gmail}{section.7.1}% 30
-\BOOKMARK [2][-]{subsection.7.1.2}{Whatsapp}{section.7.1}% 31
-\BOOKMARK [2][-]{subsection.7.1.3}{Chrome}{section.7.1}% 32
-\BOOKMARK [1][-]{section.7.2}{Bibliotecas de terceros}{chapter.7}% 33
-\BOOKMARK [2][-]{subsection.7.2.1}{Realm}{section.7.2}% 34
-\BOOKMARK [0][-]{chapter.8}{Conclusiones y trabajos futuros}{}% 35
+\BOOKMARK [1][-]{section.2.1}{Planificaci\363n}{chapter.2}% 4
+\BOOKMARK [0][-]{chapter.3}{Estado del Arte}{}% 5
+\BOOKMARK [1][-]{section.3.1}{An\341lisis Web}{chapter.3}% 6
+\BOOKMARK [2][-]{subsection.3.1.1}{Geolocalizaci\363n}{section.3.1}% 7
+\BOOKMARK [2][-]{subsection.3.1.2}{An\341lisis de los gestos del rat\363n}{section.3.1}% 8
+\BOOKMARK [2][-]{subsection.3.1.3}{Cookies}{section.3.1}% 9
+\BOOKMARK [1][-]{section.3.2}{Google y la plataforma Android}{chapter.3}% 10
+\BOOKMARK [2][-]{subsection.3.2.1}{Los servicios de Google y la localizaci\363n}{section.3.2}% 11
+\BOOKMARK [2][-]{subsection.3.2.2}{Aplicaciones de terceros}{section.3.2}% 12
+\BOOKMARK [1][-]{section.3.3}{Dispositivos IOT}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.3.1}{Asistentes personales}{section.3.3}% 14
+\BOOKMARK [0][-]{chapter.4}{Requisitos del proyecto}{}% 15
+\BOOKMARK [1][-]{section.4.1}{Requisitos}{chapter.4}% 16
+\BOOKMARK [2][-]{subsection.4.1.1}{Requisitos funcionales}{section.4.1}% 17
+\BOOKMARK [2][-]{subsection.4.1.2}{Requisitos no funcionales}{section.4.1}% 18
+\BOOKMARK [0][-]{chapter.5}{An\341lisis}{}% 19
+\BOOKMARK [1][-]{section.5.1}{Diagramas de Casos de Uso}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.2}{Arquitectura de alto nivel}{chapter.5}% 21
+\BOOKMARK [2][-]{subsection.5.2.1}{Smartphone}{section.5.2}% 22
+\BOOKMARK [2][-]{subsection.5.2.2}{Servidor Remoto}{section.5.2}% 23
+\BOOKMARK [1][-]{section.5.3}{Diagrama de secuencia}{chapter.5}% 24
+\BOOKMARK [0][-]{chapter.6}{Dise\361o}{}% 25
+\BOOKMARK [1][-]{section.6.1}{Arquitectura}{chapter.6}% 26
+\BOOKMARK [2][-]{subsection.6.1.1}{Decisiones de dise\361o}{section.6.1}% 27
+\BOOKMARK [2][-]{subsection.6.1.2}{Arquitectura a bajo nivel}{section.6.1}% 28
+\BOOKMARK [0][-]{chapter.7}{Implementaci\363n y desarrollo}{}% 29
+\BOOKMARK [1][-]{section.7.1}{Accessibility Events}{chapter.7}% 30
+\BOOKMARK [1][-]{section.7.2}{Captura de Gmail}{chapter.7}% 31
+\BOOKMARK [2][-]{subsection.7.2.1}{GmailDto}{section.7.2}% 32
+\BOOKMARK [2][-]{subsection.7.2.2}{Diagrama de actividad}{section.7.2}% 33
+\BOOKMARK [1][-]{section.7.3}{Captura de Whatsapp}{chapter.7}% 34
+\BOOKMARK [2][-]{subsection.7.3.1}{WhatsappDto}{section.7.3}% 35
+\BOOKMARK [2][-]{subsection.7.3.2}{Diagrama de actividad}{section.7.3}% 36
+\BOOKMARK [1][-]{section.7.4}{Captura de Chrome}{chapter.7}% 37
+\BOOKMARK [2][-]{subsection.7.4.1}{ChromeDto}{section.7.4}% 38
+\BOOKMARK [2][-]{subsection.7.4.2}{Diagram de actividad}{section.7.4}% 39
+\BOOKMARK [1][-]{section.7.5}{Bibliotecas de terceros}{chapter.7}% 40
+\BOOKMARK [2][-]{subsection.7.5.1}{Realm}{section.7.5}% 41
+\BOOKMARK [0][-]{chapter.8}{Conclusiones y trabajos futuros}{}% 42
