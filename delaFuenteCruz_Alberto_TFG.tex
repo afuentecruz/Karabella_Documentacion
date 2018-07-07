@@ -328,17 +328,34 @@ Una vez establecidos los límites del dominio que se pretende manejar, vamos a e
 \item Esta información estará acotada en cinco grupos. Así, contaremos con un grupo de navegación web, mensajería instantánea, comunicación, redes sociales y sistema (sensores y notificaciones). Dentro de cada grupo se atenderán a las aplicaciones más utilizadas en cada campo. 
 \item Esta captura debe ser tener valor semántico, es decir, debe tener información referencial que ayude a situar en un contexto la información. 
 \item La información capturada será almacenada de forma temporal de forma local en el almacenamiento hardware del dispositivo, y, de forma programática realizar volcados periódicos cada poco tiempo, con doble objetivo. Por un lado, no saturar el espacio de almacenamiento y por otro, asegurar los datos en un servidor remoto de manera que estos estén siempre disponibles. 
-\item Este volcado se realizará a través de una API que permitirá el propio volcado y su consumo, comportándose así como una interfaz de acceso al manejo de los datos. 
+\item Este volcado se realizará a través de una API que permitirá, a su vez, la consulta de los datos. De esta forma dispondremos de una interfaz de acceso para el manejo de la información. 
 \end{itemize}
-\newpage
+Estos objetivos, resumen a grandes rasgos, el proyecto. Veamos ahora como se ha organizado el trabajo. 
 \section{Planificación}
-Para conseguir estos objetivos se realizó una planificación inicial en el momento en el que se acordaron los términos del trabajo. Pero antes, un poco de contexto. 
+Para conseguir estos objetivos, se realizó una planificación inicial en el momento en el que se acordaron los términos del trabajo. Pero antes, un poco de contexto. 
 \newline \newline 
-Este proyecto surgió en uno de los grupos de investigación de la Escuela Politécnica de Cáceres, en concreto, en el SpiLab. Como condición necesaria para hacer el trabajo de fin de grado, se estableció que debía asistir al laboratorio de Lunes a Jueves durante todo el curso. En esa planificación inicial, los tiempos estaban claros, durante el primer cuatrimestre realizaría labores de investigación y análisis en el horario establecido. Durante el segundo, realizaría el diseño y la implementación. De esta forma, la fecha de entrega estaba proyectada para el mes de Junio. 
+Este proyecto se sugirió desde el SpiLab\cite{spilab}, uno de los grupos de investigación de la Escuela Politécnica de Cáceres. Como condición necesaria para hacer el trabajo de fin de grado, fue asistir de forma regular al laboratorio de Lunes a Jueves durante todo el curso. En esa planificación inicial, los tiempos estaban claros, durante el primer cuatrimestre realizaría labores de investigación y análisis en el horario establecido. Durante el segundo, realizaría el diseño y la implementación. De esta forma, la fecha de entrega estaba proyectada para el mes de Junio. 
 \newline \newline
 Pero es estimación no se pudo cumplir. Durante el primer cuatrimestre hice un parón para dedicarme a terminar las asignaturas pendientes que me quedaban, así, durante el mes de noviembre y diciembre no pude asistir al laboratorio. Ahí se rompió la planificación. Además, en Enero encontré trabajo, con lo cual el tiempo que podía dedicar al TFG, pese a no reducirse en gran medida, sufrió desgaste. A partir de ese momento sólo podía trabajar entre 5 y 6 horas por las tardes. 
 \newline \newline 
-De esta forma, la planificación real que resume los tiempos trabajados, las fechas y las tareas dedicadas en cada una, se resume en la siguiente figura. 
+De esta forma, la planificación real que resume los tiempos trabajados, las fechas y las tareas dedicadas en cada una, se resume en la siguiente tabla. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.6]{pictures/planificacion.png}
+	\caption{Tabla de planificacion del proyecto}{Tabla de planificacion del proyecto.}
+    		\label{fig:Tabla de planificacion del proyecto}
+\end{center}
+\end{figure}
+Si echamos un vistazo al diagrama de Gantt obtenemos de estos datos, se puede observar claramente que el esfuerzo ha estado bastante espaciado en el tiempo. Estando centrado especialmente en el inicio y final del proyecto. También el tiempo, al poco de comenzar el proyecto, el tiempo el que el proyecto estuvo parado por dedicarle tiempo a terminar las asignaturas pendientes durante el primer cuatrimestre.
+\begin{landscape}
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[scale=0.47	]{pictures/planificacion_grafica.png}
+	\caption{Diagrama de Gantt}{Diagrama de Gantt.}
+    		\label{fig:Diagrama de Gantt}
+\end{center}
+\end{figure}
+\end{landscape}
 
 \chapter{Estado del Arte}
 Está claro que para este proyecto no estamos inventando la rueda, el rastreo del usuario es una técnica que existe prácticamente desde que el uso de internet se hizo mayoritario, por ello vamos a ver como ha evolucionado este rastreo y captura a lo largo de los años. 
@@ -470,7 +487,7 @@ Esta tecnología, dado su enorme potencial, hizo que muchos usuarios mirasen con
 En este último año han irrumpido en el mercado los asistentes personales, introducidos por Google, Amazon y Apple. Estos asistentes son precisamente eso, un asistente personal que nos ayuda a gestionar nuestra agenda, consultar Internet e interactuar con el ecosistema de cada compañía. 
 \newline
 \newline
-Todos comparten la misma funcionalidad básica, incorporan un micrófono que permanece siempre activo esperando a recibir el comando de activación. Normalmente este comando es una palabra clave que permite que el dispositivo se active, Ok Google! en el caso del Google Home, Alexxa… en del Amazon Echo, etc. Una vez el dispositivo está activo pasa a un estado de escucha activa donde atiende las consultas del usuario a través de la voz. 
+Todos comparten la misma funcionalidad básica, incorporan un micrófono que permanece siempre activo esperando a recibir el comando de activación. Normalmente este comando es una palabra clave que permite que el dispositivo se active, Ok Google! en el caso del Google Home, Alexa… en del Amazon Echo, etc. Una vez el dispositivo está activo pasa a un estado de escucha activa donde atiende las consultas del usuario a través de la voz. 
 \newline
 \newline
 No hay duda de que se tratan de aparatos tremendamente interesante y que a día de hoy es hacia donde se dirige el mercado, Meter en casa un dispositivo con inteligencia artificial que nos facilite la vida, podamos encender la televisión, reproducir música, hacer anotaciones, llamar a nuestros contactos, etc, gestionado únicamente por voz es un producto realmente atractivo.  
@@ -488,31 +505,59 @@ En el caso de Amazon Alexa ha quedado demostrado que el dispositivo realiza escu
 Esto demuestra el afán de estas empresas por conocer cada vez más detalles de sus usuarios, hasta el punto de perseguir el objetivo último de que todos los hogares cuenten con un dispositivo inteligente que les permita conocer los hábitos de sus usuarios en su vida privada. 
 \newline
 \newline
-Este afán queda explicado cuando reparamos en el problema que llevamos denotando durante el desarrollo de estas páginas, la información recogida, hasta ahora, es parcial, sólo nos muestra al usuario cuando usa sus productos, el resto del tiempo permanece invisible para ellos. Si finalmente consiguen su objetivo (un dispositivo en cada casa) conseguirán saltar esa brecha y poder obtener un perfil completo del usuario, sabiendo que dice, hace y cómo se comporta a lo largo de las 24 horas del día, sin interrupción, los 365 días del año. 
+Este afán queda explicado cuando reparamos en el problema que llevamos denotando durante el desarrollo de estas páginas, la información recogida, hasta ahora, es parcial, sólo nos muestra al usuario cuando usa sus productos, el resto del tiempo permanece invisible para ellos. Si finalmente consiguen su objetivo (un dispositivo en cada casa) conseguirán saltar esa brecha y poder obtener un perfil completo del usuario, sabiendo qué dice, hace y cómo se comporta a lo largo de las 24 horas del día, sin interrupción, los 365 días del año. 
 \newline
 \newline
 Justo ese es el objetivo de este trabajo, lo cual nos indica que no vamos del todo mal encaminados. Cada vez es más importante conocer a nuestros usuarios, pero hasta ahora este conocimiento estaba limitado al producto en sí, si conseguimos extraer un perfil de comportamiento completo del mismo tendremos en nuestras manos una información con un enorme potencial, que nos permitirá abrir nuevas líneas de investigación, las cuales, en buenas manos, podrán cambiar para bien la vida de muchas personas. 
 \newline
 \newline
-Nuestro objetivo final, y lo que se persigue con este proyecto, es que esta información no esté exclusivamente en manos de compañías que sólo quieren ver incrementados sus beneficios, si no que sea accesible para cualquier equipo de desarrollo que tenga buenas intenciones (en nuestro caso, el equipo del SpiLab de la Epcc). 
+Lo que se persigue con este proyecto es que esta información no esté exclusivamente en manos de grandes compañías, que sólo quieren ver incrementados sus beneficios, si no que sea accesible para cualquier equipo de desarrollo que tenga buenas intenciones (en nuestro caso, el equipo del SpiLab de la Epcc). 
 \newpage
 \chapter{Requisitos del proyecto}
 En esta capítulo se analiza el problema planteado por el proyecto y se detalla su descomposición como requisitos de un sistema software. No hay que perder de vista que nuestro objetivo final será monitorizar las aplicaciones del usuario y registrar información acerca de cómo éste interactúa con el medio.
-\newpage
 \section{Requisitos}
-Se propone el desarrollo de una aplicación móvil que, en segundo plano, registre los movimientos del usuario y la interacción que realiza con el teléfono. Este registro de actividad debe cubrir los requisitos listados a continuación para componer un sistema final que satisfaga los objetivos expuestos con anterioridad. 
+Se propone el desarrollo de una aplicación móvil que, en segundo plano, registre los movimientos del usuario y la interacción que realiza con el teléfono. Este registro de actividad debe cubrir los requisitos listados a continuación para componer un sistema final que satisfaga los objetivos expuestos con anterioridad.
+\newline \newline 
+Por un lado, queremos registrar aplicaciones del usuario. Esto, dicho así en términos generales, no nos sirve de nada. Por ello, en primer lugar, deberemos decidir en que campos de los distintos usos que, como usuarios, le damos teléfono,  nos vamos a centrar. Una vez establecidos estos campos, elegir de cada uno una serie de aplicaciones que cubran nuestros objetivos. 
+\newline \newline 
+Por lo tanto, nos vamos a encontrar con cinco grandes grupos de aplicaciones. Por un lado la comunicación, siendo esta la razón de la existencia de la telefonía, no podía quedarse fuera. Nuestro objetivo será entonces capturar que tareas desarrolla el usuario en áreas como la comunicación inmediata, donde el usuario habla con sus contactos (las olvidadas llamadas telefónicas) y en la comunicación \textit{asíncrona}, medios tradicionales de comunicación con los contactos, como pueden ser el envío de correos electrónicos o los vetustos mensajes de texto.  
+\newline \newline 
+Así pues, incluiremos dentro del \textbf{grupo de comunicación}, la aplicación del \textbf{Teléfono}, \textbf{Mensajes} y, dado el auge que tiene Google como proveedor de servicios gratuitos de correo electrónico, capturaremos la aplicación de \textbf{GMail} como punto de entrada a los correos que envía el usuario. 
+\newline \newline 
+El otro campo en el que nos queremos centrar es, sin duda, más moderno. Se trata de la mensajería instantánea. Desde la aparición del MSN Messenger (allá en el año 99), se produjo una revolución en la manera que los usuarios nos relacionábamos con nuestras amistades, que, hoy en día, se encuentra plenamente implantada en los teléfonos inteligentes. 
+\newline \newline 
+De esta forma, incluiremos la aplicación más usada a nivel global para \textit{chatear} con los contactos, \textbf{Whatsapp}, como primera aplicación de este grupo. También incluiremos \textbf{Telegram} dado que en los últimos años han conseguido posicionarse como competidores directos de la primera. 
+\newline \newline 
+Siguiendo con la idea de encontrar los usos habituales que les damos al teléfono, nos encontramos con lo que aporta valor a los terminales de hoy en día, la navegación por Internet. Esto no debería sorprender a nadie, la verdadera revolución de los teléfonos inteligentes consiste en estar siempre conectados a la World Wide Web, es natural entonces que queramos capturar cómo el usuario interactúa con ella.
+\newline \newline 
+Definimos entonces, como aplicaciones a escuchar dentro de este grupo de navegación por internet, al navegador \textbf{Chrome}. Esto además se nos presenta como una ventaja, y es que los navegadores de las ROMs que los fabricantes imponen en sus terminales son una implementación de este navegador. Y, en un gesto romántico, capturaremos también la aplicación de \textbf{Firefox} como forma alternativa de navegar la web. 
+\newline \newline 
+Tenemos hasta ahora las áreas de comunicación, mensajería instantánea y navegación web, cubiertas. Si nos planteamos ahora cual es el otro campo donde los móviles han triunfado entre la juventud lo tenemos claro, las redes sociales. Así, escogemos las aplicaciones de \textbf{Facebook} y \textbf{Twitter} como objetivos a escuchar dentro de este área, dada la popularidad de ambas. 
+\newline \newline 
+Por último, y para completar el abanico de tareas que desarrolla el smartphone, deberemos dirigir la mirada hacia el propio dispositivo. Llamemos a este grupo \textit{sistema}. Por un lado, el terminal es fuente de información para el usuario, esto es así gracias a las notificaciones push que integran la mayor parte de las aplicaciones. Será entonces de gran interés para nosotros, siempre buscando el objetivo de obtener un perfil lo más completo del usuario, el contenido de las notificaciones que entran en su dispositivo. Además, será interesante conocer también los valores de los múltiples sensores que integran los teléfonos modernos, incluyendo, por supuesto, el omnipresente \textbf{GPS}, que nos aportará la información de localización del usuario. 
+\newline \newline 
+De esta forma, quedan definidos 4 grandes grupos en los que nos centraremos a lo largo del trabajo. Recordemos, comunicación, mensajería instantánea, navegación web, redes sociales y sistema. Todo ello sin olvidar el objetivo fundamental de registrar qué aplicaciones abre el usuario y cuánto tiempo pasa en ellas, independiente de su pertenencia a estos grupos.
+\newline \newline 
+Además, dada la naturaleza del proyecto, deberemos incentivar al usuario de alguna manera para que se instale la aplicación, así, deberemos incluir toda esta captura en una aplicación que aporte datos del uso que el usuario da al teléfono, aunque sin descubrir toda la información que vamos a capturar. Los datos sobre los tiempos de uso, aplicaciones más utilizadas, tareas frecuentes en esas aplicaciones, se nos antojan interesantes para mostrarlos dentro de la aplicación. 
+\newline \newline 
+Teniendo estas ideas claras, veamos cual es la especificación de requisitos.  
 \subsection{Requisitos funcionales}
-El sistema deberá: 
+El sistema deberá:
 \begin{itemize}
   \item Registrar cada aplicación que lanza el usuario detectando y almacenando el nombre del paquete asociado a ella. 
   \item Aportar un contexto temporal de cuando las aplicaciones son ejecutadas, esto es, el \textit{timestamp} del momento de su ejecución. 
   \item Incluyendo lo anterior, registrar el uso dado a aplicaciones relacionadas con, comunicación, mensajería instantánea, búsqueda web,redes sociales y por último, la información generada por el propio sistema. 
   \item Dentro de comunicación se incluye la aplicación de Gmail, Mensajes (sms) y el Teléfono. 
-  \item Dentro mensajería instantánea prestaremos atención a Telegram, Whatsapp Messenger y Facebook Messenger. 
+  \item Dentro mensajería instantánea prestaremos atención a Telegram, Whatsapp Messenger.
   \item Como aplicaciones relacionadas con la búsqueda en la web estarán la Chrome Browser y Google Search. 
   \item En las aplicaciones de redes sociales; Twitter y Facebook.
   \item Dentro del sistema, deberemos escuchar tanto las notificaciones recibidas como los sensores, incluyendo el GPS, acelerómetro, presión, giroscopio y temperatura.
-\subsubsection{Aplicaciones de comunicación}
+    \item La información capturada deberá ser persistida en una base de datos local dentro del propio dispositivo. 
+  \item Incluir, dentro de la propia aplicación, información acerca del uso que el usuario hace del teléfono, incluyendo datos sobre, aplicaciones más frecuentes, tiempo pasado en cada una de ellas y, en función del campo, tareas más comunes desarrolladas en cada una.
+  \item Incluido dentro del propio servicio de captura, se deberá realizar un volcado del contenido capturado almacenado en la base de datos local para, de forma periódica, mandarlo a un servidor en la nube. 
+  \item Este servidor en la nube deberá tener credenciales de acceso y contará con los endpoints necesarios para realizar peticiones de tipo POST que nos permitan almacenar la información. 
+  \item Del mismo modo, el servidor deberá incluir endpoints de tipo GET que nos permitan acceder a los datos ahí almacenados. 
+\subsubsection{Requisitos de las aplicaciones de comunicación}
   \item En  \textbf{Gmail} capturar, la dirección de correo del emisor. 
   \item La dirección de correo del receptor(es). 
   \item El asunto del correo electrónico. 
@@ -521,20 +566,18 @@ El sistema deberá:
   \item El cuerpo del mensaje. 
   \item En \textbf{Teléfono} se deberá capturar, el destinatario de la llamada. 
   \item Tiempo total invertido en ella. 
-\subsubsection{Aplicaciones de mensajería instantánea}
+\subsubsection{Requisitos de las aplicaciones de mensajería instantánea}
   \item En \textbf{Telegram} capturar, el nombre del contacto o grupo interlocutor. 
   \item Los mensajes enviados en la conversación por parte del usuario. 
   \item En \textbf{Whatsapp} capturar, el nombre del contacto o grupo interlocutor. 
   \item Los mensajes enviados en la conversación por parte del usuario. 
-  \item En \textbf{Facebook Messenger} capturar, el nombre del contacto o grupo interlocutor. 
-  \item Los mensajes enviados en la conversación por parte del usuario. 
-\subsubsection{Aplicaciones de búsqueda en la web}
+\subsubsection{Requisitos de las aplicaciones de búsqueda en la web}
   \item En \textbf{Chrome} capturar las páginas visitadas. 
   \item El tiempo invertido en cada una de ellas. 
   \item En \textbf{Firefox} capturar las páginas visitadas. 
   \item El tiempo invertido en cada una de ellas. 
   \item En \textbf{Búsqueda de Google} el objeto de búsqueda. 
-\subsubsection{Aplicaciones de redes sociales}
+\subsubsection{Requisitos de las aplicaciones de redes sociales}
   \item En \textbf{Twitter} capturar, el nombre de los perfiles visitados. 
   \item Los tuits publicados. 
   \item El contenido de los mensajes directos. 
@@ -543,16 +586,15 @@ El sistema deberá:
   \item Los estados compartidos dentro de la red social. 
   \item Las subidas de fotos y su título. 
 \end{itemize}
-\subsubsection{Sistema}
+\subsubsection{Requisitos de la información generada por el propio teléfono}
 \begin{itemize}
   \item Deberán registrarse las notificaciones recibidas por el usuario, incluyendo el contenido de la notificación y la marca horaria del momento en el que se recibe.
   \item Del sensor relacionado con la ubicación \textbf{GPS} deberemos registrar cada cambio de coordenadas que registre el teléfono. 
   \item Mediante el \textbf{acelerómetro} registraremos los cambios en la aceleración del teléfono. 
   \item Con el sensor de \textbf{presión} registraremos los cambios de altitud del teléfono. 
-  \item Con el \textbf{giroscopio} para detectar y registrar  los movimientos que realiza el teléfonpo. 
+  \item Con el \textbf{giroscopio} para detectar y registrar  los movimientos que realiza el teléfono. 
   \item El sensor de \textbf{temperatura} nos permitirá registrar, como no, la temperatura ambiente del dispositivo. 
 \end{itemize}
-\newpage
 \subsection{Requisitos no funcionales}
 \begin{itemize}
 	\item Versión. El sistema deberá soportar una versión limpia de Android 8.0. 
@@ -561,101 +603,120 @@ El sistema deberá:
 	\item Robustez. Debido a que el sistema debe estar constantemente capturando, el software debe ser tolerante a fallos y mantener el servicio siempre disponible.  
 	\item Seguridad. La base de datos local deberá estar protegida ante el acceso indebido a los datos. 
 \end{itemize}
+\subsection{Conclusiones}
 Los requisitos listados en este capítulo tienen como objetivo definir la implementación de un sistema que permita, en última instancia, obtener un perfil completo del usuario. 
 \newline \newline 
 Por un lado, los requisitos funcionales nos guiarán en la captura de información del usuario. Como se ha visto, tenemos 5 grandes grupos, que nos permiten conocer todas las facetas de la vida de este, ó, al menos, todas las que pasen por usar el terminal. 
 \newline \newline
-Por un lado la comunicación, escuchando aplicaciones como Gmail, el envío de sms y las llamadas telefónicas. Con la mensajería instantánea cubrimos las tres grandes aplicaciones en este campo, Whatsapp, Telegram y Facebook Messenger. En la navegación web, otra de las grandes tareas que hacemos con nuestros teléfonos, escucharemos Chrome, Firefox y la barra de Búsqueda Rápida de Google. 
+Gracias al apartado de comunicación , escuchando aplicaciones como Gmail, el envío de SMS y las llamadas telefónicas. Con la mensajería instantánea cubrimos las tres grandes aplicaciones en este campo, Whatsapp y Telegram. En la navegación web, otra de las grandes tareas que hacemos con nuestros teléfonos, escucharemos Chrome, Firefox y la barra de Búsqueda Rápida de Google. 
 \newline \newline 
 También podremos saber como interactúa el usuario con sus contactos a través de las redes sociales, puesto que almacenaremos datos provenientes de Facebook y Twitter. Y por último, para conocer cómo interactúa el usuario con el medio, recogeremos las notificaciones que entran en el dispositivo, así como los datos de los sensores físicos que incorporan la mayoría de terminales. 
 \newline \newline 
 Todos estos requisitos, junto con los no funcionales, cuyo objetivo es aportarle robustez al proyecto, nos permitirán desarrollar un sistema completo que abarque los usos mayoritarios del teléfono, obteniendo así un perfil completo de cómo un usuario interactúa y se relaciona con su terminal y entorno. 
 \break
-
 \chapter{Análisis}
 Para centrar el problema y enfocar los requisitos a un proceso que nos lleve a obtener un proyecto de ingeniería, haremos uso de distintos diagramas que nos ayudaran a resolver el problema y plantear una solución. Así en el capítulo nos encontramos con los diagramas de casos de uso, indicando las tareas que debe resolver el sistema, y un diagrama de arquitectura a alto nivel que plantea una solución inicial. 
-\pagebreak
 \section{Diagramas de Casos de Uso}
 Los casos de uso del sistema están planteados de modo que el usuario, al interactuar con el teléfono, dispara siempre la acción, aunque en muchos casos la acción del usuario será pasiva, es decir, no tendrá que realizar ninguna acción en concreto para disparar, por ejemplo, la captura de los sensores, pero será su propia actividad la que nos permita realizar dicha captura. 
 \newline
 \newline
-Por lo demás, hemos agrupado las aplicaciones en 5 categorías, comunicación, mensajería, navegación web, redes sociales y sensores. Dado que la mayoría de estas aplicaciones comparten la información a capturar, los veremos agrupados por comodidad para el lector. 
+Por lo demás, hemos agrupado las aplicaciones en 5 categorías, comunicación, mensajería, navegación web, redes sociales y sistema. Dado que la mayoría de estas aplicaciones comparten la información a capturar, los veremos agrupados por comodidad para el lector. 
+\subsection{Casos de uso generales}
+Estos casos de uso describen como se hace la captura de las aplicaciones. Por un lado, tenemos el registro del nombre de la app a través del nombre del paquete, y el timestamp del marco de ejecución para todas ellas. Vemos además como la captura de información extiende del lanzamiento de una aplicación, esto es así porque esta captura no se hará siempre, si no que dependerá de si la aplicación lanzada es objeto de captura. 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.7]{pictures/usecases/usecases01.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 01]{Casos de uso de cualquier aplicación.}
+	\caption[Casos de uso de cualquier aplicación.]{Casos de uso de cualquier aplicación.}
 \end{figure}
 %%% ------
-Vemos como la captura de información extiende del lanzamiento de una aplicación, esto es así porque esta captura no se hará siempre, si no que dependerá de si la aplicación lanzada es objeto de captura. 
-\pagebreak
-Si nos centramos en el apartado de aplicaciones de comunicación; 
+\subsection{Casos de uso de aplicaciones de comunicación}
+Si nos centramos en el apartado de aplicaciones de comunicación (GMail, SMS y Teléfono), para Gmail, deberemos registrar el destinatario (o destinatarios, en caso de incluir varias direcciones) del correo, así como su asunto, el cuerpo del mensaje y la marca horaria del momento en el que el correo fué enviado. 
+\newline \newline 
+Para los SMS, se incluyen las tareas de registrar el interlocutor y el cuerpo del mensaje. En el caso de la captura del teléfono, incluirá el registro del destinatario de la llamada, así como la duración total de la misma.  
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.70]{pictures/usecases/usecases02.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 02]{Casos de uso de aplicaciones de comunicación.}
+	\caption[Casos de uso de aplicaciones de comunicación.]{Casos de uso de aplicaciones de comunicación.}
 \end{figure}
 %%% ------
-En el grupo de mensajería instantánea.
+\subsection{Casos de uso de aplicaciones de mensajería instantánea}
+En el grupo de mensajería instantánea, donde están incluidos el Whatsapp y Telegram, se incluyen como tareas de la captura, tanto para Whatsapp como para Telegram, el registro del interlocutor y los mensajes vertidos en la conversación. 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.70]{pictures/usecases/usecases03.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 03]{Casos de uso de aplicaciones de mensajería instantánea.}
+	\caption[Casos de uso de aplicaciones de mensajería instantánea.]{Casos de uso de aplicaciones de mensajería instantánea.}
 \end{figure}
 %%% ------
-Aplicaciones de navegación y consulta de la web. 
+\subsection{Casos de uso de aplicaciónes de navegación web}
+En las aplicaciones de navegación y consulta de la web, donde se incluyen Chrome, Firefox y Búsqueda rápida de Google, la captura incluye las tareas del registro de la url consultada así como también la marca horaria de la consulta. 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.70]{pictures/usecases/usecases04.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 04]{Casos de uso de aplicaciones de navegación web.}
+	\caption[Casos de uso de aplicaciones de navegación web.]{Casos de uso de aplicaciones de navegación web.}
 \end{figure}
 %%% ------
-Si nos fijamos ahora en las aplicaciones de redes sociales, tenemos los siguientes casos de uso; 
+\subsection{Casos de uso de aplicaciones de redes sociales}
+Si nos fijamos ahora en las aplicaciones de redes sociales, donde incluimos la aplicación de Twitter y Facebook, vemos que por un lado la captura de Facebook incluye la captura de los perfiles visitados con la aplicación, los comentarios realizados, estados publicados y las fotos subidas con la aplicación. 
+\newline \newline 
+En el caso de Twitter, la captura incluye el registro de los perfiles visitados, los tuits publicados y los mensajes directos compartidos con la red de contactos de la aplicación. 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.70]{pictures/usecases/usecases05.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 05]{CU Apps RRSS.}
+	\caption[Casos de uso de apps de redes sociales.]{Casos de uso de apps de redes sociales.}
 \end{figure}
 %%% ------
-Por último, en el apartado de la información del sistema; 
+\subsection{Casos de uso para la información generada por el sistema}
+Por último, en el apartado de la información del sistema, cada vez que éste genere nueva información, en función de la fuente de origen de la misma, incluimos la captura de las notificaciones que llegan al dispositivo, la posición a través del GPS, y los valores de los sensores de presión, acelerómetro, presión, giroscópio y temperatura.  
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.70]{pictures/usecases/usecases06.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
 	\end{center}
-	\caption[Casos de uso 06]{CU Sistema.}
+	\caption[Casos de uso de la información generada por el sistema.]{Casos de uso de la información generada por el sistema.}
 \end{figure}
 %%% ------
-\pagebreak
+\subsection{Casos de uso del volcado de la información}
+Del mismo modo, dentro de estos casos de uso generales al sistema, se incluye la tarea de realizar un volcado a un servicio externo, de modo que se asegure la información y se libere espacio en el almacenamiento físico del terminal. 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{pictures/usecases/usecases07.png} % include ./img/imagen.[pdf|png|jgp] si es pdflatex o ./img/imagen.eps si es latex
+	\end{center}
+	\caption[Casos de uso de volcado de información.]{Casos de uso de volcado de información.}
+\end{figure}
 \section{Arquitectura de alto nivel}
 Teniendo claro cual es el propósito de nuestro sistema, debemos plantearnos cuáles serán los elementos que, interactuando entre ellos, resuelvan el problema final. 
-\newline 
-\newline
- 
-%----------- P A N O R A M I C O -------------------------------------------------
 
 \begin{figure}[H]
   \begin{center}
      \includegraphics[width=0.8\textwidth]{pictures/architecture/highLevel/altonivel01.png}
   \end{center}
   \caption[Arquitectura de alto nivel]{Arquitectura de alto nivel.}
-  \label{fig:LandscapeFigure}
+  \label{fig:Arquitectura de alto nivel}
 \end{figure}
 %----------- P A N O R A M I C O -------------------------------------------------
-
-\newpage
 Vemos que el sistema se compone gracias a tres componentes fundamentales, por un lado el usuario, fuente de nuestros datos, el propio teléfono, en donde capturaremos la información, y un servidor en la nube que recibirá de forma periódica los datos recogidos por el teléfono y que permitirá además consultarlos. 
-\newline
-\newline
+\newline \newline 
+Estos elementos interactúan entre sí de una forma natural. Por un lado el usuario, el iniciador de toda acción del sistema, interactúa con cualquier aplicación que tenga instalada en su dispositivo. De ella, el \textit{background service} de nuestra aplicación registrará su nombre y el tiempo de ejecución. 
+\newline \newline 
+Si, además, la aplicación que ha lanzado el usuario se incluyen en alguno de los grupos descritos a lo largo del documento (recordemos, comunicación, mensajería, navegación, redes sociales y sistema), este servicio en segundo plano deberá realizar las labores de cómputo y captura de la información que generada por el usuario al interactuar con ella.
+\newline \newline 
+Una vez se tenga esta información lista deberá ser almacenada en la base de datos local del teléfono. Será tarea del servicio realizar un volcado periódico de la información a un servidor en la nube. 
+\newline \newline 
+Este volcado se realiza por motivos de eficiencia, por no saturar el espacio de almacenamiento del teléfono, y además, para poder disponer de los datos en un punto de acceso unificado. El servidor. 
+\newline \newline 
+Este servidor tiene como único propósito disponer de dos puntos de entrada. El primero, que permita almacenar la información que se envíe desde el teléfono, y segundo, poder consultar la información una vez se encuentre almacenada. 
+\newline \newline 
+Teniendo en la cabeza cual es el objetivo de cada componente de la arquitectura, y cómo interactúan entre sí, veamos cada elemento de forma separada. 
 \subsection{Smartphone}
 Vayamos por partes pues y analicemos cada grupo de componentes. Por un lado el \textbf{smarthphone} y el \textbf{usuario}. Dado que el smartphone es la interfaz de acceso del usuario a las funciones del teléfono y sus aplicaciones, será entonces aquí donde centremos nuestro sistema y donde estarán la mayor parte de sus componentes, al menos todos los relacionados con la captura de información. 
 \newline
@@ -731,11 +792,11 @@ La idea es almacenar en local hasta que pase un tiempo razonable (por ejemplo, 2
 \subsection{Servidor Remoto}
 En este apartado analizaremos la arquitectura del entorno remoto planteado por la arquitectura. Consiste en un servicio en la nube que acepta el volcado que realiza la base de datos del teléfono cada poco tiempo y permite además visualizar los datos allí vertidos. 
  %%% ------ 
-\begin{figure}[hbt]
-  \begin{center} \setlength{\unitlength}{0.0105in}
-     \includegraphics[width=0.5\textwidth]{pictures/architecture/highLevelArch03.png}
+\begin{figure}[H]
+  \begin{center}
+     \includegraphics[scale=0.8]{pictures/architecture/highLevelArch03.png}
   \end{center}
-  \caption[Arquitectura de alto nivel. Cloud]{Arquitectura de alto nivel. Detalle del entorno cloud}
+  \caption[Arquitectura de alto nivel. Servidor remoto]{Arquitectura de alto nivel. Detalle del servidor remoto}
 \end{figure}
 %%% ------
 Estamos, por lo tanto, ante una típica arquitectura de servicios web, donde tenemos un controlador, encargado de atender los puntos de entrada de la API, un Manager que realiza las tareas de conversión de objetos y la lógica de negocio, el Repositorio, encargado trabajar contra la base de datos, una base de datos NoSQL y una Vista, 	que nos permite visualizar los datos almacenados. 
@@ -757,15 +818,15 @@ Se trata de nuestra base de datos en la nube, se opta por un sistema NoSQL debid
 Punto de salida de nuestra plataforma cloud, proporcionando así una interfaz de consulta de los datos almacenados, generados por la aplicación. \\
 \section{Diagrama de secuencia}
 Con el fin de explicar cuál es el flujo que recorren los datos y las operaciones que realiza cada componente así como los mensajes que se intercambian entre ellos, se incluye a continuación un diagrama de secuencia que describe el ciclo de vida de un evento desde el instante en el que se dispara hasta el momento en el que se almacena su información. 
-\begin{landscape}
-\begin{figure}[htb]
+%\begin{landscape}
+\begin{figure}[H]
   \begin{center}
-     \includegraphics[width=1.5\textwidth]{pictures/secuencediagrams/diagrama_seq_flujo.png}
+     \includegraphics[scale=0.22]{pictures/secuencediagrams/diagrama_seq_flujo.png}
   \end{center}
   \caption[Diagrama de secuencia]{Diagrama de secuencia habitual del sistema.}
     \label{fig:LandscapeFigure}
 \end{figure}
-\end{landscape}
+%\end{landscape}
 De esta forma, planteamos una arquitectura inicial dividida en capas, donde cada una está pensada para realizar una tarea simple y atómica. 
 \newline \newline 
 Se ha ideado esta arquitectura con la idea en mente de que sea un proyecto fácilmente ampliable, es decir, que el esfuerzo que conlleve añadir una nueva funcionalidad (por ejemplo, añadir una nueva app a la batería de aplicaciones a escuchar) tenga un impacto mínimo en el código y no implique grandes esfuerzos ni comunicaciones. 
@@ -876,13 +937,13 @@ Una vez que estos eventos pasen por el manejador, obtendremos como resultado una
 Profundicemos un poco más en como sería este manejador y como son los componentes que lo forman. 
 \newline
 \newline
-Como estamos viendo, el servicio de accesibilidad (lo llamaremos simplemente servicio) recibe eventos de la interfaz y los envía al manejador, pero dado que los eventos se generan en gran cantidad y en momentos puntuales tendremos que manejar un caudal de información importante, la comunicación entre el servicio y el manejador se realizará a través de un bus que permitirá al servicio desatender los datos lo antes posible y desentenderse así de lo que ocurre con esos datos y como son tratados.
+Como estamos viendo, el servicio de accesibilidad (lo llamaremos simplemente servicio) recibe eventos de la interfaz y los envía al manejador, pero dado que los eventos se generan en gran cantidad y en momentos puntuales tendremos que manejar un caudal de información importante, la comunicación entre el servicio y el manejador se realizará a través de un bus que permitirá al servicio desatender los datos lo antes posible y desentenderse así de lo que ocurre con esos datos y cómo son tratados.
 \newline
 \newline
 Este bus lo estará escuchando el manejador, que capturará los elementos para realizar un primer chequeo, y es que en función del nombre de la aplicación (más concretamente su package name), invocará a un \textit{Scraper} encargado de extraer la información relevante del evento que estamos manejando. 
 \newline
 \newline
-En nuestro sistema tendremos una interfaz Analizer, con tantas implementaciones como aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por los Managers. Encargados de persistir en una base de datos local los datos generados por el sistema. 
+En nuestro sistema tendremos una interfaz Analyzer, con tantas implementaciones como aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por los Managers. Encargados de persistir en una base de datos local los datos generados por el sistema. 
 \newline
 \newline
 Al final nuestra arquitectura a bajo nivel resulta en el siguiente diagrama. 
@@ -971,7 +1032,7 @@ D/Helper: [type] TYPE_WINDOW_STATE_CHANGED
 \end{verbatim}
 El output listado arriba se corresponde con la acción de enviar una cadena de texto a un contacto de Whatsapp y, mediante el botón de \textit{back}, navegar hacia la pantalla principal de la app, llegar a la caja de aplicaciones y volver a la pantalla principal. Una vez ahí se ha bloqueado el dispositivo. 
 \newline \newline 
-La gran complicación del proyecto consiste en la enorme cantidad de información que generan acciones que tenemos muy automatizadas como usuarios. Es nuestro objetivo entonces consiste en poner orden a ese carro de datos. 
+La gran complicación del proyecto consiste en la enorme cantidad de información que generan acciones que tenemos muy automatizadas como usuarios. Nuestro objetivo entonces consiste en poner orden a ese carro de datos. 
 \newline \newline 
 Para ello, durante el proceso de implementación, cada vez que nos enfrentamos a una nueva captura, debemos debugguear los servicios generados (con outputs similares al de arriba) y estudiarla hasta detectar el patrón que se corresponde a la acción que queremos capturar (por ejemplo, la escritura en Whatsapp o una búsqueda Web). 
 \newline \newline 
@@ -984,7 +1045,7 @@ De esta manera, detectando patrones, filtrando eventos y leyendo su información
 En el proyecto se incluyen capturas de varias aplicaciones, veamos a continuación tres de ellas que, por su relevancia, consideramos interesantes estudiar en detalle. 
 \newpage 
 \section{Captura de Gmail}
-En este apartado, y los que siguen, veremos los objetos destinados a guardar la información y los diagramas de actividad de tres aplicaciones clave para el perfilado del usuario, Gmail, Whatsapp y el navegador Chrome. Tienen como objetivo clarificar y documentar el flujo lógico que seguirá cada aplicación, durante el proceso de análisis y extracción del contenido de cada de las aplicaciones propuestas.
+En este apartado, y los que siguen, veremos los objetos destinados a guardar la información y los diagramas de actividad de tres aplicaciones clave para el perfilado del usuario, Gmail, Whatsapp y el navegador Chrome. Tienen como objetivo clarificar y documentar el flujo lógico que seguirá cada aplicación, durante el proceso de análisis y extracción del contenido de una cada de las aplicaciones propuestas.
 \subsection{GmailDto}
 El objeto donde guardaremos la información de captura se compone de los siguiente atributos; 
 \begin{verbatim}
@@ -1174,7 +1235,7 @@ Jugando con estos dos eventos seremos capaces de recoger con quién habla el usu
 \subsubsection{Eventos de com.whatsapp} 
 Este tipo de evento, cuyo origen es la propia aplicación de Whatsapp, nos aportará información acerca de los gestos que realiza el usuario dentro de la misma. Gracias a esto, podremos añadir un contexto a la información recogida, puesto que nos permiten obtener datos como el nombre del contacto con el que habla el usuario, a la vez que nos aportan información acerca de la pantalla que está viendo el usuario a cada momento.
 \newline \newline
-A la hora de recoger el texto vertido por el usuario en una conversación determinada la captura se complica, puesto que entran en juego eventos externos, sin los cuales no podríamos dotar de sentido a las cadenas escritas. Veámoslo en detalle, dado que no es un asunto trivial. Expliquemos en primer lugar como se capturan los caracteres escritos. 
+A la hora de recoger el texto vertido por el usuario en una conversación determinada la captura se complica, puesto que entran en juego eventos externos, sin los cuales no podríamos dotar de sentido a las cadenas escritas. Veámoslo en detalle, dado que no es un asunto trivial. Expliquemos en primer lugar cómo se capturan los caracteres escritos. 
 \newline \newline 
 Cuando escribimos un mensaje en el campo de texto de la aplicación, se generan tantos eventos de accesibilidad como letras pulsadas en el teclado. Estos eventos son originados por Whatsapp, con lo cual seguirán el flujo destinado para su captura, y diferenciando el widget de la UI asociado al mismo, podremos capturar el texto del evento, donde se encuentra nuestra preciada información, las letras que el usuario pulsa. 
 \newline \newline
@@ -1310,7 +1371,7 @@ Veamos a que elemento de la interfaz están relacionados los eventos para estos 
 	\end{center}
 \end{figure}
 \newpage
-\item \textit{android.widget.FrameLayout}. Asociados a la pulsación de una página guardada como sitios frecuentes. Dado que el usuario, este caso, no tiene que escribir nada en la barra de búsqueda, deberemos obtener la página visitada obteniendo el texto de este evento. De esta forma podremos saber que sitio almacenado visita cada vez. 
+\item \textit{android.widget.FrameLayout}. Asociados a la pulsación de una página guardada como sitios frecuentes. Dado que el usuario, este caso, no tiene que escribir nada en la barra de búsqueda, deberemos obtener la página visitada obteniendo el texto de este evento. De esta forma podremos saber que sitio visita cada vez y almacenar su dirección. 
 \begin{figure}[H]
 	\begin{center}
      	\includegraphics[scale=0.2]{pictures/IRL/chrome/chrome_frequents.png}
@@ -1357,7 +1418,7 @@ Nos ayuda a extraer del evento el texto asociado a la pulsación de un sitio fre
 \newline \newline 
 Una vez hecho esto, se invoca al método storeObjectInRealm(), encargado de su persistencia. 
 \subsubsection{captureSearchString(eventSto)}
-Este método, en primer lugar verifica que la cadena de búsqueda sea valida. En concreto, verifica que su longitud es mayor a la unidad. Esto es así porque a veces y de forma aparentemente aleatoria, se generan eventos de accesibilidad que han conseguido superar todos los filtros de cada nivel hasta llegar aquí, pero su contenido es la primer letra de la búsqueda o url. 
+Este método, en primer lugar verifica que la cadena de búsqueda sea válida. En concreto, verifica que su longitud es mayor a la unidad. Esto es así porque a veces y de forma aparentemente aleatoria, se generan eventos de accesibilidad que han conseguido superar todos los filtros de cada nivel hasta llegar aquí, pero su contenido es la primer letra de la búsqueda o url. 
 \newline \newline 
 Seguido de esto, se comprueba que el evento es del tipo \textit{text selection changed} y superado este filtro, se instancia un nuevo objeto del tipo ChromeDto, se le añade la marca horaria, cadena de búsqueda y se deja el objeto preparado para cuando llegue el evento de teclado responsable de confirmar la entrada de texto. 
 \subsubsection{captureUrlPrompt(eventSto)}

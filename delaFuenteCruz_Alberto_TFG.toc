@@ -3,72 +3,80 @@
 \contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n y desarrollo}{6}{section.1.1}
 \contentsline {chapter}{\numberline {2}Objetivos}{8}{chapter.2}
 \contentsline {section}{\numberline {2.1}Planificaci\IeC {\'o}n}{9}{section.2.1}
-\contentsline {chapter}{\numberline {3}Estado del Arte}{10}{chapter.3}
-\contentsline {section}{\numberline {3.1}An\IeC {\'a}lisis Web}{11}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Geolocalizaci\IeC {\'o}n}{11}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}An\IeC {\'a}lisis de los gestos del rat\IeC {\'o}n}{12}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Cookies}{13}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Google y la plataforma Android}{14}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Los servicios de Google y la localizaci\IeC {\'o}n}{17}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Aplicaciones de terceros}{19}{subsection.3.2.2}
-\contentsline {subsubsection}{Aplicaci\IeC {\'o}n de La Liga}{19}{section*.7}
-\contentsline {subsubsection}{Aplicaci\IeC {\'o}n Linterna}{20}{section*.8}
-\contentsline {section}{\numberline {3.3}Dispositivos IOT}{21}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Asistentes personales}{22}{subsection.3.3.1}
-\contentsline {chapter}{\numberline {4}Requisitos del proyecto}{25}{chapter.4}
-\contentsline {section}{\numberline {4.1}Requisitos}{26}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Requisitos funcionales}{26}{subsection.4.1.1}
-\contentsline {subsubsection}{Aplicaciones de comunicaci\IeC {\'o}n}{27}{section*.9}
-\contentsline {subsubsection}{Aplicaciones de mensajer\IeC {\'\i }a instant\IeC {\'a}nea}{27}{section*.10}
-\contentsline {subsubsection}{Aplicaciones de b\IeC {\'u}squeda en la web}{27}{section*.11}
-\contentsline {subsubsection}{Aplicaciones de redes sociales}{28}{section*.12}
-\contentsline {subsubsection}{Sistema}{28}{section*.13}
-\contentsline {subsection}{\numberline {4.1.2}Requisitos no funcionales}{29}{subsection.4.1.2}
-\contentsline {chapter}{\numberline {5}An\IeC {\'a}lisis}{31}{chapter.5}
-\contentsline {section}{\numberline {5.1}Diagramas de Casos de Uso}{32}{section.5.1}
-\contentsline {section}{\numberline {5.2}Arquitectura de alto nivel}{36}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Smartphone}{37}{subsection.5.2.1}
-\contentsline {subsubsection}{Evento}{38}{section*.22}
-\contentsline {subsubsection}{Capturador}{39}{section*.23}
-\contentsline {subsubsection}{Evento + timestamp}{39}{section*.24}
-\contentsline {subsubsection}{Manejador}{39}{section*.25}
-\contentsline {subsubsection}{Sto}{40}{section*.26}
-\contentsline {subsubsection}{Analizador}{40}{section*.27}
-\contentsline {subsubsection}{Dto}{40}{section*.28}
-\contentsline {subsubsection}{DB Manager}{41}{section*.29}
-\contentsline {subsection}{\numberline {5.2.2}Servidor Remoto}{42}{subsection.5.2.2}
-\contentsline {subsubsection}{Controller}{42}{section*.31}
-\contentsline {subsubsection}{Manager}{43}{section*.32}
-\contentsline {subsubsection}{Repository}{43}{section*.33}
-\contentsline {subsubsection}{DB NoSQL}{43}{section*.34}
-\contentsline {subsubsection}{Vista}{43}{section*.35}
-\contentsline {section}{\numberline {5.3}Diagrama de secuencia}{44}{section.5.3}
-\contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o}{47}{chapter.6}
-\contentsline {section}{\numberline {6.1}Arquitectura}{48}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Decisiones de dise\IeC {\~n}o}{48}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Arquitectura a bajo nivel}{53}{subsection.6.1.2}
-\contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{59}{chapter.7}
-\contentsline {section}{\numberline {7.1}Accessibility Events}{60}{section.7.1}
-\contentsline {section}{\numberline {7.2}Captura de Gmail}{63}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}GmailDto}{63}{subsection.7.2.1}
-\contentsline {subsection}{\numberline {7.2.2}Diagrama de actividad}{64}{subsection.7.2.2}
-\contentsline {section}{\numberline {7.3}Captura de Whatsapp}{71}{section.7.3}
-\contentsline {subsection}{\numberline {7.3.1}WhatsappDto}{71}{subsection.7.3.1}
-\contentsline {subsection}{\numberline {7.3.2}Diagrama de actividad}{72}{subsection.7.3.2}
-\contentsline {subsubsection}{Eventos de com.whatsapp}{73}{section*.51}
-\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{74}{section*.52}
-\contentsline {subsubsection}{Compute(eventSto}{81}{section*.58}
-\contentsline {subsubsection}{storeObjectInRealm()}{81}{section*.59}
-\contentsline {subsubsection}{instanceNewDto(timestamp)}{82}{section*.60}
-\contentsline {subsubsection}{confirmKeyboardInput(timestamp)}{82}{section*.61}
-\contentsline {section}{\numberline {7.4}Captura de Chrome}{84}{section.7.4}
-\contentsline {subsection}{\numberline {7.4.1}ChromeDto}{84}{subsection.7.4.1}
-\contentsline {subsection}{\numberline {7.4.2}Diagram de actividad}{85}{subsection.7.4.2}
-\contentsline {subsubsection}{Eventos de com.android.chrome}{85}{section*.62}
-\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{88}{section*.66}
-\contentsline {subsubsection}{handleFrequentSites(eventSto)}{92}{section*.69}
-\contentsline {subsubsection}{captureSearchString(eventSto)}{92}{section*.70}
-\contentsline {subsubsection}{captureUrlPrompt(eventSto)}{93}{section*.71}
-\contentsline {section}{\numberline {7.5}Bibliotecas de terceros}{93}{section.7.5}
-\contentsline {subsection}{\numberline {7.5.1}Realm}{93}{subsection.7.5.1}
-\contentsline {chapter}{\numberline {8}Conclusiones y trabajos futuros}{95}{chapter.8}
+\contentsline {chapter}{\numberline {3}Estado del Arte}{12}{chapter.3}
+\contentsline {section}{\numberline {3.1}An\IeC {\'a}lisis Web}{13}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Geolocalizaci\IeC {\'o}n}{13}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}An\IeC {\'a}lisis de los gestos del rat\IeC {\'o}n}{14}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Cookies}{15}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Google y la plataforma Android}{16}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Los servicios de Google y la localizaci\IeC {\'o}n}{19}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Aplicaciones de terceros}{21}{subsection.3.2.2}
+\contentsline {subsubsection}{Aplicaci\IeC {\'o}n de La Liga}{21}{section*.9}
+\contentsline {subsubsection}{Aplicaci\IeC {\'o}n Linterna}{22}{section*.10}
+\contentsline {section}{\numberline {3.3}Dispositivos IOT}{23}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Asistentes personales}{24}{subsection.3.3.1}
+\contentsline {chapter}{\numberline {4}Requisitos del proyecto}{27}{chapter.4}
+\contentsline {section}{\numberline {4.1}Requisitos}{27}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Requisitos funcionales}{30}{subsection.4.1.1}
+\contentsline {subsubsection}{Requisitos de las aplicaciones de comunicaci\IeC {\'o}n}{31}{section*.11}
+\contentsline {subsubsection}{Requisitos de las aplicaciones de mensajer\IeC {\'\i }a instant\IeC {\'a}nea}{32}{section*.12}
+\contentsline {subsubsection}{Requisitos de las aplicaciones de b\IeC {\'u}squeda en la web}{32}{section*.13}
+\contentsline {subsubsection}{Requisitos de las aplicaciones de redes sociales}{32}{section*.14}
+\contentsline {subsubsection}{Requisitos de la informaci\IeC {\'o}n generada por el propio tel\IeC {\'e}fono}{33}{section*.15}
+\contentsline {subsection}{\numberline {4.1.2}Requisitos no funcionales}{33}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Conclusiones}{34}{subsection.4.1.3}
+\contentsline {chapter}{\numberline {5}An\IeC {\'a}lisis}{36}{chapter.5}
+\contentsline {section}{\numberline {5.1}Diagramas de Casos de Uso}{36}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Casos de uso generales}{37}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Casos de uso de aplicaciones de comunicaci\IeC {\'o}n}{37}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Casos de uso de aplicaciones de mensajer\IeC {\'\i }a instant\IeC {\'a}nea}{38}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Casos de uso de aplicaci\IeC {\'o}nes de navegaci\IeC {\'o}n web}{38}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Casos de uso de aplicaciones de redes sociales}{39}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {5.1.6}Casos de uso para la informaci\IeC {\'o}n generada por el sistema}{40}{subsection.5.1.6}
+\contentsline {subsection}{\numberline {5.1.7}Casos de uso del volcado de la informaci\IeC {\'o}n}{41}{subsection.5.1.7}
+\contentsline {section}{\numberline {5.2}Arquitectura de alto nivel}{42}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Smartphone}{43}{subsection.5.2.1}
+\contentsline {subsubsection}{Evento}{45}{section*.25}
+\contentsline {subsubsection}{Capturador}{45}{section*.26}
+\contentsline {subsubsection}{Evento + timestamp}{46}{section*.27}
+\contentsline {subsubsection}{Manejador}{46}{section*.28}
+\contentsline {subsubsection}{Sto}{46}{section*.29}
+\contentsline {subsubsection}{Analizador}{46}{section*.30}
+\contentsline {subsubsection}{Dto}{47}{section*.31}
+\contentsline {subsubsection}{DB Manager}{47}{section*.32}
+\contentsline {subsection}{\numberline {5.2.2}Servidor Remoto}{49}{subsection.5.2.2}
+\contentsline {subsubsection}{Controller}{50}{section*.34}
+\contentsline {subsubsection}{Manager}{50}{section*.35}
+\contentsline {subsubsection}{Repository}{50}{section*.36}
+\contentsline {subsubsection}{DB NoSQL}{50}{section*.37}
+\contentsline {subsubsection}{Vista}{51}{section*.38}
+\contentsline {section}{\numberline {5.3}Diagrama de secuencia}{51}{section.5.3}
+\contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o}{53}{chapter.6}
+\contentsline {section}{\numberline {6.1}Arquitectura}{54}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Decisiones de dise\IeC {\~n}o}{54}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Arquitectura a bajo nivel}{59}{subsection.6.1.2}
+\contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{65}{chapter.7}
+\contentsline {section}{\numberline {7.1}Accessibility Events}{66}{section.7.1}
+\contentsline {section}{\numberline {7.2}Captura de Gmail}{69}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}GmailDto}{69}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Diagrama de actividad}{70}{subsection.7.2.2}
+\contentsline {section}{\numberline {7.3}Captura de Whatsapp}{77}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}WhatsappDto}{77}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Diagrama de actividad}{78}{subsection.7.3.2}
+\contentsline {subsubsection}{Eventos de com.whatsapp}{79}{section*.54}
+\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{80}{section*.55}
+\contentsline {subsubsection}{Compute(eventSto}{87}{section*.61}
+\contentsline {subsubsection}{storeObjectInRealm()}{87}{section*.62}
+\contentsline {subsubsection}{instanceNewDto(timestamp)}{88}{section*.63}
+\contentsline {subsubsection}{confirmKeyboardInput(timestamp)}{88}{section*.64}
+\contentsline {section}{\numberline {7.4}Captura de Chrome}{90}{section.7.4}
+\contentsline {subsection}{\numberline {7.4.1}ChromeDto}{90}{subsection.7.4.1}
+\contentsline {subsection}{\numberline {7.4.2}Diagram de actividad}{91}{subsection.7.4.2}
+\contentsline {subsubsection}{Eventos de com.android.chrome}{91}{section*.65}
+\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{94}{section*.69}
+\contentsline {subsubsection}{handleFrequentSites(eventSto)}{98}{section*.72}
+\contentsline {subsubsection}{captureSearchString(eventSto)}{98}{section*.73}
+\contentsline {subsubsection}{captureUrlPrompt(eventSto)}{99}{section*.74}
+\contentsline {section}{\numberline {7.5}Bibliotecas de terceros}{99}{section.7.5}
+\contentsline {subsection}{\numberline {7.5.1}Realm}{99}{subsection.7.5.1}
+\contentsline {chapter}{\numberline {8}Conclusiones y trabajos futuros}{101}{chapter.8}
