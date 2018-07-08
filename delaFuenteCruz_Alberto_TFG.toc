@@ -52,9 +52,10 @@
 \contentsline {subsubsection}{Vista}{51}{section*.38}
 \contentsline {section}{\numberline {5.3}Diagrama de secuencia}{51}{section.5.3}
 \contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o}{53}{chapter.6}
-\contentsline {section}{\numberline {6.1}Arquitectura}{54}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Decisiones de dise\IeC {\~n}o}{54}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Arquitectura a bajo nivel}{59}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.1}Arquitectura}{53}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Decisiones de dise\IeC {\~n}o}{53}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Arquitectura a bajo nivel}{57}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Diagrama de clases}{62}{subsection.6.1.3}
 \contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{65}{chapter.7}
 \contentsline {section}{\numberline {7.1}Accessibility Events}{66}{section.7.1}
 \contentsline {section}{\numberline {7.2}Captura de Gmail}{69}{section.7.2}

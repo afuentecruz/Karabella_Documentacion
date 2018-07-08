@@ -562,8 +562,10 @@ El sistema deberá:
   \item La dirección de correo del receptor(es). 
   \item El asunto del correo electrónico. 
   \item El contenido, cuerpo de dicho correo. 
+  \item La marca horaria del momento del envío. 
   \item En \textbf{Mensajes} se deberá capturar, el destinatario. 
   \item El cuerpo del mensaje. 
+  \item La marca horaria del momento del envío. 
   \item En \textbf{Teléfono} se deberá capturar, el destinatario de la llamada. 
   \item Tiempo total invertido en ella. 
 \subsubsection{Requisitos de las aplicaciones de mensajería instantánea}
@@ -573,27 +575,28 @@ El sistema deberá:
   \item Los mensajes enviados en la conversación por parte del usuario. 
 \subsubsection{Requisitos de las aplicaciones de búsqueda en la web}
   \item En \textbf{Chrome} capturar las páginas visitadas. 
-  \item El tiempo invertido en cada una de ellas. 
+  \item La marca horaria del momento de la visita. 
   \item En \textbf{Firefox} capturar las páginas visitadas. 
-  \item El tiempo invertido en cada una de ellas. 
+  \item La marca horaria del momento de la visita. 
   \item En \textbf{Búsqueda de Google} el objeto de búsqueda. 
+  \item La marca horaria del momento de la visita. 
 \subsubsection{Requisitos de las aplicaciones de redes sociales}
   \item En \textbf{Twitter} capturar, el nombre de los perfiles visitados. 
-  \item Los tuits publicados. 
-  \item El contenido de los mensajes directos. 
+  \item Los tuits publicados y la marca horaria de la publicación. 
+  \item El contenido de los mensajes directos y la marca horaria del envío. 
   \item En \textbf{Facebook} capturar, el nombre de los perfiles visitados. 
-  \item Los comentarios hechos en dichos perfiles. 
-  \item Los estados compartidos dentro de la red social. 
-  \item Las subidas de fotos y su título. 
+  \item Los comentarios hechos en dichos perfiles y la marca horaria de la publicación . 
+  \item Los estados compartidos dentro de la red social y la marca horaria de la publicación . 
+  \item Las subidas de fotos y su título junto a la marca horaria de la subida. 
 \end{itemize}
 \subsubsection{Requisitos de la información generada por el propio teléfono}
 \begin{itemize}
   \item Deberán registrarse las notificaciones recibidas por el usuario, incluyendo el contenido de la notificación y la marca horaria del momento en el que se recibe.
-  \item Del sensor relacionado con la ubicación \textbf{GPS} deberemos registrar cada cambio de coordenadas que registre el teléfono. 
-  \item Mediante el \textbf{acelerómetro} registraremos los cambios en la aceleración del teléfono. 
-  \item Con el sensor de \textbf{presión} registraremos los cambios de altitud del teléfono. 
-  \item Con el \textbf{giroscopio} para detectar y registrar  los movimientos que realiza el teléfono. 
-  \item El sensor de \textbf{temperatura} nos permitirá registrar, como no, la temperatura ambiente del dispositivo. 
+  \item Del sensor relacionado con la ubicación \textbf{GPS} deberemos registrar cada cambio de coordenadas que registre el teléfono, junto a la marca horaria del instante de la captura. 
+  \item Mediante el \textbf{acelerómetro} registraremos los cambios en la aceleración del teléfono, junto a la marca horaria del instante de la captura. 
+  \item Con el sensor de \textbf{presión} registraremos los cambios de altitud del teléfono, junto a la marca horaria del instante de la captura.
+  \item Con el \textbf{giroscopio} para detectar y registrar  los movimientos que realiza el teléfono, junto a la marca horaria del instante de la captura.
+  \item El sensor de \textbf{temperatura} nos permitirá registrar, como no, la temperatura ambiente del dispositivo, junto a la marca horaria del instante de la captura.
 \end{itemize}
 \subsection{Requisitos no funcionales}
 \begin{itemize}
@@ -839,7 +842,6 @@ Con esta arquitectura conseguimos entonces el objetivo de que añadir aplicacion
 % -------------- % 
 \chapter{Diseño}
 En este capítulo se detalla el resultado de las sucesivas iteraciones sobre la etapa de diseño. A partir de los requisitos se ha estudiado el problema y planteado una arquitectura que nos permitirá guiar la implementación de los casos de uso. Se pretende obtener una arquitectura limpia y organizada de manera que permita la mantenibilidad del proyecto y una modificación mínima y eficaz. 
-\newpage
 \section{Arquitectura}
 A la hora de plantear nuestra arquitectura el primer paso será conocer la propia arquitectura de Android, por ello, en la siguiente sección estudiaremos como está planteado el sistema sobre el que nos basamos y en base a ese conocimiento tomaremos unas decisiones de diseño que nos ayudarán a componer la arquitectura final. 
 \subsection{Decisiones de diseño}
@@ -889,7 +891,6 @@ La capa de los Interface Adapters realiza la conversión de los datos de manera 
 \newline
 \newline
 En la última capa y más externa, Frameworks and Drivers, residen las plataformas y herramientas externas, donde se incluye la interfaz de usuario, web... 
-\newpage
 \subsection{Arquitectura a bajo nivel}
 Una vez tenemos claro como está estructurado Android y los servicios que ofrece al desarrollador, debemos plantearnos cómo diseñar una aplicación que sea capaz de implementar estos servicios de accesibilidad para capturar, procesar y extraer la  información de los eventos que se generan, deberemos abstraernos del problema y ser capaces de, a partir de una vista general del sistema inferir las capas que finalmente nos guiarán la implementación. 
 \newline
@@ -899,7 +900,7 @@ Así pues, en primer lugar situar nuestro sistema dentro del stack tecnológico 
 %%% ------ 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.6]{pictures/architecture/arquitecturaGeneral01.png} 
+		\includegraphics[scale=0.7]{pictures/architecture/arquitecturaGeneral01.png} 
 	\end{center}
 	\caption[Arquitectura dentro del android stack]{Arquitectura del sistema dentro del stack de Android.}
 \end{figure}
@@ -928,54 +929,58 @@ De esta forma, y siguiendo las líneas definidas, obtenemos una arquitectura det
 Donde la interfaz de usuario (UI) genera eventos de accesibilidad. Estos eventos, como ya se ha comentado, están asociados a cada acción que el usuario realiza con el teléfono sobre la interfaz. Será la implementación del evento de accesibilidad (Accesibility Service) el que nos permita capturarlos. 
 \newline
 \newline
-Este servicio se encargará de capturar los eventos y mandarlos hacia el Manejador de Eventos (Event Handler), este manejador será el encargado de clasificar y procesar los eventos en función de la información que traigan consigo. 
+Este servicio se encargará de capturar los eventos y mandarlos hacia el Manejador de Eventos (EventHandler), este manejador será el encargado de clasificar y procesar los eventos en función de la información que traigan consigo. 
 \newline
 \newline
-Una vez que estos eventos pasen por el manejador, obtendremos como resultado una entidad lista para ser guardada en la base de datos. 
+El manejador de eventos es un componente crucial del sistema. Será el encargado de, en función de la aplicación origen del evento, mandarlos a un analizador u otro. Además, no sólo se centra en los eventos de las aplicaciones que estamos escuchando, si no que mantiene un control sobre componentes del sistema como el teclado o las notificaciones. 
+\newline 
+\newline 
+Estos eventos de teclado son cruciales para algunos analizadores, nos permitirán controlar la entrada de texto del usuario. Por lo tanto el manejador deberá mantener la información de la aplicación que se está escuchando en cada momento, y en función de ello, y junto al evento de teclado, llamar al analizador oportuno para que realice la tarea correspondiente. 
 \newline
 \newline
-Profundicemos un poco más en como sería este manejador y como son los componentes que lo forman. 
+Siguiendo con el resto de componente, nuestro sistema cuenta con una interfaz Analyzer, con tantas implementaciones 
+ aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por un Manager de objetos. Este Manager será la entidad responsable de persistir en una base de datos local los datos generados por el sistema, además de realizar el dump de los datos cada vez que proceda. 
 \newline
 \newline
-Como estamos viendo, el servicio de accesibilidad (lo llamaremos simplemente servicio) recibe eventos de la interfaz y los envía al manejador, pero dado que los eventos se generan en gran cantidad y en momentos puntuales tendremos que manejar un caudal de información importante, la comunicación entre el servicio y el manejador se realizará a través de un bus que permitirá al servicio desatender los datos lo antes posible y desentenderse así de lo que ocurre con esos datos y cómo son tratados.
-\newline
-\newline
-Este bus lo estará escuchando el manejador, que capturará los elementos para realizar un primer chequeo, y es que en función del nombre de la aplicación (más concretamente su package name), invocará a un \textit{Scraper} encargado de extraer la información relevante del evento que estamos manejando. 
-\newline
-\newline
-En nuestro sistema tendremos una interfaz Analyzer, con tantas implementaciones como aplicaciones estemos monitorizando. Procesarán el evento de accesibilidad y lo encapsularán en una unidad de datos que será pasada a la capa de persistencia, formada por los Managers. Encargados de persistir en una base de datos local los datos generados por el sistema. 
-\newline
-\newline
-Al final nuestra arquitectura a bajo nivel resulta en el siguiente diagrama. 
+Con el GPS y los sensores la historia es diferente, puesto que la escucha de los mismos está ligada a la implementación de sendos listeners dentro de un servicio en segundo plano. Este servicio por tanto, lanzará tantos dos listeners, por un lado, el listener de la localización y por otro, un listener de los sensores que están incluidos en el terminal. Cada vez que se detecten cambios en los valores del GPS o los sensores, se empaquetará la información en un Dto y se llevará al DBManager para que la persista.
+\newline 
+\newline 
+En la parte del DataManager tendremos entonces la implementación de las operaciones de guardado y recuperación de la base de datos. Esta implementación ha ido cambiando a lo largo del desarrollo. En un principio había tantas implementaciones del manejador como entidades de datos estaba manejando la aplicación. Con el tiempo esto cambió para encontrarnos una única clase DBManager que, de forma anónima, maneja los objetos que los analizadores le comunican. 
+\newline \newline 
+Esto se ha hecho persiguiendo el objetivo de parametrizar lo máximo posible las implementaciones de las clases participantes en el sistema. El DBManager recibirá objetos de tipo Dto, los cuales extienden de RealmObject (como se verá en el siguiente capítulo). Así, DBMaganer lo único que conoce de los objetos que maneja es que son instancias de tipo RealmObject, con lo cual nos evita duplicar código y nos aporta flexibilidad y comodidad a la hora de modificar o ampliar el proyecto. 
+\newline \newline
+De esta manera nos encontramos con 4 capas separadas por funcionalidad y con independencia lógica entre ellas, puesto que cada una está consagrada a una tarea particular (servicios de escucha, manejar eventos, computarlos, persistirlos). 
+\newline \newline
+La lógica de negocio del sistema se encuentra, sin duda, en las capas del manejador y analizador, donde deberemos de echar un esfuerzo de implementación considerable para manejar todo el flujo de información. 
+\newline \newline 
+\subsection{Diagrama de clases}
+Por un lado, tenemos dos servicios en la aplicación, el primero, \textbf{AccessibilityServiceImpl}, implementa un Servicio de Accesibilidad, nos permitirá capturar los eventos generados por la interfaz al interactuar el usuario con la misma.
+\newline \newline
+El segundo, \textbf{SensorListenerService}, implementa dos interfaces, por un lado \textbf{LocationService}, para la captura de la localización GPS, y por otro, \textbf{SensorEventListener}, para la captura de los valores de los sensores de ambiente del teléfono. 
+\newline \newline
+Este servicio es independiente a manejadores, analizadores y demás elementos del sistema. Cuando detecten un cambio en los valores del gps o los sensores, lo almacenarán en el Dto correspondiente (LocationDto para la localización y Sensor Dto para los sensores) llamando para ello al DBManager. 
+\newline \newline
+Siguiendo con el \textbf{servicio de accesibilidad}, la implementación de esta interfaz nos permite, como ya se ha dicho, capturar los gestos que realiza el usuario en la pantalla. Son los \textbf{eventos de accesibilidad} los que nos aportan esa información. 
+\newline \newline
+Una vez que este servicio de accesibilidad captura esos eventos, se comunica con el manejador, que deberá comprobar el nombre del paquete que originó el evento para llamar a la implementación del analizador correspondiente. Este analizador será el responsable de extraer la información del evento y darle sentido al carro de datos que entrará en el sistema. 
+\newline \newline
+De esta manera, nos encontramos tantos analizadores como aplicaciones queremos escuchar. Al tratarse de la implementación de una interfaz, todas las implementaciones deberán contar con los métodos compute, para extraer y darle significado a la información recogida, y store, para persistir la instancia del objeto capturado en la base de datos. 
+\newline \newline
+Los objetos en los cuales almacenamos la información están asociados a los analizadores, y dada la naturaleza de la aplicación, habrá tantos como aplicaciones queramos escuchar, puesto que los atributos deben adaptarse a la naturaleza de la misma. 
+\newline \newline
+De cualquier modo, para mejorar la compresión del diagrama, se han agrupado las clases del analizador en 5 paquetes. A saber, Browsing, Social, System, Communication y Messaging. Dentro de ellos los atributos de cada dto son similares unos a otros, puesto que la naturaleza de las aplicaciones que se incluyen en cada uno son similares. 
+\newline \newline
+Teniendo este diagrama en mente, y conociendo como está estructurada la arquitectura y su implementación, veamos como se ha realizado la misma. 
 %%% ------ 
-\begin{figure}[H]
+\begin{landscape}
+\begin{figure}[htb]
 \begin{center}
-		\includegraphics[width=1.3\textwidth]{pictures/architecture/arquitecturaGeneral03.png} 
+		\includegraphics[scale=0.32]{pictures/classDiagram/classDiagram.png} 
 %	\end{large}
-	\caption[Arquitectura detallada]{Arquitectura detallada}
+	\caption[Diagrama de clases de la aplicación]{Diagrama de clases de la aplicación}
 	\end{center}
 \end{figure}
-%%% ------  
-En primer lugar nos encontramos la ui que alimenta al servicio de accesibilidad con eventos. Este servicio se encarga de meterlos en un bus de forma que el manejador pueda recogerlos y computarlos. 
-\newline \newline
-Este tratamiento que realiza el manejador no es otro que, en función de la app que lo lanzó llamar a las clases implicadas en su tratamiento.
-\newline \newline
-Expliquemos más despacio en que consite esto. El manejador, como se ha dicho en alguna ocasión, analiza el package name del evento, este package name nos permite identificar el elemento del sistema android que lanzó el evento, ya sean relacionados con la aplicación en foco en ese momento como los relacionados con el uso de sensores del teléfono. 
-\newline \newline
-Los eventos de las aplicaciones serán tratados por el analizador que le corresponda. Estos extraerán la información pertinente y la encapsularán en dtos. 
-\newline \newline
-Con los sensores la historia es diferente, puesto que la escucha de los mismos está ligada a la implementación de sendos listeners que recogen la información que van generando. En un apartado diferente entra la escucha del micrófono, puesto que para respetar la privacidad del usuario sólo se lanzará la captura de audio cuando un evento relacionado con la misma sea lanzado. Nos referimos a casos concretos del uso del móvil como comandos de voz, notas de audio, etc. 
-\newline \newline
-En la parte del Data Manager nos encontramos a las entidades y a los responsables de mover esas entidades a lo largo de la arquitectura. 
-\newline \newline
-Así nos encontramos con el paquete repository, encargado de la persistencia en base de datos de las entidades. Entidades como dtos (para la comunicación de información desde el manejador al data manager) y mappers, que realizarán la conversión de dtos a modelos, entidad aceptada por el repository para la persistencia en la base de datos. 
-\newline \newline
-De esta manera nos encontramos con 4 capas separadas por funcionalidad y con independencia lógica entre ellas, puesto que cada una está consagrada a una tarea particular (recibir eventos, computarlos, persistirlos). 
-\newline \newline
-La lógica de negocio del sistema se encuentra, sin duda, en la capa correspondiente al manejador, donde deberemos de echar un esfuerzo de implementación considerable para manejar todo el flujo de información. 
-%%% ------
-
-
+\end{landscape}
 \chapter{Implementación y desarrollo}
 Durante el siguiente capítulo veremos documentada la lógica que sigue la aplicación, centrándonos en el servicio de escucha en segundo plano, responsable de capturar los datos del usuario en cada una de las aplicaciones que nos permitirán conocer su perfil completo en cada una de sus facetas. Recordemos, comunicación, mensajería, navegación, redes sociales y el plano físico mediante los sensores. 
 \newline \newline 
