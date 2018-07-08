@@ -606,7 +606,7 @@ El sistema deberá:
 	\item Robustez. Debido a que el sistema debe estar constantemente capturando, el software debe ser tolerante a fallos y mantener el servicio siempre disponible.  
 	\item Seguridad. La base de datos local deberá estar protegida ante el acceso indebido a los datos. 
 \end{itemize}
-\subsection{Conclusiones}
+\subsection{Conclusiones de la definición de requisitos}
 Los requisitos listados en este capítulo tienen como objetivo definir la implementación de un sistema que permita, en última instancia, obtener un perfil completo del usuario. 
 \newline \newline 
 Por un lado, los requisitos funcionales nos guiarán en la captura de información del usuario. Como se ha visto, tenemos 5 grandes grupos, que nos permiten conocer todas las facetas de la vida de este, ó, al menos, todas las que pasen por usar el terminal. 
@@ -830,6 +830,7 @@ Con el fin de explicar cuál es el flujo que recorren los datos y las operacione
     \label{fig:LandscapeFigure}
 \end{figure}
 %\end{landscape}
+\subsection{Conclusiones del análisis}
 De esta forma, planteamos una arquitectura inicial dividida en capas, donde cada una está pensada para realizar una tarea simple y atómica. 
 \newline \newline 
 Se ha ideado esta arquitectura con la idea en mente de que sea un proyecto fácilmente ampliable, es decir, que el esfuerzo que conlleve añadir una nueva funcionalidad (por ejemplo, añadir una nueva app a la batería de aplicaciones a escuchar) tenga un impacto mínimo en el código y no implique grandes esfuerzos ni comunicaciones. 
@@ -981,12 +982,35 @@ Teniendo este diagrama en mente, y conociendo como está estructurada la arquite
 	\end{center}
 \end{figure}
 \end{landscape}
+\subsection{Conclusiones del diseño}
+A lo largo de este capítulo hemos planteado una arquitectura para nuestro sistema. Con la idea de plantear un diseño eficiente y dirigido, hemos empezado por ver cómo está planteado el propio sistema Android con sus frameworks y aplicaciones, pasando por la definición del \textit{clean architecture}, con la idea de aplicar el mismo concepto a nuestro sistema. 
+\newline \newline 
+El resultado es una arquitectura divida en capas, donde se ha pretendido aislar lo máximo posible una de otra, y donde una capa sólo conoce la existencia de la inmediatamente inferior, para poder comunicarse con ella mediante mensajes que, en este caso, contienen instancias de objetos. 
+\newline \newline 
+Además, se ha planteado el analizador como una interfaz bajo la premisa de poder añadir nuevas aplicaciones a la batería ya existentes, con, en vistas a un futuro, completar cada vez más nuestro sistema. Por ello, si se desea entonces crear nuevos analizadores, bastará con implementar la interfaz planteada y añadir su detección en el manejador. 
+\newline \newline 
+El resultado es una arquitectura flexible, mantenible y sencilla. 
 \chapter{Implementación y desarrollo}
 Durante el siguiente capítulo veremos documentada la lógica que sigue la aplicación, centrándonos en el servicio de escucha en segundo plano, responsable de capturar los datos del usuario en cada una de las aplicaciones que nos permitirán conocer su perfil completo en cada una de sus facetas. Recordemos, comunicación, mensajería, navegación, redes sociales y el plano físico mediante los sensores. 
 \newline \newline 
 En primer lugar, debemos conocer los objetos y los datos con los que estamos trabajando. A lo largo del proyecto hemos citado en innumerables ocasiones los eventos de accesibilidad, pero el lector aún no conoce su forma, su contenido ni cómo se generan. También se adjuntará una descripción de los objetos Dto donde almacenaremos la información, con el fin de situar al lector dentro del marco en el que se ha realizado la implementación del proyecto. 
-\newpage
 \section{Accessibility Events}
+A lo largo del documento, hemos venido hablando una y otra vez de los eventos de accesibilidad. Ya es hora de que el lector los conozca y vea en que consisten realmente y cómo son generados. 
+\newline \newline 
+Sin duda, \textit{ver} los eventos de accesibilidad es de gran ayuda, tanto para el lector como para el programador. Por ello, tenemos un método que nos permite mostrar por consola la información que viene asociada al evento de accesibilidad. 
+\newline \newline 
+Así, si el desarrollar desea capturar una aplicación, deberá conectar su teléfono al IDE e interactuar con el dispositivo mientras se muestran por pantalla estos eventos. De esta manera podrá ver los eventos generados, con la información que los acompaña. 
+\newline \newline 
+Al mostrar por consolas los eventos, mostramos seis atributos clave, con los que trabajaremos a lo largo de la implementación. 
+\begin{itemize}
+	\item \textbf{Type}: Describe el tipo de evento. Tenemos una enorme cantidad de tipos, algunos de ellos, por ejemplo son \textit{TYPE VIEW CLICKED}, representa el hecho de pulsar sobre una vista, botón, etc. \textit{TYPE NOTIFICATION STATE CHANGED}, el evento que lanza una notificación al mostrarse, \textit{TYPE WINDOW STATE CHANGED}, es el evento que se genera cada vez que cambia el contenido de la pantalla del usuario, y así, un largo etc. 
+	\item \textbf{EventId}: Es el valor entero del EventType. 
+	\item \textbf{Class}: Se trata del nombre de la clase del elemento de la interfaz que generó el evento. Podemos tener de todo, widgets  coom el EditText, ImageButton, LinearLayout, vistas como el ViewGroup, y un largo etc.
+	\item \textbf{Package}: El nombre del paquete de la aplicación que generó el evento. Esto nos permitirá identificar las aplicaciones que dan lugar a los eventos y por tanto, será de gran ayuda para el manejador a la hora de discernir a qué analizador enviar el evento. 
+	\item \textbf{Time}: El instante en el que se generó el evento. 
+	\item \textbf{Text}: El texto que acompaña al evento. Aquí puede haber de todo, desde los placeholders que acompañan a las entradas de texto, el propio texto que escribe el usuario, el nombre de una ventana, etc. 
+\end{itemize}
+Conociendo ya los atributos que vamos a manejar, veamos un ejemplo de una salida por consola. 
 \begin{verbatim}
 D/Helper: [type] TYPE_VIEW_TEXT_CHANGED 
 [eventId] 16 [class] android.widget.EditText 
@@ -1048,7 +1072,6 @@ Una vez hecho esto, se debe implementar el método \textit{compute} del analizad
 De esta manera, detectando patrones, filtrando eventos y leyendo su información, conseguiremos imbuir información a los objetos dtos, los cuales usaremos para persistir el fruto de nuestra captura. 
 \newline \newline 
 En el proyecto se incluyen capturas de varias aplicaciones, veamos a continuación tres de ellas que, por su relevancia, consideramos interesantes estudiar en detalle. 
-\newpage 
 \section{Captura de Gmail}
 En este apartado, y los que siguen, veremos los objetos destinados a guardar la información y los diagramas de actividad de tres aplicaciones clave para el perfilado del usuario, Gmail, Whatsapp y el navegador Chrome. Tienen como objetivo clarificar y documentar el flujo lógico que seguirá cada aplicación, durante el proceso de análisis y extracción del contenido de una cada de las aplicaciones propuestas.
 \subsection{GmailDto}
@@ -1188,7 +1211,6 @@ Por último, tenemos el elemento \textit{Widget Toast}, típico mensaje que apar
 En este caso el widget toast nos informa cada vez que se envía un correo, momento en el cual cerramos nuestro Dto y se lo pasamos al manejador de la base de datos para que lo persiste en la colección correspondiente. 
 \item \textbf{DBManager}. Capa encargada de la persistencia, se encarga mapear los GMailDto a un modelo y almacenarlo en la base de datos local. 
 \end{itemize} % -- niveles de app 
-\newpage
 \section{Captura de Whatsapp}
 Veamos ahora como es la captura de Whatsapp y cómo es la estructura del objeto en el que se asienta. 
 \subsection{WhatsappDto}
@@ -1263,7 +1285,7 @@ La captura del resto de campos (interlocutor y pantalla principal) es sencilla, 
 \item \textit{com.whatsapp.HomeActivity}. Se corresponde a la pantalla principal del Whatsapp. Nos sirve para almacenar en la base de datos cualquier objeto existente que contenga información. Una vez hecho esto, instanciamos una nueva versión del mismo y limpiamos los atributos de la clase relacionados con el interlocutor y el mensaje que escribe el usuario. 
 \begin{figure}[H]
 	\begin{center}
-     	\includegraphics[scale=0.2]{pictures/IRL/whatsapp/whatsapp_home.png}
+     	\includegraphics[scale=0.15]{pictures/IRL/whatsapp/whatsapp_home.png}
 	    	\caption{Whatsapp Home}{Pantalla principal de Whatsapp}
     	\label{fig:Whatsapp Home}
 	\end{center}
@@ -1274,7 +1296,7 @@ La captura del resto de campos (interlocutor y pantalla principal) es sencilla, 
 Además, el mismo evento que nos indica la entrada en una conversación lleva asociado el nombre del contacto, con lo cual para saber con quién está hablando el usuario bastará con extraer el texto del evento. 
 \begin{figure}[H]
 	\begin{center}
-     	\includegraphics[scale=0.2]{pictures/IRL/whatsapp/whatsapp_layout.png}
+     	\includegraphics[scale=0.15]{pictures/IRL/whatsapp/whatsapp_layout.png}
 	    	\caption{Whatsapp layout de una conversación}{Layout de una conversación de usuario}
     	\label{fig:Whatsapp Relative Layout}
 	\end{center}
@@ -1284,7 +1306,7 @@ Además, el mismo evento que nos indica la entrada en una conversación lleva as
 Este contenido se irá almacenando en una variable que se añadirá al Dto asociado cuando entre en juego un evento de teclado. Con las condiciones descritas anteriormente, recordemos, eventos con nombre de paquete \textit{com.google.android.inputmethod.latin} y cuyo texto implique la acción de mostrar el teclado limpio, esperando una nueva entrada de texto. 
 \begin{figure}[H]
 	\begin{center}
-     	\includegraphics[scale=0.2]{pictures/IRL/whatsapp/whatsapp_text.png}
+     	\includegraphics[scale=0.15]{pictures/IRL/whatsapp/whatsapp_text.png}
 	    	\caption{Campo de texto de Whatsapp}{Campo de texto de Whatsapp}
     	\label{fig:Whatsapp editText widget}
 	\end{center}
@@ -1336,7 +1358,6 @@ A este método público se le llama directamente desde el manejador de eventos. 
 Como se ha explicado al inicio de esta sección, esto se traduce en el hecho de que el usuario ha mandado la cadena que se encontraba escribiendo, por lo tanto el método debe encargarse de chequear la validez de esa cadena y añadirla a la lista de mensajes del WhatsappDto
 \newline \newline 
 Gracias a este algoritmo, conseguiremos una completa recolección de lo que hace el usuario dentro del Whatsapp, sabremos con quien habla, lo que dice y durante cuanto tiempo se relaciona con sus contactos. Esta información por lo tanto se denota muy valiosa, ya que Whatsapp es la aplicación más usada para hablar con nuestro alegados, gracias al contexto aportado podremos conocer de que forma se relaciona el usuario con su entorno social más cercano. 
-\newpage
 \section{Captura de Chrome}
 La captura de las búsquedas y páginas realizadas Chrome se antoja más sencilla, puesto que sólo necesitamos controlar las cadenas de búsqueda así como la marca horaria en la que fueron realizadas. 
 \subsection{ChromeDto}
@@ -1370,16 +1391,16 @@ Veamos a que elemento de la interfaz están relacionados los eventos para estos 
 \item \textit{android.widget.EditText}. Generado cuando el usuario escribe en la barra de búsuqeda. Por lo tanto, y del mismo modo que ocurría en Whatsapp, deberemos ir almacenando en una variable los caracteres vertidos por el usuario en esa barra de búsqueda. Ya llegará la confirmación por parte de un evento de teclado, que veremos mas adelante, para persistir esa información. 
 \begin{figure}[H]
 	\begin{center}
-     	\includegraphics[scale=0.2]{pictures/IRL/chrome/chrome_editText.png}
+     	\includegraphics[scale=0.15]{pictures/IRL/chrome/chrome_editText.png}
 	    	\caption{Componente edit text de Chrome)}{Componente edit text de Chrome}
     	\label{fig:Componente edit text de Chrome}
 	\end{center}
 \end{figure}
 \newpage
-\item \textit{android.widget.FrameLayout}. Asociados a la pulsación de una página guardada como sitios frecuentes. Dado que el usuario, este caso, no tiene que escribir nada en la barra de búsqueda, deberemos obtener la página visitada obteniendo el texto de este evento. De esta forma podremos saber que sitio visita cada vez y almacenar su dirección. 
+\item \textit{android.widget.FrameLayout}. Asociados a la pulsación de una página guardada como sitios frecuentes. Dado que el usuario, este caso, no tiene que escribir nada en la barra de búsqueda, deberemos obtener la página visitada obteniendo el texto de este evento. De esta forma podremos saber que sitios visita en cada ocasión, y, además, almacenar su dirección. 
 \begin{figure}[H]
 	\begin{center}
-     	\includegraphics[scale=0.2]{pictures/IRL/chrome/chrome_frequents.png}
+     	\includegraphics[scale=0.15]{pictures/IRL/chrome/chrome_frequents.png}
 	    	\caption{Componente frameLayout de sitios frecuentes en Chrome)}{Componente frameLayout de sitios frecuentes en Chrome}
     	\label{fig:Componente frame layout de Chrome}
 	\end{center}
@@ -1387,7 +1408,7 @@ Veamos a que elemento de la interfaz están relacionados los eventos para estos 
 \item \textit{android.view.ViewGroup}. Se ejecutan cuando el usuario pulsa sobre alguna de las sugerencias que va generando la aplicación a medida que el usuario escribe la url o búsqueda. Este flujo debe estar incluido, porque cuando el usuario acepta alguna de estas sugerencias no se generan, como es obvio, eventos asociados a la escritura, si no que siguen su propio camino. Capturando estos eventos nos aseguramos de que nada se escapa en nuestra recolección de información. 
 \begin{figure}[H]
 	\begin{center}
-     	\includegraphics[scale=0.2]{pictures/IRL/chrome/chrome_view.png}
+     	\includegraphics[scale=0.15]{pictures/IRL/chrome/chrome_view.png}
 	    	\caption{Componente view group de sugerencias en Chrome)}{Componente view de sugerencias en Chrome}
     	\label{fig:Componente view group de Chrome}
 	\end{center}

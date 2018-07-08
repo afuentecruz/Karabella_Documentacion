@@ -24,7 +24,7 @@
 \contentsline {subsubsection}{Requisitos de las aplicaciones de redes sociales}{32}{section*.14}
 \contentsline {subsubsection}{Requisitos de la informaci\IeC {\'o}n generada por el propio tel\IeC {\'e}fono}{33}{section*.15}
 \contentsline {subsection}{\numberline {4.1.2}Requisitos no funcionales}{33}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Conclusiones}{34}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.3}Conclusiones de la definici\IeC {\'o}n de requisitos}{34}{subsection.4.1.3}
 \contentsline {chapter}{\numberline {5}An\IeC {\'a}lisis}{36}{chapter.5}
 \contentsline {section}{\numberline {5.1}Diagramas de Casos de Uso}{36}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Casos de uso generales}{37}{subsection.5.1.1}
@@ -51,33 +51,35 @@
 \contentsline {subsubsection}{DB NoSQL}{50}{section*.37}
 \contentsline {subsubsection}{Vista}{51}{section*.38}
 \contentsline {section}{\numberline {5.3}Diagrama de secuencia}{51}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Conclusiones del an\IeC {\'a}lisis}{52}{subsection.5.3.1}
 \contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o}{53}{chapter.6}
 \contentsline {section}{\numberline {6.1}Arquitectura}{53}{section.6.1}
 \contentsline {subsection}{\numberline {6.1.1}Decisiones de dise\IeC {\~n}o}{53}{subsection.6.1.1}
 \contentsline {subsection}{\numberline {6.1.2}Arquitectura a bajo nivel}{57}{subsection.6.1.2}
 \contentsline {subsection}{\numberline {6.1.3}Diagrama de clases}{62}{subsection.6.1.3}
-\contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{65}{chapter.7}
+\contentsline {subsection}{\numberline {6.1.4}Conclusiones del dise\IeC {\~n}o}{65}{subsection.6.1.4}
+\contentsline {chapter}{\numberline {7}Implementaci\IeC {\'o}n y desarrollo}{66}{chapter.7}
 \contentsline {section}{\numberline {7.1}Accessibility Events}{66}{section.7.1}
-\contentsline {section}{\numberline {7.2}Captura de Gmail}{69}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}GmailDto}{69}{subsection.7.2.1}
-\contentsline {subsection}{\numberline {7.2.2}Diagrama de actividad}{70}{subsection.7.2.2}
-\contentsline {section}{\numberline {7.3}Captura de Whatsapp}{77}{section.7.3}
-\contentsline {subsection}{\numberline {7.3.1}WhatsappDto}{77}{subsection.7.3.1}
-\contentsline {subsection}{\numberline {7.3.2}Diagrama de actividad}{78}{subsection.7.3.2}
-\contentsline {subsubsection}{Eventos de com.whatsapp}{79}{section*.54}
-\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{80}{section*.55}
+\contentsline {section}{\numberline {7.2}Captura de Gmail}{70}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}GmailDto}{71}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Diagrama de actividad}{72}{subsection.7.2.2}
+\contentsline {section}{\numberline {7.3}Captura de Whatsapp}{78}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}WhatsappDto}{78}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Diagrama de actividad}{79}{subsection.7.3.2}
+\contentsline {subsubsection}{Eventos de com.whatsapp}{80}{section*.54}
+\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{81}{section*.55}
 \contentsline {subsubsection}{Compute(eventSto}{87}{section*.61}
 \contentsline {subsubsection}{storeObjectInRealm()}{87}{section*.62}
 \contentsline {subsubsection}{instanceNewDto(timestamp)}{88}{section*.63}
 \contentsline {subsubsection}{confirmKeyboardInput(timestamp)}{88}{section*.64}
-\contentsline {section}{\numberline {7.4}Captura de Chrome}{90}{section.7.4}
-\contentsline {subsection}{\numberline {7.4.1}ChromeDto}{90}{subsection.7.4.1}
-\contentsline {subsection}{\numberline {7.4.2}Diagram de actividad}{91}{subsection.7.4.2}
-\contentsline {subsubsection}{Eventos de com.android.chrome}{91}{section*.65}
-\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{94}{section*.69}
-\contentsline {subsubsection}{handleFrequentSites(eventSto)}{98}{section*.72}
-\contentsline {subsubsection}{captureSearchString(eventSto)}{98}{section*.73}
-\contentsline {subsubsection}{captureUrlPrompt(eventSto)}{99}{section*.74}
-\contentsline {section}{\numberline {7.5}Bibliotecas de terceros}{99}{section.7.5}
-\contentsline {subsection}{\numberline {7.5.1}Realm}{99}{subsection.7.5.1}
-\contentsline {chapter}{\numberline {8}Conclusiones y trabajos futuros}{101}{chapter.8}
+\contentsline {section}{\numberline {7.4}Captura de Chrome}{89}{section.7.4}
+\contentsline {subsection}{\numberline {7.4.1}ChromeDto}{89}{subsection.7.4.1}
+\contentsline {subsection}{\numberline {7.4.2}Diagram de actividad}{90}{subsection.7.4.2}
+\contentsline {subsubsection}{Eventos de com.android.chrome}{90}{section*.65}
+\contentsline {subsubsection}{Eventos de com.google.android.inputmethod.latin}{93}{section*.69}
+\contentsline {subsubsection}{handleFrequentSites(eventSto)}{96}{section*.72}
+\contentsline {subsubsection}{captureSearchString(eventSto)}{96}{section*.73}
+\contentsline {subsubsection}{captureUrlPrompt(eventSto)}{97}{section*.74}
+\contentsline {section}{\numberline {7.5}Bibliotecas de terceros}{97}{section.7.5}
+\contentsline {subsection}{\numberline {7.5.1}Realm}{97}{subsection.7.5.1}
+\contentsline {chapter}{\numberline {8}Conclusiones y trabajos futuros}{99}{chapter.8}
