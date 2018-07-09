@@ -1454,6 +1454,102 @@ La primera tarea que debe realizar el método es extraer la url visitada del tex
 Una vez obtenida la url visitada (se puede extraer recorriendo la cadena y buscando el carácter que está en mayúsculas), instanciamos un nuevo ChromeDto, le añadimos el timestamp, la cadena de búsqueda y persistimos en la base de datos. 
 \newline \newline
 De esta manera, podremos saber que páginas visita el usuario con su marca horaria. Los hábitos de navegación son un factor determinante a la hora de definir el perfil de usuario, puesto que una persona cuando busca en la web se refleja a sí misma, sus dudas, inquietudes y sus intereses. Cabe decir que en el proyecto se incluye también la captura de la barra de búsqueda de Google, por estar incluida en la mayoría de versiones de Android, y el navegador Firefox, al ser el segundo más asentado en el mercado. 
+\section{Manual de usuario}
+Una vez se haya instalado la aplicación y se ejecute por primera vez, lo primero que verá el usuario será una solicitud de permisos, que deberá aceptar si quiere que el servicio de localización funcione correctamente. De esta forma, tendremos la siguiente captura como primera pantalla, en caso de ser la primera ejecución. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/home3.png}
+	    	\caption{Pantalla de la app en la primera ejecución}
+    	\label{fig:Pantalla de la app en la primera ejecucion}
+	\end{center}
+\end{figure}
+Una vez el usuario autorice el acceso a la ubicación, lo siguiente que se le muestra es una pantalla de bienvenida, donde se detalla el propósito de la app (siempre destinado a no desvelar el proceso de captura en segundo plano). Además, dado que la aplicación necesita tener activado el permiso de accesibilidad, si no se encuentra concedido, se mostrará un mensaje en rojo a modo de aviso. Este mensaje explica que para funcionar correctamente, el usuario necesita conceder, de forma explícita, estos permisos. 
+\newline \newline 
+Además, para mayor comodidad, se ofrece un botón de modo de \textit{shortcut} para ir directamente a esta opción de los ajustes. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/home1.png}
+	    	\caption{Pantalla de bienvenida, mostrando el aviso de accesibilidad}
+    	\label{fig:Pantalla de bienvenida, mostrando el aviso de accesibilidad}
+	\end{center}
+\end{figure}
+Si el usuario pulsa sobre el botón que le ofrecemos, será redirigido a la siguiente pantalla, correspondiente a los ajustes de accesibilidad de la aplicación. En ella, deberá activar el toggle hasta llevarlo al estado \textit{activado}, tal y como figura en la siguiente imagen. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/accessibility.png}
+	    	\caption{Ajustes de accesibilidad de Tormantos}
+    	\label{fig:Ajustes de accesibilidad de Tormantos}
+	\end{center}
+\end{figure}
+Si volvemos a la aplicación, veremos que el estado de la pantalla ha cambiado, ya no muestra el aviso, por el contrario, se ofrece la pantalla de bienvenida de forma limpia y sin más elementos que el mensaje descriptivo. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/home2.png}
+	    	\caption{Pantalla de bienvenida sin el mensaje de aviso}
+    	\label{fig:Pantalla de bienvenida sin el mensaje de aviso}
+	\end{center}
+\end{figure}
+Observamos, en la esquina superior izquierda un icono, si lo pulsamos, lanzaremos la acción de despliegue del panel lateral, donde se encuentras las opciones de nuestra aplicación. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/navigation.png}
+	    	\caption{Navigation drawer de la aplicación desplegado}
+    	\label{fig:Navigation drawer de la aplicacion desplegado}
+	\end{center}
+\end{figure}
+En este nuevo menú lateral, observamos 4 categorías, a saber, Apps de comunicación, con la opción \textit{Comunicación}, Mensajería, con la opción \textbf{Mensajería instantánea}, Navegación con Web, con la opción \textit{Navegadores} y la última, información generada por el sistema, con la opción sistema. 
+\newline \newline 
+Si el usuario decide pulsar sobre alguna de estas opciones, se mostrará la siguiente información. 
+\subsubsection{Comunicación}
+Se muestra la siguiente pantalla. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/navigation.png}
+	    	\caption{Pantalla de comunicación}
+    	\label{fig:Pantalla de comunicacion}
+	\end{center}
+\end{figure}
+En ella, y en una vista de tarjetas, se muestran los detalles del uso del télefono, uso de mensajes SMS y uso de Gmail. 
+\newline \newline 
+En el uso del teléfono, nos encontramos, en primer lugar, un recuento del tiempo que ha empleado el usuario utilizando la aplicación de \textit{teléfono} de su disposito. En la siguiente línea, el número total de llamadas realizadas, y en la tercera y última, el nombre del contacto más habitual en estas llamadas. 
+\newline \newline 
+En el uso de mensajes SMS la información mostrada es similar, por un lado el recuento del tiempo de uso de la aplicación, el número total de mensajes enviados y el contacto habitual, destinatario de esos mensajes. 
+\newline \newline 
+Por último, en el uso de Gmail, de nuevo vemos el recuento del tiempo empleado usando la app de Gmail, los correos enviados y la dirección de destinatario habitual de dichos correos. 
+\subsection{Mensajería instantánea}
+Si avanzamos en los elementos del panel lateral, llegaremos a la siguiente pantalla, que nos muestra la información acerca del uso de las aplicaciones de mensajería instantánea, Whatsapp y Telegram. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/messaging.png}
+	    	\caption{Pantalla de comunicación}
+    	\label{fig:Pantalla de comunicacion}
+	\end{center}
+\end{figure}
+En primer lugar, nos encontramos con información sobre Whatsapp. Como viene siendo habitual, tenemos un recuento del tiempo pasado utilizando la aplicación, así como el número de conversaciones distintas en las que ha entrado el usuario. 
+\newline \newline 
+Seguidamente, vemos un recuento del total de mensajes enviados por el usuario en los distintos chats, así como el nombre del contacto habitual de estos mensajes. 
+\newline \newline 
+En el caso de Telegram, la información mostrada es más reducida, puesto que únicamente nos ofrece un recuento de los mensajes enviados utilizando este sistema de mensajería. 
+\subsubsection{Navegación web} 
+Nos encontramos en esta ocasión con una vista que nos aporta información sobre el uso dado a los navegadores Chrome y Firefox. 
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/browsing.png}
+	    	\caption{Pantalla de navegación web}
+    	\label{fig:Pantalla de navegacion web}
+	\end{center}
+\end{figure}
+En ambos casos la información mostrada es la misma. El ya habitual recuento del tiempo de uso, el total de páginas visitadas con cada aplicación y, para ambas, la página más visitada usando el navegador correspondiente. 
+\subsubsection{Sistema} 
+Llegamos así hasta la última pantalla, la información generada por el sistema.
+\begin{figure}[H]
+	\begin{center}
+     	\includegraphics[scale=0.2]{pictures/capsapp/system.png}
+	    	\caption{Pantalla de información del sistema}
+    	\label{fig:Pantalla de informacion del sistema}
+	\end{center}
+\end{figure}
+La única información que se muestra aquí es la referente a las notificaciones recibidas en el teléfono. Tenemos por un lado, el número total de notificaciones que han entrado en nuestro terminal, así como el nombre del paquete de la aplicación responsable del mayor número de ellas.  
 \section{Bibliotecas de terceros}
 \subsection{Realm}
 Realm es una base de datos cuya implementación para Android nos ofrece una alternativa a SQLite, destactando por su rapidez y facilidad de uso. 
@@ -1469,20 +1565,57 @@ En este caso se está usando exactamente la versión 5.1.0. Deberemos añadir en
 		apply plugin: 'realm-android'
 
 \end{verbatim}
-
-
-
-
+\section{Requisitos incumplidos}
+Aún con todo el trabajo que ha llevado el desarrollo del proyecto, algunos requisitos se han quedado fuera, bien por falta de tiempo de implementación, bien por limitaciones técnicas de los propios servicios de accesibilidad. Veámos cuales son, agrupándolos por grupos. 
+\subsection{Aplicaciones de comunicación}
+\begin{itemize}
+\item Dentro de la aplicación de Gmail, ha resultado imposible capturar el cuerpo del correo electrónico, al no generarse eventos de accesibilidad asociados a esta acción. 
+\end{itemize}
+\subsection{Aplicaciones de mensajería instantánea}
+\begin{itemize}
+\item Dentro de la aplicación de Telegram, no se ha podido registrar el nombre del interlocutor, al no generarse eventos de accesibilidad asociados a la acción de pulsar sobre una conversación. 
+\end{itemize}
+\subsection{Búsqueda en la web}
+\begin{itemize}
+\item Dentro de la aplicación de Búsqueda de Google, no se ha podido registrar la cadena de búsqueda, al no generarse eventos de accesibilidad asociados a esta acción. 
+\end{itemize}
+\subsection{Aplicaciones de redes sociales}
+\begin{itemize}
+\item No se ha implementado la captura de twitter ni facebook por falta de tiempo en la implementación. 
+\end{itemize}
 %~\ref{fig:Calculo IDLE-PC} este valor es calculado automáticamente por el programa, algo que no pasa en versiones anteriores de este, donde se calculan varios valores que se muestran al usuario para que este seleccione uno de ellos.
 %\begin{figure}[h]
 %\centering
 %\caption[Calculo IDLE-PC]{Calculo IDLE-PC}
 %\label{fig:Calculo IDLE-PC}
 %\end{figure}
-
+\subsubsection{Conclusión}
+El desarrollo de la aplicación vemos que tiene dos partes claramente diferenciadas, por un lado el servicio de escucha en segundo, del que el usuario cuanto menos sepa mejor. Y por otro, la interfaz de la aplicación, que debe ofrecer algún pretexto para mantener al usuario informado sobre la información que recoge el sistema, aunque sólo sea una pequeña parte del conjunto. 
+\newline \newline 
+A través de esta interfaz de usuario, se pretende mostrar al mismo una aproximación de las rutinas que adquiere con el teléfono, así como, siendo lo más importante, el tiempo gastado en cada app. 
+\newline \newline 
+Es importante recalcar el hecho de que esta aplicación no necesita que el usuario interactúe directamente con ella, si no que sencillamente se trata de una ventana a los datos obtenidos hasta el momento de su consulta.
+\newline \newline 
+Por lo demás, el desarrollo del servicio de captura, en el afán de querer recabar el máximo número de datos de cada faceta de la vida del usuario, se ha vuelto un proceso ampliamente extendido en el tiempo. Para capturar una aplicación hay que estudiar sus puntos de entradas, cada flujo de interacción alternativo que puede tomar el usuario y una vez sacados los patrones, plasmarlos en el analizador. 
+\newline \newline 
+Aún así, el fruto del trabajo se antoja positivo, puesto que hemos conseguido capturar los datos del usuario en el uso de las aplicaciones más frecuentes en cada campo, lo cual, personalmente, y dejando a un lado la cuestión ética, considero una opción muy interesante. 
 
 \chapter{Conclusiones y trabajos futuros}
-
+Como conclusión personal, que extraigo después de haber investigado sobre las técnicas de recolección de datos, y habiendo implementado una herramienta para tal propósito, tengo cada vez más claro que la privacidad en el siglo XXI es una quimera. Además da igual cuanto te preocupes por ella, cualquier paso en falso en internet permite que las grandes compañías consigan tu información personal y no puedas evitar que se trafique con tus datos. No hablemos ya si usamos un smartphone, en cuyo caso estamos vendidos a Google, Apple, o la compañía que proceda. 
+\newline \newline 
+Además, me asusta un poco lo desconocido. Me explico, que los proveedores de servicios quieren nuestros dato creo que está asumido por parte de la sociedad. Pero lo realmente aterrador es hasta donde se llega en ámbitos que no son conocidos por el público, y me refiero a casos de espionaje entre gobiernos, industrial, etc. 
+\newline \newline 
+Si un estudiante ha podido desarrollar una aplicación que es capaz de leer los mensajes que escribes en Whatsapp, no quiero ni imaginar de lo que son capaces equipos con inversión y recursos dedicados a trabajar en ello 24 horas al día. Basta con aprovecharse de cualquier fallo de seguridad para saltarse las restricciones que, por su propia naturaleza, Android impone en su sistema, para lograr leer la pantalla del usuario. Y no sólo eso, si no las veces en las que los usuarios, sin darnos cuenta, autorizamos operaciones de este tipo, escondidas entre el lenguaje jurídico de los términos y condiciones de los servicios. 
+\newline \newline 
+Por mi parte, tiraré por el camino del medio y una vez terminado el trabajo, instalaré una versión de LineageOS con los servicios mínimos de Google para poder usar el GPS. No creo que valga de mucho, pero al menos para ponérselo un poco menos fácil que hasta ahora, que estamos regalando nuestros datos (aunque también es verdad que ellos nos regalan sus servicios... vaya!). 
+\section{Trabajos futuros}
+Dado que este trabajo se enmarca dentro de un trabajo de fin de máster, el próximo paso lógico será emplear los datos recogidos por la aplicación para su estudio. 
+\newline 
+\newline 
+Este estudio deberá consistir en un proceso de \textit{machine learning} para lograr, en última instancia, la predicción de alteraciones en el comportamiento del usuario. Esto podrá llevarse a cabo gracias a los datos recogidos dentro de aplicaciones que forman parte del día a día del usuario. Además, y como se ha dejado claro, cubrimos todas las facetas del usuario. De esta manera no tendremos puntos ciegos en los que desconozcamos como se interactúa el usuario en un determinado campo. 
+\newline 
+\newline 
+Además, si se quiere ir mas allá con el proceso de captura, el proyecto está abierto a modificaciones. Se ha documentado el funcionamiento del sistema de captura, el papel que juegan los eventos, sus campos, etc. Si se desea, añadir nueva funcionalidad es tan fácil como implementar la interfaz disponible, sin que esto se traduzca en un cambio estructural del código. Dejemos que el proyecto viva!. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%% ANEXOS %%%%%%%%%%%%%%%
