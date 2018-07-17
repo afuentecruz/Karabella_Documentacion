@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: delaFuenteCruz_Alberto_TFG.aux
+The style file: plain.bst
+Database file #1: bib.bib
+Warning--I didn't find a database entry for "LaLiga"
+Warning--to sort, need author or key in RIR
+Warning--to sort, need author or key in ripe
+Warning--to sort, need author or key in googleLocationHistory
+Warning--empty journal in guachos
+You've used 18 entries,
+            2118 wiz_defined-function locations,
+            573 strings with 5914 characters,
+and the built_in function-call counts, 3479 in all, are:
+= -- 296
+> -- 108
+< -- 0
++ -- 49
+- -- 30
+* -- 140
+:= -- 546
+add.period$ -- 35
+call.type$ -- 18
+change.case$ -- 68
+chr.to.int$ -- 0
+cite$ -- 22
+duplicate$ -- 134
+empty$ -- 395
+format.name$ -- 30
+if$ -- 758
+int.to.chr$ -- 0
+int.to.str$ -- 18
+missing$ -- 3
+newline$ -- 74
+num.names$ -- 30
+pop$ -- 156
+preamble$ -- 1
+purify$ -- 51
+quote$ -- 0
+skip$ -- 144
+stack$ -- 0
+substring$ -- 91
+swap$ -- 17
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 70
+warning$ -- 4
+while$ -- 30
+width$ -- 20
+write$ -- 141
+(There were 5 warnings)
